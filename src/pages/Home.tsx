@@ -76,25 +76,37 @@ const Home: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* 英雄区域 */}
-      <section className="bg-gradient-to-r from-green-500 to-green-600 rounded-2xl p-8 text-white">
+      <section className="bg-gradient-to-r from-red-600 via-red-500 to-amber-500 rounded-2xl p-8 text-white">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl font-bold mb-4">神农智链 - 区块链农产品溯源平台</h1>
-          <p className="text-xl mb-6 text-green-100">
+          <h1 className="text-4xl font-bold mb-4">神农智链 · 青年红色筑梦</h1>
+          <p className="text-xl mb-6 text-amber-100">
             基于区块链技术的农产品全生命周期溯源，让每一份农产品都有可信的身份证明
           </p>
           <div className="flex justify-center space-x-4">
             <Link
               to="/scan"
-              className="flex items-center space-x-2 bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+              className="flex items-center space-x-2 bg-white text-red-700 px-6 py-3 rounded-lg font-semibold hover:bg-amber-50 transition-colors border border-amber-300"
             >
               <Scan className="w-5 h-5" />
               <span>扫码溯源</span>
             </Link>
             <Link
               to="/register"
-              className="bg-green-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-800 transition-colors"
+              className="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors border border-amber-400"
             >
               立即注册
+            </Link>
+            <Link
+              to="/play/apple"
+              className="bg-white text-red-700 px-6 py-3 rounded-lg font-semibold hover:bg-amber-50 transition-colors border border-amber-300"
+            >
+              互动剧入口
+            </Link>
+            <Link
+              to="/play/map"
+              className="bg-white text-red-700 px-6 py-3 rounded-lg font-semibold hover:bg-amber-50 transition-colors border border-amber-300"
+            >
+              故事线预览
             </Link>
           </div>
         </div>
@@ -110,7 +122,7 @@ const Home: React.FC = () => {
               placeholder="搜索农产品..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent"
             />
           </div>
           <div className="flex gap-2">
@@ -120,8 +132,8 @@ const Home: React.FC = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   selectedCategory === category
-                    ? 'bg-green-500 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-red-600 text-white border border-amber-400'
+                    : 'bg-white text-gray-700 hover:bg-amber-50 border border-amber-300'
                 }`}
               >
                 {category}
@@ -165,8 +177,8 @@ const Home: React.FC = () => {
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (
-                    <div className="w-full h-48 bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center">
-                      <span className="text-green-600 font-semibold">{product.name}</span>
+                    <div className="w-full h-48 bg-gradient-to-br from-red-100 to-amber-100 flex items-center justify-center">
+                      <span className="text-red-700 font-semibold">{product.name}</span>
                     </div>
                   )}
                 </div>
@@ -176,7 +188,7 @@ const Home: React.FC = () => {
                   <p className="text-sm text-gray-600 mb-2 line-clamp-2">{product.description}</p>
                   
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-lg font-bold text-green-600">
+                    <span className="text-lg font-bold text-red-600">
                       ¥{product.price}/{product.unit}
                     </span>
                     <div className="flex items-center space-x-1 text-sm text-gray-500">
@@ -188,7 +200,7 @@ const Home: React.FC = () => {
                   <div className="flex items-center justify-between text-sm text-gray-500">
                     <span>农户：{product.farmer?.name}</span>
                     <div className="flex items-center space-x-1">
-                      <Shield className="w-4 h-4 text-green-500" />
+                      <Shield className="w-4 h-4 text-red-500" />
                       <span>{product.traceability_count} 条溯源</span>
                     </div>
                   </div>
@@ -212,24 +224,24 @@ const Home: React.FC = () => {
       {/* 特色功能 */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-          <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Shield className="w-6 h-6 text-green-600" />
+          <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Shield className="w-6 h-6 text-red-600" />
           </div>
           <h3 className="text-lg font-semibold mb-2">区块链溯源</h3>
           <p className="text-gray-600">基于区块链技术，确保数据不可篡改，提供可信的溯源服务</p>
         </div>
         
         <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-          <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Star className="w-6 h-6 text-blue-600" />
+          <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Star className="w-6 h-6 text-amber-600" />
           </div>
           <h3 className="text-lg font-semibold mb-2">品质保证</h3>
           <p className="text-gray-600">严格的质检流程，权威检测报告，让消费者买得放心</p>
         </div>
         
         <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-          <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Calendar className="w-6 h-6 text-purple-600" />
+          <div className="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Calendar className="w-6 h-6 text-rose-600" />
           </div>
           <h3 className="text-lg font-semibold mb-2">全链追踪</h3>
           <p className="text-gray-600">从种植到销售的全生命周期记录，透明可视的供应链</p>

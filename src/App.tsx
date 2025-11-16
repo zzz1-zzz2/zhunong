@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import Home from './pages/Home'
 import ProductDetail from './pages/ProductDetail'
@@ -26,43 +26,83 @@ import AppleAdventure from './pages/play/AppleAdventure'
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <div className="min-h-screen bg-gray-50">
-          <Routes>
-            {/* 公开路由 */}
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/scan" element={<Scan />} />
-            <Route path="/test-auth" element={<TestAuth />} />
-            <Route path="/play/map" element={<StoryMap />} />
-            <Route path="/play/apple" element={<AppleAdventure />} />
-            
-            {/* 用户端路由 */}
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="product/:id" element={<ProductDetail />} />
-              <Route path="profile" element={<Profile />} />
-              <Route path="orders" element={<Orders />} />
-            </Route>
-            
-            {/* 商户端路由 */}
-            <Route path="/merchant" element={<MerchantLayout />}>
-              <Route index element={<MerchantDashboard />} />
-              <Route path="products" element={<MerchantProducts />} />
-              <Route path="traceability" element={<MerchantTraceability />} />
-              <Route path="orders" element={<MerchantOrders />} />
-            </Route>
-            
-            {/* 监管端路由 */}
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<AdminDashboard />} />
-              <Route path="monitoring" element={<AdminMonitoring />} />
-              <Route path="enterprises" element={<AdminEnterprises />} />
-            </Route>
-          </Routes>
-          <Toaster position="top-right" />
-        </div>
-      </Router>
+      {import.meta.env.BASE_URL !== '/' ? (
+        <HashRouter>
+          <div className="min-h-screen bg-gray-50">
+            <Routes>
+              {/* 公开路由 */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/scan" element={<Scan />} />
+              <Route path="/test-auth" element={<TestAuth />} />
+              <Route path="/play/map" element={<StoryMap />} />
+              <Route path="/play/apple" element={<AppleAdventure />} />
+              
+              {/* 用户端路由 */}
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path="product/:id" element={<ProductDetail />} />
+                <Route path="profile" element={<Profile />} />
+                <Route path="orders" element={<Orders />} />
+              </Route>
+              
+              {/* 商户端路由 */}
+              <Route path="/merchant" element={<MerchantLayout />}>
+                <Route index element={<MerchantDashboard />} />
+                <Route path="products" element={<MerchantProducts />} />
+                <Route path="traceability" element={<MerchantTraceability />} />
+                <Route path="orders" element={<MerchantOrders />} />
+              </Route>
+              
+              {/* 监管端路由 */}
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="monitoring" element={<AdminMonitoring />} />
+                <Route path="enterprises" element={<AdminEnterprises />} />
+              </Route>
+            </Routes>
+            <Toaster position="top-right" />
+          </div>
+        </HashRouter>
+      ) : (
+        <BrowserRouter>
+          <div className="min-h-screen bg-gray-50">
+            <Routes>
+              {/* 公开路由 */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/scan" element={<Scan />} />
+              <Route path="/test-auth" element={<TestAuth />} />
+              <Route path="/play/map" element={<StoryMap />} />
+              <Route path="/play/apple" element={<AppleAdventure />} />
+              
+              {/* 用户端路由 */}
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path="product/:id" element={<ProductDetail />} />
+                <Route path="profile" element={<Profile />} />
+                <Route path="orders" element={<Orders />} />
+              </Route>
+              
+              {/* 商户端路由 */}
+              <Route path="/merchant" element={<MerchantLayout />}>
+                <Route index element={<MerchantDashboard />} />
+                <Route path="products" element={<MerchantProducts />} />
+                <Route path="traceability" element={<MerchantTraceability />} />
+                <Route path="orders" element={<MerchantOrders />} />
+              </Route>
+              
+              {/* 监管端路由 */}
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="monitoring" element={<AdminMonitoring />} />
+                <Route path="enterprises" element={<AdminEnterprises />} />
+              </Route>
+            </Routes>
+            <Toaster position="top-right" />
+          </div>
+        </BrowserRouter>
+      )}
     </AuthProvider>
   )
 }

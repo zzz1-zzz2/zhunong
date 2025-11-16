@@ -62,15 +62,15 @@ const Register: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 to-amber-50 flex items-center justify-center px-4">
       <div className="max-w-md w-full">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-gradient-to-br from-red-600 to-amber-500 border border-amber-300 shadow">
             <span className="text-white font-bold text-xl">农</span>
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">创建账户</h1>
-          <p className="text-gray-600">加入神农智链，开启溯源之旅</p>
+          <p className="text-gray-600">加入神农智链 · 红色筑梦主题</p>
         </div>
 
         {/* 注册表单 */}
@@ -81,7 +81,7 @@ const Register: React.FC = () => {
                 姓名
               </label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-amber-500 w-5 h-5" />
                 <input
                   id="name"
                   name="name"
@@ -89,7 +89,7 @@ const Register: React.FC = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   placeholder="请输入姓名"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
+                  className="w-full pl-10 pr-4 py-3 border border-amber-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-red-600 transition-colors"
                   required
                 />
               </div>
@@ -100,7 +100,7 @@ const Register: React.FC = () => {
                 手机号
               </label>
               <div className="relative">
-                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-amber-500 w-5 h-5" />
                 <input
                   id="phone"
                   name="phone"
@@ -108,7 +108,7 @@ const Register: React.FC = () => {
                   value={formData.phone}
                   onChange={handleInputChange}
                   placeholder="请输入手机号"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
+                  className="w-full pl-10 pr-4 py-3 border border-amber-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-red-600 transition-colors"
                   required
                 />
               </div>
@@ -123,7 +123,7 @@ const Register: React.FC = () => {
                 name="userType"
                 value={formData.userType}
                 onChange={handleInputChange}
-                className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
+                className="w-full px-3 py-3 border border-amber-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-red-600 transition-colors"
               >
                 <option value="consumer">消费者</option>
                 <option value="farmer">农户</option>
@@ -136,7 +136,7 @@ const Register: React.FC = () => {
                 密码
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-amber-500 w-5 h-5" />
                 <input
                   id="password"
                   name="password"
@@ -144,13 +144,13 @@ const Register: React.FC = () => {
                   value={formData.password}
                   onChange={handleInputChange}
                   placeholder="请输入密码（至少6位）"
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
+                  className="w-full pl-10 pr-12 py-3 border border-amber-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-red-600 transition-colors"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-amber-500 hover:text-red-600"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -162,7 +162,7 @@ const Register: React.FC = () => {
                 确认密码
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-amber-500 w-5 h-5" />
                 <input
                   id="confirmPassword"
                   name="confirmPassword"
@@ -170,13 +170,13 @@ const Register: React.FC = () => {
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
                   placeholder="请再次输入密码"
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
+                  className="w-full pl-10 pr-12 py-3 border border-amber-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-red-600 transition-colors"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-amber-500 hover:text-red-600"
                 >
                   {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -186,16 +186,16 @@ const Register: React.FC = () => {
             <div className="flex items-center">
               <input
                 type="checkbox"
-                className="rounded border-gray-300 text-green-600 focus:ring-green-500"
+                className="rounded border-amber-300 text-red-600 focus:ring-red-600"
                 required
               />
               <span className="ml-2 text-sm text-gray-600">
                 我同意{' '}
-                <a href="#" className="text-green-600 hover:text-green-500">
+                <a href="#" className="text-red-600 hover:text-red-700">
                   用户协议
                 </a>
                 {' '}和{' '}
-                <a href="#" className="text-green-600 hover:text-green-500">
+                <a href="#" className="text-red-600 hover:text-red-700">
                   隐私政策
                 </a>
               </span>
@@ -204,7 +204,7 @@ const Register: React.FC = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="w-full bg-red-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-red-700 focus:ring-2 focus:ring-red-600 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors border border-amber-400"
             >
               {loading ? '注册中...' : '注册'}
             </button>
@@ -213,7 +213,7 @@ const Register: React.FC = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               已有账户？{' '}
-              <Link to="/login" className="text-green-600 hover:text-green-500 font-medium">
+              <Link to="/login" className="text-red-600 hover:text-red-700 font-medium">
                 立即登录
               </Link>
             </p>

@@ -66,7 +66,7 @@ const TestAuth: React.FC = () => {
       <div className="space-x-4">
         <button
           onClick={testLogin}
-          className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors"
+          className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors border border-amber-400"
         >
           测试消费者登录
         </button>

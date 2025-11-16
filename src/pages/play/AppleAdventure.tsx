@@ -272,7 +272,7 @@ const AppleAdventure: React.FC = () => {
                   ))}
                 </div>
                 <div className="mt-3 flex items-center gap-3">
-                  <button onClick={saveImages} className="px-3 py-2 rounded bg-green-600 text-white text-sm">保存</button>
+                  <button onClick={saveImages} className="px-3 py-2 rounded bg-red-600 text-white text-sm border border-amber-400">保存</button>
                   <button onClick={resetImages} className="px-3 py-2 rounded bg-gray-200 text-gray-800 text-sm">恢复默认</button>
                 </div>
               </div>

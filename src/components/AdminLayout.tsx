@@ -34,11 +34,11 @@ const AdminLayout: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* 顶部导航 */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-white shadow-sm border-b border-amber-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/admin" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-red-600 to-amber-500 border border-amber-300 shadow">
                 <span className="text-white font-bold text-sm">监</span>
               </div>
               <span className="text-xl font-bold text-gray-900">监管平台</span>
@@ -66,7 +66,7 @@ const AdminLayout: React.FC = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className="flex items-center space-x-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                className="flex items-center space-x-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-amber-50 hover:text-red-600 transition-colors"
               >
                 <item.icon className="w-5 h-5" />
                 <span>{item.label}</span>

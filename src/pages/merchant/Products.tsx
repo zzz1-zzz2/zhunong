@@ -175,7 +175,7 @@ const MerchantProducts: React.FC = () => {
             setEditingProduct(null)
             setShowAddModal(true)
           }}
-          className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+          className="flex items-center space-x-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors border border-amber-400"
         >
           <Plus className="w-5 h-5" />
           <span>添加产品</span>
@@ -191,7 +191,7 @@ const MerchantProducts: React.FC = () => {
             placeholder="搜索产品..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 border border-amber-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-red-600"
           />
         </div>
       </div>
@@ -200,7 +200,7 @@ const MerchantProducts: React.FC = () => {
       <div className="bg-white rounded-lg shadow-sm overflow-hidden">
         {loading ? (
           <div className="p-8 text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mx-auto"></div>
             <p className="mt-4 text-gray-500">加载中...</p>
           </div>
         ) : (
@@ -252,7 +252,7 @@ const MerchantProducts: React.FC = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                         product.is_available
-                          ? 'bg-green-100 text-green-800'
+                          ? 'bg-amber-100 text-red-800'
                           : 'bg-red-100 text-red-800'
                       }`}>
                         {product.is_available ? '上架' : '下架'}
@@ -262,7 +262,7 @@ const MerchantProducts: React.FC = () => {
                       <div className="flex space-x-2">
                         <button
                           onClick={() => openEditModal(product)}
-                          className="text-blue-600 hover:text-blue-900"
+                          className="text-red-600 hover:text-red-900"
                         >
                           <Edit className="w-4 h-4" />
                         </button>
@@ -306,7 +306,7 @@ const MerchantProducts: React.FC = () => {
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-amber-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-red-600"
                     required
                   />
                 </div>
@@ -317,7 +317,7 @@ const MerchantProducts: React.FC = () => {
                     <select
                       value={formData.category}
                       onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-amber-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-red-600"
                     >
                       {categories.map(cat => (
                         <option key={cat} value={cat}>{cat}</option>
@@ -329,7 +329,7 @@ const MerchantProducts: React.FC = () => {
                     <select
                       value={formData.unit}
                       onChange={(e) => setFormData(prev => ({ ...prev, unit: e.target.value }))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-amber-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-red-600"
                     >
                       {units.map(unit => (
                         <option key={unit} value={unit}>{unit}</option>
@@ -346,7 +346,7 @@ const MerchantProducts: React.FC = () => {
                       step="0.01"
                       value={formData.price}
                       onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-amber-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-red-600"
                       required
                     />
                   </div>
@@ -379,7 +379,7 @@ const MerchantProducts: React.FC = () => {
                       type="checkbox"
                       checked={formData.is_available}
                       onChange={(e) => setFormData(prev => ({ ...prev, is_available: e.target.checked }))}
-                      className="rounded border-gray-300 text-green-600 focus:ring-green-500"
+                      className="rounded border-amber-300 text-red-600 focus:ring-red-600"
                     />
                     <span className="ml-2 text-sm text-gray-700">立即上架</span>
                   </label>
@@ -398,7 +398,7 @@ const MerchantProducts: React.FC = () => {
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                    className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors border border-amber-400"
                   >
                     {editingProduct ? '更新' : '添加'}
                   </button>

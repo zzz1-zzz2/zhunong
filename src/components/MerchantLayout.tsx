@@ -35,7 +35,7 @@ const MerchantLayout: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* 顶部导航 */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-white shadow-sm border-b border-amber-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/merchant" className="flex items-center space-x-2">
@@ -67,7 +67,7 @@ const MerchantLayout: React.FC = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className="flex items-center space-x-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-green-50 hover:text-green-600 transition-colors"
+                className="flex items-center space-x-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-amber-50 hover:text-red-600 transition-colors"
               >
                 <item.icon className="w-5 h-5" />
                 <span>{item.label}</span>

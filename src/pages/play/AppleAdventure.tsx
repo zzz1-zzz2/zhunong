@@ -1,5 +1,5 @@
-import React, { useMemo, useRef, useState } from 'react'
-import { Play, RefreshCw, ChevronRight, Leaf, Truck, Store, Sprout, Music, PauseCircle } from 'lucide-react'
+import React, { useMemo, useRef, useState, useEffect } from 'react'
+import { Play, RefreshCw, ChevronRight, Leaf, Truck, Store, Sprout, Music, PauseCircle, Droplet, FlaskConical, CheckCircle } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 
@@ -217,6 +217,59 @@ const AppleAdventure: React.FC = () => {
   const endingTitle = score >= 3 ? '传奇果王' : score === 2 ? '丰收能手' : score === 1 ? '合格批次' : '需复检'
   const endingReward = score >= 3 ? '买一送一券' : score === 2 ? '满减券（满99减20）' : score === 1 ? '折扣券（95折）' : '折扣券（9折）'
 
+  // 互动种植模拟
+  const [simStage, setSimStage] = useState<'seed' | 'planted' | 'watered' | 'sprout' | 'flower' | 'fruit' | 'harvested'>('seed')
+  const [moisture, setMoisture] = useState<number>(0)
+  const [growth, setGrowth] = useState<number>(0)
+  const [fertilized, setFertilized] = useState<boolean>(false)
+  const growthTimer = useRef<number | null>(null)
+
+  useEffect(() => {
+    if (growthTimer.current) window.clearInterval(growthTimer.current)
+    if (current === 'orchard' && simStage !== 'harvested') {
+      growthTimer.current = window.setInterval(() => {
+        setMoisture(m => Math.max(0, m - 2))
+        setGrowth(g => {
+          const canGrow = moisture > 0 && ['planted','watered','sprout','flower'].includes(simStage)
+          if (!canGrow) return g
+          const inc = fertilized ? 4 : 2
+          const ng = Math.min(100, g + inc)
+          if (ng >= 25 && simStage === 'watered') setSimStage('sprout')
+          if (ng >= 60 && (simStage === 'sprout' || simStage === 'watered')) setSimStage('flower')
+          if (ng >= 100 && simStage !== 'fruit') setSimStage('fruit')
+          return ng
+        })
+      }, 800)
+    }
+    return () => {
+      if (growthTimer.current) window.clearInterval(growthTimer.current)
+    }
+  }, [current, simStage, fertilized, moisture])
+
+  const handleSeedClick = () => {
+    if (simStage !== 'seed') return
+    setSimStage('planted')
+    setLastTip('已播种，等待浇水与养护。')
+  }
+  const handleWater = () => {
+    if (current !== 'orchard') return
+    setMoisture(m => Math.min(100, m + 35))
+    if (simStage === 'planted') setSimStage('watered')
+    setLastTip('补充水分，促进生长。')
+  }
+  const handleFertilize = () => {
+    if (current !== 'orchard') return
+    setFertilized(true)
+    setLastTip('施肥完成，增长速度提升。')
+  }
+  const handleHarvest = () => {
+    if (simStage !== 'fruit') return
+    setSimStage('harvested')
+    setLastTip('完成收获并绑定批次，准备入库。')
+    setFlags(f => ({ ...f, graded: true }))
+    setTimeout(() => setCurrent('warehouse'), 800)
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-amber-50 px-4 py-10">
       <div className="max-w-3xl mx-auto">
@@ -303,7 +356,62 @@ const AppleAdventure: React.FC = () => {
                 </button>
               </div>
             ) : (
-              <p className="text-gray-700 leading-relaxed mb-6">{scene.narrative}</p>
+              <>
+                <p className="text-gray-700 leading-relaxed mb-6">{scene.narrative}</p>
+
+                {current === 'orchard' && (
+                  <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                      <div className="text-sm text-gray-600 mb-3">互动：点击种子 → 浇水 → 施肥 → 成长 → 收获</div>
+                      <div className="h-40 rounded-lg bg-gradient-to-b from-red-50 to-amber-100 relative overflow-hidden">
+                        <div
+                          onClick={handleSeedClick}
+                          className={`absolute left-1/2 -translate-x-1/2 bottom-4 w-8 h-8 rounded-full ${simStage==='seed' ? 'bg-amber-400 cursor-pointer' : 'bg-amber-300'} shadow`}
+                          title="点击播种"
+                        />
+                        {simStage !== 'seed' && (
+                          <div className="absolute left-1/2 -translate-x-1/2 bottom-4 w-24 h-2 bg-amber-700 rounded" />
+                        )}
+                        {['sprout','flower','fruit','harvested'].includes(simStage) && (
+                          <Sprout className="absolute left-1/2 -translate-x-1/2 bottom-8 w-10 h-10 text-green-700" />
+                        )}
+                        {simStage==='fruit' && (
+                          <CheckCircle className="absolute right-3 top-3 w-6 h-6 text-red-600" />
+                        )}
+                      </div>
+
+                      <div className="mt-4 grid grid-cols-3 gap-2">
+                        <button onClick={handleWater} className="flex items-center justify-center gap-2 px-3 py-2 rounded bg-red-600 text-white hover:bg-red-700 border border-amber-400">
+                          <Droplet className="w-4 h-4" />浇水
+                        </button>
+                        <button onClick={handleFertilize} className={`flex items-center justify-center gap-2 px-3 py-2 rounded ${fertilized ? 'bg-amber-300 text-red-700' : 'bg-white text-red-700 hover:bg-amber-50'} border border-amber-400`}>
+                          <FlaskConical className="w-4 h-4" />施肥
+                        </button>
+                        <button onClick={handleHarvest} disabled={simStage!=='fruit'} className={`flex items-center justify-center gap-2 px-3 py-2 rounded ${simStage==='fruit' ? 'bg-red-600 text-white hover:bg-red-700 border border-amber-400' : 'bg-gray-100 text-gray-500'} `}>
+                          <CheckCircle className="w-4 h-4" />收获
+                        </button>
+                      </div>
+
+                      <div className="mt-4 space-y-2">
+                        <div className="text-xs text-gray-600">水分 {moisture}%</div>
+                        <div className="w-full h-2 bg-gray-200 rounded">
+                          <div className="h-2 bg-amber-400 rounded" style={{ width: `${moisture}%` }} />
+                        </div>
+                        <div className="text-xs text-gray-600">成长 {growth}%</div>
+                        <div className="w-full h-2 bg-gray-200 rounded">
+                          <div className="h-2 bg-red-600 rounded" style={{ width: `${growth}%` }} />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-white border rounded-lg p-4">
+                      <div className="text-sm text-gray-700 mb-2">阶段：{simStage}</div>
+                      <div className="text-xs text-gray-600">施肥：{fertilized ? '是' : '否'}</div>
+                      <div className="text-xs text-gray-600">提示：点击播种后需浇水，达到 25% 会发芽，60% 开花，100% 结果，可收获进入仓储流程。</div>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

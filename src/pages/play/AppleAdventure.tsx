@@ -331,68 +331,68 @@ const AppleAdventure: React.FC = () => {
 
           <div className="p-8">
             {editingImages && (
-              <div className="mb-6 p-4 border rounded-lg bg-gradient-to-br from-amber-50 to-yellow-50 border-amber-300">
-                <div className="text-lg font-medium mb-3">为每个场景设置更合适的图片 URL：</div>
+              <div className="mb-6 p-6 border rounded-lg bg-gradient-to-br from-red-50 to-amber-50 border-red-300">
+                <div className="text-xl font-bold mb-4 text-red-800">为每个场景设置更合适的图片 URL：</div>
                 <div className="space-y-3">
                   {Object.values(scenes).map((s) => (
                     <div key={s.id} className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
-                      <label className="text-base text-gray-700">{s.title}</label>
+                      <label className="text-lg text-red-700 font-medium">{s.title}</label>
                       <input
                         value={imageOverrides[s.id] ?? ''}
                         onChange={(e) => setImageOverrides((prev) => ({ ...prev, [s.id]: e.target.value }))}
                         placeholder={s.image}
-                        className="sm:col-span-2 w-full px-3 py-2 border rounded"
+                        className="sm:col-span-2 w-full px-4 py-3 border rounded text-lg border-red-300 focus:ring-2 focus:ring-red-500 focus:border-red-500"
                       />
                     </div>
                   ))}
                 </div>
                 <div className="mt-3 flex items-center gap-3">
-                  <button onClick={saveImages} className="px-4 py-3 rounded bg-red-600 text-white text-base border border-amber-400">保存</button>
-                  <button onClick={resetImages} className="px-4 py-3 rounded bg-gradient-to-r from-amber-200 to-yellow-200 text-red-700 text-base border border-amber-400 hover:from-amber-300 hover:to-yellow-300 shadow-sm">恢复默认</button>
+                  <button onClick={saveImages} className="px-6 py-4 rounded bg-gradient-to-r from-red-600 to-red-700 text-white text-lg font-bold border border-amber-400 hover:from-red-700 hover:to-red-800">保存</button>
+                  <button onClick={resetImages} className="px-6 py-4 rounded bg-gradient-to-r from-amber-400 to-yellow-500 text-red-800 text-lg font-bold border border-red-400 hover:from-amber-500 hover:to-yellow-600 shadow-sm">恢复默认</button>
                 </div>
               </div>
             )}
             {current === 'intro' ? (
               <div className="space-y-6">
-                <div className="text-gray-700 leading-relaxed text-lg">
-                  <div className="font-medium mb-3 text-xl">{user?.name ? `${identity || '追梦青年'}${user.name}，` : ''}欢迎踏上红色筑梦之旅。</div>
-                  <div className="text-lg">选择你的身份，凝聚青年力量助力乡村振兴：</div>
+                <div className="text-red-800 leading-relaxed text-lg font-medium">
+                  <div className="font-bold mb-3 text-xl text-red-800">{user?.name ? `${identity || '追梦青年'}${user.name}，` : ''}欢迎踏上红色筑梦之旅。</div>
+                  <div className="text-lg text-red-700 font-medium">选择你的身份，凝聚青年力量助力乡村振兴：</div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {['红色志愿者','田园爱好者','科技玩家'].map((role) => (
                     <button
                       key={role}
                       onClick={() => setIdentity(role)}
-                      className={`w-full py-3 px-4 rounded border ${identity === role ? 'bg-gradient-to-r from-amber-50 to-yellow-50 text-red-700 border-amber-400 shadow-sm' : 'bg-white text-gray-700 hover:bg-amber-50 border-amber-300'}`}
+                      className={`w-full py-4 px-6 rounded-lg border-2 font-bold text-lg ${identity === role ? 'bg-gradient-to-r from-red-600 to-red-700 text-white border-amber-400 shadow-lg' : 'bg-white text-red-700 hover:bg-gradient-to-r hover:from-amber-50 hover:to-yellow-50 border-red-300 hover:border-amber-400'}`}
                     >
                       {role}
                     </button>
                   ))}
                 </div>
-                <div className="text-base text-gray-600">{personaText}</div>
+                <div className="text-lg text-red-700 font-medium">{personaText}</div>
                 <button
                   onClick={() => setCurrent('orchard')}
-                  className="w-full bg-red-600 text-white py-4 px-6 rounded-lg font-bold hover:bg-red-700 transition-colors border border-amber-400 text-lg"
+                  className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-5 px-8 rounded-lg font-bold hover:from-red-700 hover:to-red-800 transition-all border-2 border-amber-400 text-xl shadow-lg"
                 >
                   开始旅程
                 </button>
               </div>
             ) : (
               <>
-                <p className="text-gray-700 leading-relaxed mb-6 text-lg">{scene.narrative}</p>
+                <p className="text-red-800 leading-relaxed mb-8 text-xl font-medium">{scene.narrative}</p>
 
                 {current === 'orchard' && (
-                  <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-gradient-to-br from-amber-50 to-yellow-50 border border-amber-300 rounded-lg p-4 shadow-sm">
-                      <div className="text-base text-gray-600 mb-3">互动：点击种子 → 浇水 → 施肥 → 成长 → 收获</div>
-                      <div className="h-40 rounded-lg bg-gradient-to-br from-red-100 via-amber-50 to-yellow-100 relative overflow-hidden">
+                  <div className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="bg-gradient-to-br from-red-50 to-amber-50 border-2 border-red-300 rounded-lg p-6 shadow-lg">
+                      <div className="text-lg text-red-700 font-bold mb-4">互动：点击种子 → 浇水 → 施肥 → 成长 → 收获</div>
+                      <div className="h-48 rounded-lg bg-gradient-to-br from-red-100 via-amber-50 to-yellow-100 relative overflow-hidden border-2 border-amber-400">
                         <div
                           onClick={handleSeedClick}
-                          className={`absolute left-1/2 -translate-x-1/2 bottom-4 w-8 h-8 rounded-full ${simStage==='seed' ? 'bg-amber-400 cursor-pointer' : 'bg-amber-300'} shadow`}
+                          className={`absolute left-1/2 -translate-x-1/2 bottom-4 w-10 h-10 rounded-full ${simStage==='seed' ? 'bg-gradient-to-r from-amber-400 to-yellow-500 cursor-pointer shadow-lg' : 'bg-gradient-to-r from-amber-300 to-yellow-400'} border-2 border-red-400`}
                           title="点击播种"
                         />
                         {simStage !== 'seed' && (
-                          <div className="absolute left-1/2 -translate-x-1/2 bottom-4 w-24 h-2 bg-amber-700 rounded" />
+                          <div className="absolute left-1/2 -translate-x-1/2 bottom-4 w-28 h-3 bg-gradient-to-r from-amber-700 to-red-800 rounded" />
                         )}
                         {['sprout','flower','fruit','harvested'].includes(simStage) && (
                           <Sprout className="absolute left-1/2 -translate-x-1/2 bottom-8 w-10 h-10 text-red-600" />
@@ -403,40 +403,40 @@ const AppleAdventure: React.FC = () => {
                       </div>
 
                       <div className="mt-4 grid grid-cols-3 gap-2">
-                        <button onClick={handleWater} className="flex items-center justify-center gap-2 px-4 py-3 rounded bg-gradient-to-r from-red-600 to-red-700 text-white hover:from-red-700 hover:to-red-800 border border-amber-400 shadow-sm text-base">
+                        <button onClick={handleWater} className="flex items-center justify-center gap-2 px-6 py-4 rounded-lg bg-gradient-to-r from-red-600 to-red-700 text-white hover:from-red-700 hover:to-red-800 border-2 border-amber-400 shadow-lg text-lg font-bold">
                           <Droplet className="w-4 h-4" />浇水
                         </button>
-                        <button onClick={handleFertilize} className={`flex items-center justify-center gap-2 px-4 py-3 rounded ${fertilized ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-red-700' : 'bg-white text-red-700 hover:bg-gradient-to-r hover:from-amber-50 hover:to-yellow-50'} border border-amber-400 shadow-sm text-base`}>
+                        <button onClick={handleFertilize} className={`flex items-center justify-center gap-2 px-6 py-4 rounded-lg border-2 shadow-lg text-lg font-bold ${fertilized ? 'bg-gradient-to-r from-amber-500 to-yellow-600 text-red-800 border-red-400' : 'bg-white text-red-700 hover:bg-gradient-to-r hover:from-amber-50 hover:to-yellow-50 border-amber-400 hover:border-red-400'}`}>
                           <FlaskConical className="w-4 h-4" />施肥
                         </button>
-                        <button onClick={handleHarvest} disabled={simStage!=='fruit'} className={`flex items-center justify-center gap-2 px-4 py-3 rounded ${simStage==='fruit' ? 'bg-gradient-to-r from-amber-500 to-yellow-600 text-white hover:from-amber-600 hover:to-yellow-700 border border-red-400 shadow-sm text-base' : 'bg-gray-100 text-gray-500 text-base'} `}>
+                        <button onClick={handleHarvest} disabled={simStage!=='fruit'} className={`flex items-center justify-center gap-2 px-6 py-4 rounded-lg border-2 shadow-lg text-lg font-bold ${simStage==='fruit' ? 'bg-gradient-to-r from-amber-500 to-yellow-600 text-white hover:from-amber-600 hover:to-yellow-700 border-red-400' : 'bg-gray-100 text-gray-500 border-gray-300'} `}>
                           <CheckCircle className="w-4 h-4" />收获
                         </button>
                       </div>
 
-                      <div className="mt-4 space-y-2">
-                        <div className="text-sm text-gray-600 font-medium">水分 {moisture}%</div>
-                        <div className="w-full h-2 bg-gray-200 rounded">
-                          <div className="h-2 bg-gradient-to-r from-amber-400 to-yellow-500 rounded" style={{ width: `${moisture}%` }} />
+                      <div className="mt-6 space-y-3">
+                        <div className="text-lg text-red-700 font-bold">水分 {moisture}%</div>
+                        <div className="w-full h-4 bg-red-100 rounded-lg border border-red-200">
+                          <div className="h-4 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-lg border border-amber-500" style={{ width: `${moisture}%` }} />
                         </div>
-                        <div className="text-sm text-gray-600 font-medium">成长 {growth}%</div>
-                        <div className="w-full h-2 bg-gray-200 rounded">
-                          <div className="h-2 bg-gradient-to-r from-red-500 to-red-700 rounded" style={{ width: `${growth}%` }} />
+                        <div className="text-lg text-red-700 font-bold">成长 {growth}%</div>
+                        <div className="w-full h-4 bg-red-100 rounded-lg border border-red-200">
+                          <div className="h-4 bg-gradient-to-r from-red-500 to-red-700 rounded-lg border border-red-500" style={{ width: `${growth}%` }} />
                         </div>
                       </div>
                     </div>
 
-                    <div className="bg-white border rounded-lg p-4">
-                      <div className="text-base text-gray-700 mb-2 font-medium">阶段：{simStage}</div>
-                      <div className="text-sm text-gray-600 mb-1">施肥：{fertilized ? '是' : '否'}</div>
-                      <div className="text-sm text-gray-600 leading-relaxed">提示：点击播种后需浇水，达到 25% 会发芽，60% 开花，100% 结果，可收获进入仓储流程。</div>
+                    <div className="bg-white border-2 border-red-200 rounded-lg p-6 shadow-lg">
+                      <div className="text-xl text-red-800 mb-3 font-bold">阶段：{simStage}</div>
+                      <div className="text-lg text-red-700 mb-2 font-medium">施肥：{fertilized ? '是' : '否'}</div>
+                      <div className="text-lg text-red-700 leading-relaxed font-medium">提示：点击播种后需浇水，达到 25% 会发芽，60% 开花，100% 结果，可收获进入仓储流程。</div>
                     </div>
                   </div>
                 )}
               </>
             )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {scene.choices.map((c) => (
                 <button
                   key={c.text}
@@ -462,31 +462,31 @@ const AppleAdventure: React.FC = () => {
                     }
                     handleChoice(c.next)
                   }}
-                  className="flex items-center justify-between w-full bg-white text-red-700 py-4 px-6 rounded-lg font-bold hover:bg-amber-50 transition-colors transform hover:translate-x-0.5 border border-amber-400 text-lg"
+                  className="flex items-center justify-between w-full bg-gradient-to-r from-white to-amber-50 text-red-700 py-5 px-8 rounded-lg font-bold hover:from-amber-50 hover:to-yellow-50 transition-all transform hover:translate-x-1 border-2 border-amber-400 text-xl shadow-lg"
                 >
                   <span>{c.text}</span>
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="w-6 h-6" />
                 </button>
               ))}
             </div>
 
             {lastTip && (
-              <div className="mt-6 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-300 text-amber-800 rounded-lg shadow-sm text-lg font-medium">{lastTip}</div>
+              <div className="mt-8 p-6 bg-gradient-to-r from-red-50 to-amber-50 border-2 border-red-300 text-red-800 rounded-lg shadow-lg text-xl font-bold">{lastTip}</div>
             )}
 
             <div className="mt-8 flex items-center justify-between">
-              <div className="text-base text-gray-500 font-medium">场景：{scene.id}</div>
+              <div className="text-lg text-red-600 font-bold">场景：{scene.id}</div>
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setCurrent('intro')}
-                  className="inline-flex items-center gap-2 text-base text-red-700 bg-gradient-to-r from-amber-100 to-yellow-100 py-3 px-4 rounded hover:from-amber-200 hover:to-yellow-200 border border-amber-400 shadow-sm"
+                  className="inline-flex items-center gap-2 text-lg font-bold text-red-800 bg-gradient-to-r from-amber-300 to-yellow-400 py-4 px-6 rounded-lg hover:from-amber-400 hover:to-yellow-500 border-2 border-red-400 shadow-lg"
                 >
-                  <RefreshCw className="w-4 h-4" />重来一次
+                  <RefreshCw className="w-5 h-5" />重来一次
                 </button>
                 {current === 'market' && (
                 <button
                   onClick={() => navigate('/')}
-                  className="inline-flex items-center gap-2 text-base bg-red-600 text-white py-3 px-4 rounded hover:bg-red-700 border border-amber-400 font-bold"
+                  className="inline-flex items-center gap-2 text-lg bg-gradient-to-r from-red-600 to-red-700 text-white py-4 px-6 rounded-lg hover:from-red-700 hover:to-red-800 border-2 border-amber-400 font-bold shadow-lg"
                 >
                   立即兑换
                 </button>
@@ -495,13 +495,13 @@ const AppleAdventure: React.FC = () => {
             </div>
 
             {current === 'market' && (
-              <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-lg border bg-gray-50">
-                  <div className="font-semibold mb-1">{endingTitle}</div>
-                  <div className="text-sm text-gray-600">根据你的选择生成结局与奖励。</div>
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="p-6 rounded-lg border-2 bg-gradient-to-r from-red-50 to-amber-50 border-red-300">
+                  <div className="text-xl font-bold mb-2 text-red-800">{endingTitle}</div>
+                  <div className="text-lg text-red-600 font-medium">根据你的选择生成结局与奖励。</div>
                 </div>
-                <div className="p-4 rounded-lg border bg-yellow-50">
-                  <div className="font-semibold mb-1">{endingReward}</div>
+                <div className="p-6 rounded-lg border-2 bg-gradient-to-r from-amber-100 to-yellow-200 border-amber-400">
+                  <div className="text-xl font-bold mb-2 text-red-800">{endingReward}</div>
                   <div className="text-sm text-gray-600">可在首页点击“立即兑换”完成闭环。</div>
                 </div>
               </div>

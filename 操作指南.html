@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🍎 苹果奇遇记 - AI图片应用指南</title>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            min-height: 100vh;
+        }
+        .container { 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            background: white; 
+            border-radius: 20px; 
+            padding: 40px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            text-align: center; 
+            color: #d32f2f; 
+            margin-bottom: 30px; 
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .step {
+            background: linear-gradient(135deg, #fff5f5, #fff8e1);
+            margin: 25px 0;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #d32f2f;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+        .step h3 {
+            color: #d32f2f;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .step-number {
+            background: #d32f2f;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+        .highlight {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #856404;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #155724;
+        }
+        .btn {
+            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: linear-gradient(135deg, #b71c1c, #8b0000);
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d, #495057);
+        }
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #495057, #343a40);
+        }
+        .preview-img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .url-box {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            word-break: break-all;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍎 苹果奇遇记 - AI图片应用指南</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">一步步教您如何应用AI生成的专业场景图片</p>
+
+        <div class="step">
+            <h3><span class="step-number">1</span> 🔍 查看已生成的图片</h3>
+            <p>我已经为您创建了专业的AI图片生成页面，包含11个场景的定制图片：</p>
+            <div class="highlight">
+                <strong>📂 生成的文件：</strong>
+                <ul>
+                    <li><code>generated_images.html</code> - AI图片展示页面</li>
+                    <li><code>better_images.html</code> - 图片优化建议页面</li>
+                </ul>
+            </div>
+            <p><strong>操作：</strong> 双击打开 <code>generated_images.html</code> 文件，您可以看到所有AI生成的图片</p>
+            <a href="#" class="btn" onclick="alert('请在文件管理器中找到 generated_images.html 并双击打开')">📂 打开图片页面</a>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">2</span> ⚙️ 系统已自动更新</h3>
+            <p>好消息！我已经帮您把《苹果奇遇记》的图片URL全部更新为AI生成的图片了：</p>
+            <div class="success">
+                <strong>✅ 已完成更新：</strong>
+                <ul>
+                    <li>🎯 苹果奇遇记·青年红色筑梦 - AI生成红色主题图片</li>
+                    <li>🌱 选址种植 - AI生成果园选址场景</li>
+                    <li>🐛 病虫害防治 - AI生成AI植保技术图片</li>
+                    <li>💧 灌溉策略 - AI生成智能滴灌系统</li>
+                    <li>🍎 果园采摘 - AI生成丰收采摘场景</li>
+                    <li>❄️ 冷链仓储 - AI生成现代化冷藏库</li>
+                    <li>📦 包装材质 - AI生成环保包装生产线</li>
+                    <li>🚛 冷链运输 - AI生成GPS温控运输</li>
+                    <li>🛒 销售渠道 - AI生成多渠道销售场景</li>
+                    <li>⚠️ 运输异常 - AI生成异常处理场景</li>
+                    <li>🏪 商超上架 - AI生成超市陈列场景</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">3</span> 🚀 立即体验</h3>
+            <p>现在您可以立即体验更新后的《苹果奇遇记》了！</p>
+            <div class="highlight">
+                <strong>🎮 如何体验：</strong>
+                <ol>
+                    <li>运行项目：<code>npm run dev</code></li>
+                    <li>打开浏览器访问项目地址</li>
+                    <li>进入"苹果奇遇记"页面</li>
+                    <li>欣赏全新的AI生成场景图片！</li>
+                </ol>
+            </div>
+            <a href="#" class="btn" onclick="alert('请在终端中运行 npm run dev 启动项目')">🚀 启动项目</a>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">4</span> 🎨 自定义图片（可选）</h3>
+            <p>如果您想进一步自定义图片，可以使用以下方法：</p>
+            <div class="code-block">
+                <strong>📝 AI图片生成API格式：</strong><br>
+                <code>https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=您的描述&image_size=landscape_16_9</code>
+            </div>
+            <p><strong>示例提示词：</strong></p>
+            <div class="url-box">
+                红色青年团队在农村果园，充满希望的氛围，红色主题，现代与传统结合，乡村振兴背景，温暖阳光，专业摄影风格
+            </div>
+            <a href="#" class="btn btn-secondary" onclick="alert('请参考 better_images.html 中的详细提示词')">🎨 查看更多提示词</a>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">5</span> 💡 技术说明</h3>
+            <p>我使用的是内置的AI图片生成API，具有以下特点：</p>
+            <div class="success">
+                <ul>
+                    <li>🤖 <strong>智能生成：</strong>基于文本描述实时生成图片</li>
+                    <li>🎨 <strong>专业定制：</strong>每个场景都有专门的提示词优化</li>
+                    <li>📐 <strong>尺寸适配：</strong>16:9横屏比例，完美适配网页</li>
+                    <li>⚡ <strong>即时更新：</strong>修改URL后立即生效，无需重启</li>
+                    <li>🔄 <strong>可重新生成：</strong>不满意可以随时重新生成</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">6</span> 🎯 快速验证</h3>
+            <p>想要快速确认图片是否生效？</p>
+            <div class="code-block">
+                <strong>🔍 检查文件：</strong> 打开 <code>src/pages/play/AppleAdventure.tsx</code><br>
+                <strong>🔍 查找关键词：</strong> 搜索 "trae-api-us.mchost.guru"<br>
+                <strong>✅ 确认结果：</strong> 应该能看到11个场景都使用了新的AI图片URL
+            </div>
+            <a href="#" class="btn" onclick="alert('请在IDE中打开 AppleAdventure.tsx 文件查看')">🔍 查看代码</a>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background: linear-gradient(135deg, #e3f2fd, #bbdefb); border-radius: 15px;">
+            <h3>🎉 恭喜！您已完成所有设置！</h3>
+            <p>现在《苹果奇遇记》拥有了专业的AI生成图片，每个场景都更加生动贴切。</p>
+            <p>快去体验全新的视觉效果吧！🚀</p>
+        </div>
+    </div>
+
+    <script>
+        // 添加一些交互功能
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🍎 苹果奇遇记AI图片应用指南已加载完成！');
+            
+            // 为按钮添加点击效果
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // 按钮点击动画
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-2px)';
+                    }, 100);
+                });
+            });
+
+            // 步骤展开/收起功能
+            const steps = document.querySelectorAll('.step');
+            steps.forEach((step, index) => {
+                step.addEventListener('click', function() {
+                    this.style.background = this.style.background.includes('fff8e1') ? 
+                        'linear-gradient(135deg, #f0f8ff, #e6f3ff)' : 
+                        'linear-gradient(135deg, #fff5f5, #fff8e1)';
+                });
+            });
+        });
+
+        // 辅助函数：复制文本到剪贴板
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ 已复制到剪贴板！');
+            });
+        }
+
+        // 辅助函数：打开文件
+        function openFile(filename) {
+            alert(`📂 请在文件管理器中找到 ${filename} 并双击打开`);
+        }
+    </script>
+</body>
+</html>

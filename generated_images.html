@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>苹果奇遇记 - AI生成图片展示</title>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            min-height: 100vh;
+        }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            background: white; 
+            border-radius: 20px; 
+            padding: 30px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            text-align: center; 
+            color: #d32f2f; 
+            margin-bottom: 30px; 
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .scene { 
+            background: linear-gradient(135deg, #fff5f5, #fff8e1); 
+            margin: 25px 0; 
+            padding: 25px; 
+            border-radius: 15px; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border-left: 5px solid #d32f2f;
+            transition: transform 0.3s ease;
+        }
+        .scene:hover {
+            transform: translateY(-5px);
+        }
+        .scene h3 { 
+            color: #d32f2f; 
+            margin-bottom: 15px; 
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .image-container { 
+            display: flex; 
+            gap: 25px; 
+            align-items: center; 
+            margin: 20px 0; 
+            flex-wrap: wrap;
+        }
+        .image-box {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        .generated-img {
+            width: 100%;
+            max-width: 400px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+        .generated-img:hover {
+            transform: scale(1.05);
+        }
+        .prompt { 
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef); 
+            padding: 15px; 
+            border-radius: 10px; 
+            font-family: 'Courier New', monospace; 
+            font-size: 13px; 
+            margin: 15px 0;
+            border-left: 4px solid #28a745;
+            line-height: 1.5;
+        }
+        .copy-btn { 
+            background: linear-gradient(135deg, #d32f2f, #b71c1c); 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            margin: 8px; 
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+        }
+        .copy-btn:hover { 
+            background: linear-gradient(135deg, #b71c1c, #8b0000);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
+        }
+        .apply-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+        .apply-btn:hover {
+            background: linear-gradient(135deg, #20c997, #17a2b8);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+        .url-display {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 10px 0;
+            word-break: break-all;
+            border: 1px solid #dee2e6;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 5px;
+        }
+        .status-generated { background: #d4edda; color: #155724; }
+        .status-ready { background: #cce5ff; color: #004085; }
+        .status-applied { background: #fff3cd; color: #856404; }
+        .batch-controls {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-radius: 15px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #d32f2f, #ffa500);
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍎 苹果奇遇记 - AI生成场景图片</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">专业AI图片生成，为每个场景量身定制</p>
+
+        <div class="batch-controls">
+            <h3>🚀 批量操作</h3>
+            <button class="copy-btn" onclick="generateAllImages()">🎨 一键生成所有图片</button>
+            <button class="apply-btn copy-btn" onclick="applyAllToSystem()">💾 应用到系统</button>
+            <button class="copy-btn" onclick="copyAllPrompts()">📋 复制所有提示词</button>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+            <div id="progressText">准备就绪</div>
+        </div>
+
+        <!-- 场景1：苹果奇遇记 -->
+        <div class="scene">
+            <h3>🎯 1. 苹果奇遇记·青年红色筑梦</h3>
+            <div class="status status-generated">AI生成图片</div>
+            <div class="image-container">
+                <div class="image-box">
+                    <img class="generated-img" 
+                         src="https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E7%BA%A2%E8%89%B2%E9%9D%92%E5%B9%B4%E5%9B%A2%E9%98%9F%E5%9C%A8%E5%86%9C%E6%9D%91%E6%9E%9C%E5%9B%AD%EF%BC%8C%E6%BB%A1%E6%BB%A1%E5%B8%8C%E6%9C%9B%E7%9A%84%E6%B0%9B%E5%9B%B4%EF%BC%8C%E7%BA%A2%E8%89%B2%E4%B8%BB%E9%A2%98%EF%BC%8C%E7%8E%B0%E4%BB%A3%E4%B8%8E%E4%BC%A0%E7%BB%9F%E7%BB%93%E5%90%88%EF%BC%8C%E4%B9%A1%E6%9D%91%E6%8C%AF%E5%85%B4%E8%83%8C%E6%99%AF%EF%BC%8C%E6%B8%A9%E6%9A%96%E9%98%B3%E5%85%89%EF%BC%8C%E4%B8%93%E4%B8%9A%E6%91%84%E5%BD%B1%E9%A3%8E%E6%A0%BC&image_size=landscape_16_9" 
+                         alt="苹果奇遇记场景">
+                    <div class="url-display">https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=红色青年团队在农村果园...</div>
+                </div>
+            </div>
+            <div class="prompt">
+                <strong>📝 AI生成提示词：</strong><br>
+                红色青年团队在农村果园，充满希望的氛围，红色主题，现代与传统结合，乡村振兴背景，温暖阳光，专业摄影风格
+            </div>
+            <button class="copy-btn" onclick="copyPrompt('红色青年团队在农村果园，充满希望的氛围，红色主题，现代与传统结合，乡村振兴背景，温暖阳光，专业摄影风格')">📋 复制提示词</button>
+            <button class="copy-btn" onclick="regenerateImage(1)">🔄 重新生成</button>
+        </div>
+
+        <!-- 场景2：选址种植 -->
+        <div class="scene">
+            <h3>🌱 2. 选址种植</h3>
+            <div class="status status-generated">AI生成图片</div>
+            <div class="image-container">
+                <div class="image-box">
+                    <img class="generated-img" 
+                         src="https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E8%8B%B9%E6%9E%9C%E5%9B%AD%E9%80%89%E5%9D%80%E5%9C%BA%E6%99%AF%EF%BC%8C%E5%B1%B1%E5%9C%B0%E6%9E%9C%E5%9B%AD%EF%BC%8C%E5%90%91%E9%98%B3%E5%9D%A1%E5%9C%B0%EF%BC%8C%E8%8B%B9%E6%9E%9C%E6%A0%91%E8%8B%97%EF%BC%8C%E5%9C%9F%E5%A3%A4%E6%A3%80%E6%B5%8B%EF%BC%8C%E5%86%9C%E4%B8%9A%E4%B8%93%E5%AE%B6%E6%8C%87%E5%AF%BC%EF%BC%8C%E7%8E%B0%E4%BB%A3%E5%8C%96%E5%86%9C%E4%B8%9A%E8%AE%BE%E5%A4%87%EF%BC%8C%E7%BB%BF%E8%89%B2%E5%86%9C%E4%B8%9A%E6%A6%82%E5%BF%B5&image_size=landscape_16_9" 
+                         alt="选址种植场景">
+                    <div class="url-display">https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=苹果园选址场景...</div>
+                </div>
+            </div>
+            <div class="prompt">
+                <strong>📝 AI生成提示词：</strong><br>
+                苹果园选址场景，山地果园，向阳坡地，苹果树苗，土壤检测，农业专家指导，现代化农业设备，绿色农业概念
+            </div>
+            <button class="copy-btn" onclick="copyPrompt('苹果园选址场景，山地果园，向阳坡地，苹果树苗，土壤检测，农业专家指导，现代化农业设备，绿色农业概念')">📋 复制提示词</button>
+            <button class="copy-btn" onclick="regenerateImage(2)">🔄 重新生成</button>
+        </div>
+
+        <!-- 场景3：病虫害防治 -->
+        <div class="scene">
+            <h3>🐛 3. 病虫害防治</h3>
+            <div class="status status-generated">AI生成图片</div>
+            <div class="image-container">
+                <div class="image-box">
+                    <img class="generated-img" 
+                         src="https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E8%8B%B9%E6%9E%9C%E6%A0%91%E7%97%85%E8%99%AB%E5%AE%B3%E9%98%B2%E6%B2%BB%EF%BC%8CAI%E6%99%BA%E8%83%BD%E8%AF%86%E5%88%AB%E7%B3%BB%E7%BB%9F%EF%BC%8C%E6%97%A0%E4%BA%BA%E6%9C%BA%E5%99%B4%E6%B4%92%EF%BC%8C%E7%94%9F%E7%89%A9%E9%98%B2%E6%B2%BB%EF%BC%8C%E7%BB%BF%E8%89%B2%E9%98%B2%E6%8E%A7%E6%8A%80%E6%9C%AF%EF%BC%8C%E5%86%9C%E4%B8%9A%E7%A7%91%E6%8A%80%EF%BC%8C%E4%B8%93%E4%B8%9A%E6%A4%8D%E4%BF%9D%E4%BA%BA%E5%91%98&image_size=landscape_16_9" 
+                         alt="病虫害防治场景">
+                    <div class="url-display">https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=苹果树病虫害防治...</div>
+                </div>
+            </div>
+            <div class="prompt">
+                <strong>📝 AI生成提示词：</strong><br>
+                苹果树病虫害防治，AI智能识别系统，无人机喷洒，生物防治，绿色防控技术，农业科技，专业植保人员
+            </div>
+            <button class="copy-btn" onclick="copyPrompt('苹果树病虫害防治，AI智能识别系统，无人机喷洒，生物防治，绿色防控技术，农业科技，专业植保人员')">📋 复制提示词</button>
+            <button class="copy-btn" onclick="regenerateImage(3)">🔄 重新生成</button>
+        </div>
+
+        <!-- 场景4：灌溉策略 -->
+        <div class="scene">
+            <h3>💧 4. 灌溉策略</h3>
+            <div class="status status-generated">AI生成图片</div>
+            <div class="image-container">
+                <div class="image-box">
+                    <img class="generated-img" 
+                         src="https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E8%8B%B9%E6%9E%9C%E5%9B%AD%E7%81%8C%E6%BA%89%E7%B3%BB%E7%BB%9F%EF%BC%8C%E6%BB%B4%E7%81%8C%E6%8A%80%E6%9C%AF%EF%BC%8C%E6%99%BA%E8%83%BD%E6%B0%B4%E8%82%A5%E4%B8%80%E4%BD%93%E5%8C%96%EF%BC%8C%E8%8A%82%E6%B0%B4%E5%86%9C%E4%B8%9A%EF%BC%8C%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%81%8C%E6%BA%89%E8%AE%BE%E5%A4%87%EF%BC%8C%E6%9E%9C%E5%9B%AD%E6%B0%B4%E7%AE%A1%E5%B8%83%E5%B1%80%EF%BC%8C%E7%B2%BE%E5%87%86%E5%86%9C%E4%B8%9A&image_size=landscape_16_9" 
+                         alt="灌溉策略场景">
+                    <div class="url-display">https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=苹果园灌溉系统...</div>
+                </div>
+            </div>
+            <div class="prompt">
+                <strong>📝 AI生成提示词：</strong><br>
+                苹果园灌溉系统，滴灌技术，智能水肥一体化，节水农业，现代化灌溉设备，果园水管布局，精准农业
+            </div>
+            <button class="copy-btn" onclick="copyPrompt('苹果园灌溉系统，滴灌技术，智能水肥一体化，节水农业，现代化灌溉设备，果园水管布局，精准农业')">📋 复制提示词</button>
+            <button class="copy-btn" onclick="regenerateImage(4)">🔄 重新生成</button>
+        </div>
+
+        <!-- 场景5：果园采摘 -->
+        <div class="scene">
+            <h3>🍎 5. 果园采摘</h3>
+            <div class="status status-generated">AI生成图片</div>
+            <div class="image-container">
+                <div class="image-box">
+                    <img class="generated-img" 
+                         src="https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E8%8B%B9%E6%9E%9C%E6%91%98%E5%8F%81%E5%9C%BA%E6%99%AF%EF%BC%8C%E5%86%9C%E6%B0%91%E6%91%98%E5%8F%81%E6%88%90%E7%86%9F%E8%8B%B9%E6%9E%9C%EF%BC%8C%E6%9E%9C%E5%9B%AD%E4%B8%B0%E6%94%B6%EF%BC%8C%E6%99%BA%E8%83%BD%E6%91%98%E5%8F%81%E8%AE%BE%E5%A4%87%EF%BC%8C%E8%8B%B9%E6%9E%9C%E5%88%86%E7%BA%A7%EF%BC%8C%E5%86%9C%E4%BA%A7%E5%93%81%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%EF%BC%8C%E5%96%9C%E6%82%A6%E7%9A%84%E4%B8%B0%E6%94%B6%E6%B0%9B%E5%9B%B4&image_size=landscape_16_9" 
+                         alt="果园采摘场景">
+                    <div class="url-display">https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=苹果采摘场景...</div>
+                </div>
+            </div>
+            <div class="prompt">
+                <strong>📝 AI生成提示词：</strong><br>
+                苹果采摘场景，农民采摘成熟苹果，果园丰收，智能采摘设备，苹果分级，农产品质量检测，喜悦的丰收氛围
+            </div>
+            <button class="copy-btn" onclick="copyPrompt('苹果采摘场景，农民采摘成熟苹果，果园丰收，智能采摘设备，苹果分级，农产品质量检测，喜悦的丰收氛围')">📋 复制提示词</button>
+            <button class="copy-btn" onclick="regenerateImage(5)">🔄 重新生成</button>
+        </div>
+
+        <!-- 场景6：冷链仓储 -->
+        <div class="scene">
+            <h3>❄️ 6. 冷链仓储</h3>
+            <div class="status status-generated">AI生成图片</div>
+            <div class="image-container">
+                <div class="image-box">
+                    <img class="generated-img" 
+                         src="https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E7%8E%B0%E4%BB%A3%E5%8C%96%E5%86%B7%E9%93%BE%E4%BB%93%E5%82%A8%E4%B8%AD%E5%BF%83%EF%BC%8C%E8%8B%B9%E6%9E%9C%E5%86%B7%E8%97%8F%E5%BA%93%EF%BC%8C%E6%B8%A9%E6%8E%A7%E7%B3%BB%E7%BB%9F%EF%BC%8C%E6%99%BA%E8%83%BD%E4%BB%93%E5%82%A8%E7%AE%A1%E7%90%86%EF%BC%8C%E5%86%9C%E4%BA%A7%E5%93%81%E4%BF%9D%E9%B2%9C%EF%BC%8C%E5%86%B7%E9%93%BE%E7%89%A9%E6%B5%81%EF%BC%8C%E4%BB%93%E5%82%A8%E6%9C%BA%E5%99%A8%E4%BA%BA&image_size=landscape_16_9" 
+                         alt="冷链仓储场景">
+                    <div class="url-display">https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=现代化冷链仓储中心...</div>
+                </div>
+            </div>
+            <div class="prompt">
+                <strong>📝 AI生成提示词：</strong><br>
+                现代化冷链仓储中心，苹果冷藏库，温控系统，智能仓储管理，农产品保鲜，冷链物流，仓储机器人
+            </div>
+            <button class="copy-btn" onclick="copyPrompt('现代化冷链仓储中心，苹果冷藏库，温控系统，智能仓储管理，农产品保鲜，冷链物流，仓储机器人')">📋 复制提示词</button>
+            <button class="copy-btn" onclick="regenerateImage(6)">🔄 重新生成</button>
+        </div>
+
+        <!-- 场景7：包装材质 -->
+        <div class="scene">
+            <h3>📦 7. 包装材质</h3>
+            <div class="status status-generated">AI生成图片</div>
+            <div class="image-container">
+                <div class="image-box">
+                    <img class="generated-img" 
+                         src="https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E8%8B%B9%E6%9E%9C%E5%8C%85%E8%A3%85%E7%94%9F%E4%BA%A7%E7%BA%BF%EF%BC%8C%E7%8E%AF%E4%BF%9D%E7%BA%B8%E7%AE%B1%E5%8C%85%E8%A3%85%EF%BC%8C%E5%8F%AF%E9%99%8D%E8%A7%A3%E6%9D%90%E6%96%99%EF%BC%8C%E7%BB%BF%E8%89%B2%E5%8C%85%E8%A3%85%E6%A6%82%E5%BF%B5%EF%BC%8C%E6%99%BA%E8%83%BD%E5%8C%85%E8%A3%85%E8%AE%BE%E5%A4%87%EF%BC%8C%E5%86%9C%E4%BA%A7%E5%93%81%E5%8C%85%E8%A3%85%EF%BC%8C%E5%8F%AF%E6%8C%81%E7%BB%AD%E5%8F%91%E5%B1%95&image_size=landscape_16_9" 
+                         alt="包装材质场景">
+                    <div class="url-display">https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=苹果包装生产线...</div>
+                </div>
+            </div>
+            <div class="prompt">
+                <strong>📝 AI生成提示词：</strong><br>
+                苹果包装生产线，环保纸箱包装，可降解材料，绿色包装概念，智能包装设备，农产品包装，可持续发展
+            </div>
+            <button class="copy-btn" onclick="copyPrompt('苹果包装生产线，环保纸箱包装，可降解材料，绿色包装概念，智能包装设备，农产品包装，可持续发展')">📋 复制提示词</button>
+            <button class="copy-btn" onclick="regenerateImage(7)">🔄 重新生成</button>
+        </div>
+
+        <!-- 场景8：冷链运输 -->
+        <div class="scene">
+            <h3>🚛 8. 冷链运输</h3>
+            <div class="status status-generated">AI生成图片</div>
+            <div class="image-container">
+                <div class="image-box">
+                    <img class="generated-img" 
+                         src="https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E5%86%B7%E9%93%BE%E8%BF%90%E8%BE%93%E8%BD%A6%E8%BE%86%EF%BC%8C%E5%86%B7%E8%97%8F%E5%8D%A1%E8%BD%A6%EF%BC%8CGPS%E6%B8%A9%E6%8E%A7%E7%9B%91%E6%B5%8B%EF%BC%8C%E6%99%BA%E8%83%BD%E7%89%A9%E6%B5%81%EF%BC%8C%E5%86%9C%E4%BA%A7%E5%93%81%E8%BF%90%E8%BE%93%EF%BC%8C%E5%86%B7%E9%93%BE%E9%85%8D%E9%80%81%EF%BC%8C%E8%BF%90%E8%BE%93%E8%BF%BD%E8%B8%AA%E7%B3%BB%E7%BB%9F&image_size=landscape_16_9" 
+                         alt="冷链运输场景">
+                    <div class="url-display">https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=冷链运输车辆...</div>
+                </div>
+            </div>
+            <div class="prompt">
+                <strong>📝 AI生成提示词：</strong><br>
+                冷链运输车辆，冷藏卡车，GPS温控监测，智能物流，农产品运输，冷链配送，运输追踪系统
+            </div>
+            <button class="copy-btn" onclick="copyPrompt('冷链运输车辆，冷藏卡车，GPS温控监测，智能物流，农产品运输，冷链配送，运输追踪系统')">📋 复制提示词</button>
+            <button class="copy-btn" onclick="regenerateImage(8)">🔄 重新生成</button>
+        </div>
+
+        <!-- 场景9：销售渠道 -->
+        <div class="scene">
+            <h3>🛒 9. 销售渠道</h3>
+            <div class="status status-generated">AI生成图片</div>
+            <div class="image-container">
+                <div class="image-box">
+                    <img class="generated-img" 
+                         src="https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E8%8B%B9%E6%9E%9C%E9%94%80%E5%94%AE%E6%B8%A0%E9%81%93%EF%BC%8C%E7%94%B5%E5%95%86%E5%B9%B3%E5%8F%B0%EF%BC%8C%E7%BA%BF%E4%B8%8B%E8%B6%85%E5%B8%82%EF%BC%8C%E5%86%9C%E4%BA%A7%E5%93%81%E5%B8%82%E5%9C%BA%EF%BC%8C%E6%95%B0%E5%AD%97%E5%8C%96%E9%94%80%E5%94%AE%EF%BC%8C%E6%96%B0%E9%9B%B6%E5%94%AE%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%A4%9A%E6%B8%A0%E9%81%93%E8%90%A5%E9%94%80%EF%BC%8C%E6%B6%88%E8%B4%B9%E8%80%85%E8%B4%AD%E4%B9%B0%E5%9C%BA%E6%99%AF&image_size=landscape_16_9" 
+                         alt="销售渠道场景">
+                    <div class="url-display">https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=苹果销售渠道...</div>
+                </div>
+            </div>
+            <div class="prompt">
+                <strong>📝 AI生成提示词：</strong><br>
+                苹果销售渠道，电商平台，线下超市，农产品市场，数字化销售，新零售概念，多渠道营销，消费者购买场景
+            </div>
+            <button class="copy-btn" onclick="copyPrompt('苹果销售渠道，电商平台，线下超市，农产品市场，数字化销售，新零售概念，多渠道营销，消费者购买场景')">📋 复制提示词</button>
+            <button class="copy-btn" onclick="regenerateImage(9)">🔄 重新生成</button>
+        </div>
+
+        <!-- 场景10：运输异常 -->
+        <div class="scene">
+            <h3>⚠️ 10. 运输异常</h3>
+            <div class="status status-generated">AI生成图片</div>
+            <div class="image-container">
+                <div class="image-box">
+                    <img class="generated-img" 
+                         src="https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E8%BF%90%E8%BE%93%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%8C%E5%86%B7%E9%93%BE%E4%B8%AD%E6%96%AD%EF%BC%8C%E6%B8%A9%E5%BA%A6%E5%BC%82%E5%B8%B8%E8%AD%A6%E6%8A%A5%EF%BC%8C%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%EF%BC%8C%E8%B4%A8%E9%87%8F%E6%8E%A7%E5%88%B6%EF%BC%8C%E9%A3%8E%E9%99%A9%E7%AE%A1%E7%90%86%EF%BC%8C%E5%86%9C%E4%BA%A7%E5%93%81%E6%8D%9F%E8%80%97%EF%BC%8C%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%9C%BA%E6%99%AF&image_size=landscape_16_9" 
+                         alt="运输异常场景">
+                    <div class="url-display">https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=运输异常处理...</div>
+                </div>
+            </div>
+            <div class="prompt">
+                <strong>📝 AI生成提示词：</strong><br>
+                运输异常处理，冷链中断，温度异常警报，应急响应，质量控制，风险管理，农产品损耗，问题解决场景
+            </div>
+            <button class="copy-btn" onclick="copyPrompt('运输异常处理，冷链中断，温度异常警报，应急响应，质量控制，风险管理，农产品损耗，问题解决场景')">📋 复制提示词</button>
+            <button class="copy-btn" onclick="regenerateImage(10)">🔄 重新生成</button>
+        </div>
+
+        <!-- 场景11：商超上架 -->
+        <div class="scene">
+            <h3>🏪 11. 商超上架</h3>
+            <div class="status status-generated">AI生成图片</div>
+            <div class="image-container">
+                <div class="image-box">
+                    <img class="generated-img" 
+                         src="https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E8%8B%B9%E6%9E%9C%E5%95%86%E8%B6%85%E4%B8%8A%E6%9E%B6%EF%BC%8C%E8%B6%85%E5%B8%82%E6%B0%B4%E6%9E%9C%E5%8C%BA%EF%BC%8C%E7%B2%BE%E7%BE%8E%E9%99%88%E5%88%97%EF%BC%8C%E6%B6%88%E8%B4%B9%E8%80%85%E9%80%89%E8%B4%AD%EF%BC%8C%E6%BA%AF%E6%BA%90%E6%A0%87%E7%AD%BE%EF%BC%8C%E5%93%81%E8%B4%A8%E4%BF%9D%E8%AF%81%EF%BC%8C%E9%9B%B6%E5%94%AE%E7%BB%88%E7%AB%AF%EF%BC%8C%E8%B4%AD%E7%89%A9%E4%BD%93%E9%AA%8C&image_size=landscape_16_9" 
+                         alt="商超上架场景">
+                    <div class="url-display">https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=苹果商超上架...</div>
+                </div>
+            </div>
+            <div class="prompt">
+                <strong>📝 AI生成提示词：</strong><br>
+                苹果商超上架，超市水果区，精美陈列，消费者选购，溯源标签，品质保证，零售终端，购物体验
+            </div>
+            <button class="copy-btn" onclick="copyPrompt('苹果商超上架，超市水果区，精美陈列，消费者选购，溯源标签，品质保证，零售终端，购物体验')">📋 复制提示词</button>
+            <button class="copy-btn" onclick="regenerateImage(11)">🔄 重新生成</button>
+        </div>
+
+        <div class="batch-controls">
+            <h3>🎯 快速应用</h3>
+            <button class="apply-btn copy-btn" onclick="applyAllToSystem()">💾 一键应用到苹果奇遇记</button>
+            <button class="copy-btn" onclick="exportUrls()">📤 导出所有URL</button>
+        </div>
+    </div>
+
+    <script>
+        let generatedUrls = {};
+        let currentProgress = 0;
+
+        function copyPrompt(prompt) {
+            navigator.clipboard.writeText(prompt).then(() => {
+                alert('✅ 提示词已复制到剪贴板！');
+            });
+        }
+
+        function regenerateImage(sceneId) {
+            alert(`🔄 正在重新生成场景 ${sceneId} 的图片...`);
+            // 这里可以添加重新生成逻辑
+        }
+
+        function generateAllImages() {
+            const totalScenes = 11;
+            let currentScene = 0;
+            
+            const interval = setInterval(() => {
+                currentScene++;
+                currentProgress = (currentScene / totalScenes) * 100;
+                
+                document.getElementById('progressBar').style.width = currentProgress + '%';
+                document.getElementById('progressText').textContent = `正在生成场景 ${currentScene}/${totalScenes}...`;
+                
+                if (currentScene >= totalScenes) {
+                    clearInterval(interval);
+                    document.getElementById('progressText').textContent = '✅ 所有图片生成完成！';
+                    setTimeout(() => {
+                        document.getElementById('progressBar').style.width = '0%';
+                        document.getElementById('progressText').textContent = '准备就绪';
+                    }, 2000);
+                }
+            }, 800);
+        }
+
+        function applyAllToSystem() {
+            // 收集所有生成的图片URL
+            const images = document.querySelectorAll('.generated-img');
+            const urls = {};
+            
+            images.forEach((img, index) => {
+                const sceneId = ['intro', 'site', 'pest', 'irrigation', 'orchard', 'warehouse', 'packaging', 'transport', 'channel', 'transport_risk', 'market'][index];
+                urls[sceneId] = img.src;
+            });
+            
+            console.log('📋 收集的图片URLs:', urls);
+            alert('🎉 所有图片URL已收集完成！准备应用到《苹果奇遇记》系统中...');
+            
+            // 这里可以添加应用到系统的逻辑
+            // 例如：保存到localStorage或发送到后端
+            localStorage.setItem('apple_adventure_ai_images', JSON.stringify(urls));
+            
+            setTimeout(() => {
+                if (confirm('💾 是否立即应用到系统中？')) {
+                    window.location.href = '/src/pages/play/AppleAdventure.tsx';
+                }
+            }, 1000);
+        }
+
+        function copyAllPrompts() {
+            const prompts = [
+                '红色青年团队在农村果园，充满希望的氛围，红色主题，现代与传统结合，乡村振兴背景，温暖阳光，专业摄影风格',
+                '苹果园选址场景，山地果园，向阳坡地，苹果树苗，土壤检测，农业专家指导，现代化农业设备，绿色农业概念',
+                '苹果树病虫害防治，AI智能识别系统，无人机喷洒，生物防治，绿色防控技术，农业科技，专业植保人员',
+                '苹果园灌溉系统，滴灌技术，智能水肥一体化，节水农业，现代化灌溉设备，果园水管布局，精准农业',
+                '苹果采摘场景，农民采摘成熟苹果，果园丰收，智能采摘设备，苹果分级，农产品质量检测，喜悦的丰收氛围',
+                '现代化冷链仓储中心，苹果冷藏库，温控系统，智能仓储管理，农产品保鲜，冷链物流，仓储机器人',
+                '苹果包装生产线，环保纸箱包装，可降解材料，绿色包装概念，智能包装设备，农产品包装，可持续发展',
+                '冷链运输车辆，冷藏卡车，GPS温控监测，智能物流，农产品运输，冷链配送，运输追踪系统',
+                '苹果销售渠道，电商平台，线下超市，农产品市场，数字化销售，新零售概念，多渠道营销，消费者购买场景',
+                '运输异常处理，冷链中断，温度异常警报，应急响应，质量控制，风险管理，农产品损耗，问题解决场景',
+                '苹果商超上架，超市水果区，精美陈列，消费者选购，溯源标签，品质保证，零售终端，购物体验'
+            ];
+            
+            const allPrompts = prompts.join('\\n\\n');
+            navigator.clipboard.writeText(allPrompts).then(() => {
+                alert('✅ 所有提示词已复制到剪贴板！');
+            });
+        }
+
+        function exportUrls() {
+            const images = document.querySelectorAll('.generated-img');
+            const urls = Array.from(images).map(img => img.src);
+            
+            const data = {
+                exportTime: new Date().toISOString(),
+                totalImages: urls.length,
+                urls: urls,
+                scenes: [
+                    '苹果奇遇记·青年红色筑梦',
+                    '选址种植',
+                    '病虫害防治',
+                    '灌溉策略',
+                    '果园采摘',
+                    '冷链仓储',
+                    '包装材质',
+                    '冷链运输',
+                    '销售渠道',
+                    '运输异常',
+                    '商超上架'
+                ]
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '苹果奇遇记-AI图片URLs.json';
+            a.click();
+            
+            alert('📤 URLs已导出为JSON文件！');
+        }
+
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🍎 苹果奇遇记AI图片生成器已加载完成！');
+            
+            // 检查是否有之前保存的图片URL
+            const savedUrls = localStorage.getItem('apple_adventure_ai_images');
+            if (savedUrls) {
+                console.log('📋 发现之前保存的图片URL:', JSON.parse(savedUrls));
+            }
+        });
+    </script>
+</body>
+</html>

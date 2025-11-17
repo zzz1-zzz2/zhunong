@@ -111,7 +111,7 @@ const AgriculturalDataDisplay: React.FC = () => {
     <div className="w-full max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg">
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-2 flex items-center gap-2">
-          <Sprout className="w-6 h-6 text-green-600" />
+          <Sprout className="w-6 h-6 text-red-600" />
           智慧农业数据监控
         </h2>
         <p className="text-gray-600">实时监测果园环境数据，优化种植管理</p>
@@ -147,7 +147,7 @@ const AgriculturalDataDisplay: React.FC = () => {
             {[
               { title: '平均温度', value: '24.5°C', icon: Thermometer, color: 'text-red-600' },
               { title: '土壤湿度', value: '65%', icon: Droplets, color: 'text-blue-600' },
-              { title: 'pH值', value: '6.8', icon: Gauge, color: 'text-green-600' },
+              { title: 'pH值', value: '6.8', icon: Gauge, color: 'text-amber-600' },
               { title: '传感器数量', value: '12', icon: Gauge, color: 'text-purple-600' }
             ].map(({ title, value, icon: Icon, color }) => (
               <div key={title} className="bg-gray-50 p-4 rounded-lg">

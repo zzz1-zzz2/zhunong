@@ -110,7 +110,7 @@ const Home: React.FC = () => {
             </Link>
             <Link
               to="/traceability/ORG-APPLE-2024-001"
-              className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-700 hover:to-emerald-700 transition-all shadow-lg flex items-center space-x-2"
+              className="bg-gradient-to-r from-red-600 to-amber-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-red-700 hover:to-amber-700 transition-all shadow-lg flex items-center space-x-2"
             >
               <QrCode className="w-5 h-5" />
               <span>有机苹果溯源示例</span>

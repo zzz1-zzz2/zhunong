@@ -261,8 +261,8 @@ const TraceabilityDetail: React.FC = () => {
               </div>
               <div className="text-right">
                 <div className="flex items-center space-x-2 mb-2">
-                  <Shield className="w-5 h-5 text-green-500" />
-                  <span className="text-sm font-medium text-green-600">区块链验证</span>
+                  <Shield className="w-5 h-5 text-red-500" />
+                  <span className="text-sm font-medium text-red-600">区块链验证</span>
                 </div>
                 <div className="bg-gray-100 rounded-lg p-2">
                   <p className="text-xs text-gray-500 font-mono break-all max-w-32">
@@ -292,10 +292,10 @@ const TraceabilityDetail: React.FC = () => {
               </div>
               <p className="text-sm text-gray-700">{data.farmInfo.location}</p>
             </div>
-            <div className="bg-green-50 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-4 border border-amber-200">
               <div className="flex items-center space-x-2 mb-2">
-                <User className="w-5 h-5 text-green-600" />
-                <span className="text-sm font-medium text-green-800">种植者</span>
+                <User className="w-5 h-5 text-red-600" />
+                <span className="text-sm font-medium text-red-800">种植者</span>
               </div>
               <p className="text-sm text-gray-700">{data.farmInfo.farmerName}</p>
             </div>
@@ -384,7 +384,7 @@ const TraceabilityDetail: React.FC = () => {
                     {data.qualityTests.slice(0, 2).map((test, index) => (
                       <div key={index} className="flex justify-between items-center">
                         <span className="text-gray-600">{test.testType}</span>
-                        <span className="font-medium text-green-600">{test.result}</span>
+                        <span className="font-medium text-red-600">{test.result}</span>
                       </div>
                     ))}
                   </div>
@@ -426,7 +426,7 @@ const TraceabilityDetail: React.FC = () => {
                   <div className="space-y-2">
                     {data.farmInfo.certification.map((cert, index) => (
                       <div key={index} className="flex items-center space-x-2">
-                        <CheckCircle className="w-4 h-4 text-green-600" />
+                        <CheckCircle className="w-4 h-4 text-red-600" />
                         <span className="font-medium">{cert}</span>
                       </div>
                     ))}
@@ -472,7 +472,7 @@ const TraceabilityDetail: React.FC = () => {
               
               <div className="mb-8">
                 <h3 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
-                  <Leaf className="w-5 h-5 mr-2 text-green-600" />
+                  <Leaf className="w-5 h-5 mr-2 text-red-600" />
                   施肥记录
                 </h3>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -548,7 +548,7 @@ const TraceabilityDetail: React.FC = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                       <div>
                         <p className="text-sm text-gray-600 mb-1">检测结果</p>
-                        <p className="font-semibold text-green-600">{test.result}</p>
+                        <p className="font-semibold text-red-600">{test.result}</p>
                       </div>
                       <div>
                         <p className="text-sm text-gray-600 mb-1">检测机构</p>
@@ -667,8 +667,8 @@ const TraceabilityDetail: React.FC = () => {
           <div className="flex flex-col lg:flex-row items-center justify-between">
             <div className="flex items-center space-x-4 mb-4 lg:mb-0">
               <div className="flex items-center space-x-2">
-                <Shield className="w-6 h-6 text-green-600" />
-                <span className="font-semibold text-green-800">区块链验证</span>
+                <Shield className="w-6 h-6 text-red-600" />
+                <span className="font-semibold text-red-800">区块链验证</span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle className="w-6 h-6 text-blue-600" />

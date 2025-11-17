@@ -55,7 +55,7 @@ const AppleAdventure: React.FC = () => {
       id: 'irrigation',
       title: '智能灌溉监测',
       narrative: '现代化滴灌系统正在运行，土壤传感器实时监测湿度、温度和pH值。数据显示：北区果园土壤湿度65%，温度24.5°C，pH值6.8，各项指标正常。工作人员穿着红色背心，使用数字设备检查灌溉管线。',
-      icon: <Leaf className="w-10 h-10 text-emerald-600" />,
+      icon: <Leaf className="w-10 h-10 text-red-600" />,
       image: '/%E6%99%BA%E8%83%BD%E7%81%8C%E6%BA%89%E5%9C%BA%E6%99%AF.png',
       choices: [
         { text: '查看详细数据', next: 'data_monitoring' },
@@ -66,7 +66,7 @@ const AppleAdventure: React.FC = () => {
       id: 'data_monitoring',
       title: '农业数据分析',
       narrative: '基于豆包AI生成的真实农业数据：土壤湿度65%，养分含量78%，pH值6.8，有机质82%。实验样本55*显示标准灌溉产量3.2kg/株，样本26*精准灌溉产量3.8kg/株，产量提升18.75%。',
-      icon: <FlaskConical className="w-10 h-10 text-blue-600" />,
+      icon: <FlaskConical className="w-10 h-10 text-amber-600" />,
       image: '/智能灌溉场景.png',
       choices: [
         { text: '查看实验样本', next: 'experiment_samples' },
@@ -77,7 +77,7 @@ const AppleAdventure: React.FC = () => {
       id: 'experiment_samples',
       title: '实验样本收集',
       narrative: '田间试验数据收集：样本55*（标准灌溉）产量3.2kg/株，样本26*（精准灌溉）产量3.8kg/株。透明样本袋标记清晰，白色网格线划分试验区域，确保数据准确性。',
-      icon: <FlaskConical className="w-10 h-10 text-purple-600" />,
+      icon: <FlaskConical className="w-10 h-10 text-red-600" />,
       image: '/病虫害防治场景.png',
       choices: [
         { text: '分析实验结果', next: 'orchard' },
@@ -315,14 +315,14 @@ const AppleAdventure: React.FC = () => {
                   if (musicOn) { audioRef.current.pause() } else { audioRef.current.play().catch(() => {}) }
                   setMusicOn(!musicOn)
                 }}
-                className="ml-auto inline-flex items-center gap-2 bg-amber-500/30 hover:bg-amber-500/40 text-white px-3 py-2 rounded"
+                className="ml-auto inline-flex items-center gap-2 bg-red-600/30 hover:bg-red-600/40 text-white px-3 py-2 rounded"
               >
                 {musicOn ? <PauseCircle className="w-5 h-5" /> : <Music className="w-5 h-5" />}
                 <span className="text-sm">背景音乐</span>
               </button>
               <button
                 onClick={() => setEditingImages((v) => !v)}
-                className="ml-2 inline-flex items-center gap-2 bg-amber-500/30 hover:bg-amber-500/40 text-white px-3 py-2 rounded"
+                className="ml-2 inline-flex items-center gap-2 bg-amber-600/30 hover:bg-amber-600/40 text-white px-3 py-2 rounded"
               >
                 <span className="text-sm">编辑图片</span>
               </button>
@@ -363,7 +363,7 @@ const AppleAdventure: React.FC = () => {
                     <button
                       key={role}
                       onClick={() => setIdentity(role)}
-                      className={`w-full py-2 px-3 rounded border ${identity === role ? 'bg-amber-50 text-red-700 border-amber-400' : 'bg-white text-gray-700 hover:bg-amber-50 border-amber-300'}`}
+                      className={`w-full py-2 px-3 rounded border ${identity === role ? 'bg-gradient-to-r from-amber-50 to-yellow-50 text-red-700 border-amber-400 shadow-sm' : 'bg-white text-gray-700 hover:bg-amber-50 border-amber-300'}`}
                     >
                       {role}
                     </button>
@@ -385,7 +385,7 @@ const AppleAdventure: React.FC = () => {
                   <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
                       <div className="text-sm text-gray-600 mb-3">互动：点击种子 → 浇水 → 施肥 → 成长 → 收获</div>
-                      <div className="h-40 rounded-lg bg-gradient-to-b from-red-50 to-amber-100 relative overflow-hidden">
+                      <div className="h-40 rounded-lg bg-gradient-to-br from-red-100 via-amber-50 to-yellow-100 relative overflow-hidden">
                         <div
                           onClick={handleSeedClick}
                           className={`absolute left-1/2 -translate-x-1/2 bottom-4 w-8 h-8 rounded-full ${simStage==='seed' ? 'bg-amber-400 cursor-pointer' : 'bg-amber-300'} shadow`}
@@ -403,13 +403,13 @@ const AppleAdventure: React.FC = () => {
                       </div>
 
                       <div className="mt-4 grid grid-cols-3 gap-2">
-                        <button onClick={handleWater} className="flex items-center justify-center gap-2 px-3 py-2 rounded bg-red-600 text-white hover:bg-red-700 border border-amber-400">
+                        <button onClick={handleWater} className="flex items-center justify-center gap-2 px-3 py-2 rounded bg-gradient-to-r from-red-600 to-red-700 text-white hover:from-red-700 hover:to-red-800 border border-amber-400 shadow-sm">
                           <Droplet className="w-4 h-4" />浇水
                         </button>
                         <button onClick={handleFertilize} className={`flex items-center justify-center gap-2 px-3 py-2 rounded ${fertilized ? 'bg-amber-300 text-red-700' : 'bg-white text-red-700 hover:bg-amber-50'} border border-amber-400`}>
                           <FlaskConical className="w-4 h-4" />施肥
                         </button>
-                        <button onClick={handleHarvest} disabled={simStage!=='fruit'} className={`flex items-center justify-center gap-2 px-3 py-2 rounded ${simStage==='fruit' ? 'bg-red-600 text-white hover:bg-red-700 border border-amber-400' : 'bg-gray-100 text-gray-500'} `}>
+                        <button onClick={handleHarvest} disabled={simStage!=='fruit'} className={`flex items-center justify-center gap-2 px-3 py-2 rounded ${simStage==='fruit' ? 'bg-gradient-to-r from-amber-500 to-yellow-600 text-white hover:from-amber-600 hover:to-yellow-700 border border-red-400 shadow-sm' : 'bg-gray-100 text-gray-500'} `}>
                           <CheckCircle className="w-4 h-4" />收获
                         </button>
                       </div>
@@ -417,11 +417,11 @@ const AppleAdventure: React.FC = () => {
                       <div className="mt-4 space-y-2">
                         <div className="text-xs text-gray-600">水分 {moisture}%</div>
                         <div className="w-full h-2 bg-gray-200 rounded">
-                          <div className="h-2 bg-amber-400 rounded" style={{ width: `${moisture}%` }} />
+                          <div className="h-2 bg-gradient-to-r from-amber-400 to-yellow-500 rounded" style={{ width: `${moisture}%` }} />
                         </div>
                         <div className="text-xs text-gray-600">成长 {growth}%</div>
                         <div className="w-full h-2 bg-gray-200 rounded">
-                          <div className="h-2 bg-red-600 rounded" style={{ width: `${growth}%` }} />
+                          <div className="h-2 bg-gradient-to-r from-red-500 to-red-700 rounded" style={{ width: `${growth}%` }} />
                         </div>
                       </div>
                     </div>
@@ -471,7 +471,7 @@ const AppleAdventure: React.FC = () => {
             </div>
 
             {lastTip && (
-              <div className="mt-6 p-4 bg-amber-50 border border-amber-200 text-amber-800 rounded">{lastTip}</div>
+              <div className="mt-6 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-300 text-amber-800 rounded-lg shadow-sm">{lastTip}</div>
             )}
 
             <div className="mt-8 flex items-center justify-between">

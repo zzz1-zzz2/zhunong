@@ -33,7 +33,7 @@ const AppleAdventure: React.FC = () => {
       id: 'site',
       title: '选址种植',
       narrative: '为苹果选择适宜的种植环境。向阳地有利于糖度积累，但需要精细水分管理；背阴地甜度略低，但抗旱压力较小。',
-      icon: <Sprout className="w-10 h-10 text-red-500" />,
+      icon: <Sprout className="w-10 h-10 text-red-600" />,
       image: '/%E9%80%89%E5%9D%80%E7%A7%8D%E6%A4%8D%E5%9C%BA%E6%99%AF.png',
       choices: [
         { text: '向阳地', next: 'pest' },
@@ -44,7 +44,7 @@ const AppleAdventure: React.FC = () => {
       id: 'pest',
       title: '病虫害监测',
       narrative: '果园工作人员穿着红色背心进行病虫害巡查，使用数字设备记录数据。通过专业监测设备收集病虫害数据，确保苹果健康成长。',
-      icon: <Leaf className="w-10 h-10 text-red-500" />,
+      icon: <Leaf className="w-10 h-10 text-red-600" />,
       image: '/%E7%97%85%E8%99%AB%E5%AE%B3%E9%98%B2%E6%B2%BB%E5%9C%BA%E6%99%AF.png',
       choices: [
         { text: 'AI 植保算法', next: 'irrigation' },
@@ -99,7 +99,7 @@ const AppleAdventure: React.FC = () => {
       id: 'warehouse',
       title: '冷链仓储',
       narrative: '苹果进入规范仓储，温湿度与批次信息写入链上，形成关键溯源节点。下一步选择运输方式。',
-      icon: <Leaf className="w-10 h-10 text-red-500" />,
+      icon: <Leaf className="w-10 h-10 text-red-600" />,
       image: '/%E5%86%B7%E9%93%BE%E8%BF%90%E8%BE%93.png',
       choices: [
         { text: '低温冷链运输', next: 'packaging' },
@@ -110,7 +110,7 @@ const AppleAdventure: React.FC = () => {
       id: 'packaging',
       title: '包装材质',
       narrative: '选择更适合流通的包装。环保纸箱利于透气与减震；塑料筐耐用但在高温下通风性稍差。',
-      icon: <Leaf className="w-10 h-10 text-red-500" />,
+      icon: <Leaf className="w-10 h-10 text-red-600" />,
       image: '/%E5%88%86%E7%BA%A7%E5%8C%85%E8%A3%85%E5%9C%BA%E6%99%AF.png',
       choices: [
         { text: '环保纸箱', next: 'transport' },
@@ -293,7 +293,7 @@ const AppleAdventure: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 to-amber-50 px-4 py-10">
+    <div className="min-h-screen bg-gradient-to-br from-red-100 via-amber-50 to-yellow-100 px-4 py-10">
       <div className="max-w-3xl mx-auto">
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
           <div className="relative group h-64 sm:h-72 md:h-80 w-full">
@@ -331,7 +331,7 @@ const AppleAdventure: React.FC = () => {
 
           <div className="p-8">
             {editingImages && (
-              <div className="mb-6 p-4 border rounded-lg bg-gray-50">
+              <div className="mb-6 p-4 border rounded-lg bg-gradient-to-br from-amber-50 to-yellow-50 border-amber-300">
                 <div className="text-sm font-medium mb-3">为每个场景设置更合适的图片 URL：</div>
                 <div className="space-y-3">
                   {Object.values(scenes).map((s) => (
@@ -348,7 +348,7 @@ const AppleAdventure: React.FC = () => {
                 </div>
                 <div className="mt-3 flex items-center gap-3">
                   <button onClick={saveImages} className="px-3 py-2 rounded bg-red-600 text-white text-sm border border-amber-400">保存</button>
-                  <button onClick={resetImages} className="px-3 py-2 rounded bg-gray-200 text-gray-800 text-sm">恢复默认</button>
+                  <button onClick={resetImages} className="px-3 py-2 rounded bg-gradient-to-r from-amber-200 to-yellow-200 text-red-700 text-sm border border-amber-400 hover:from-amber-300 hover:to-yellow-300 shadow-sm">恢复默认</button>
                 </div>
               </div>
             )}
@@ -383,7 +383,7 @@ const AppleAdventure: React.FC = () => {
 
                 {current === 'orchard' && (
                   <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                    <div className="bg-gradient-to-br from-amber-50 to-yellow-50 border border-amber-300 rounded-lg p-4 shadow-sm">
                       <div className="text-sm text-gray-600 mb-3">互动：点击种子 → 浇水 → 施肥 → 成长 → 收获</div>
                       <div className="h-40 rounded-lg bg-gradient-to-br from-red-100 via-amber-50 to-yellow-100 relative overflow-hidden">
                         <div
@@ -395,7 +395,7 @@ const AppleAdventure: React.FC = () => {
                           <div className="absolute left-1/2 -translate-x-1/2 bottom-4 w-24 h-2 bg-amber-700 rounded" />
                         )}
                         {['sprout','flower','fruit','harvested'].includes(simStage) && (
-                          <Sprout className="absolute left-1/2 -translate-x-1/2 bottom-8 w-10 h-10 text-green-700" />
+                          <Sprout className="absolute left-1/2 -translate-x-1/2 bottom-8 w-10 h-10 text-red-600" />
                         )}
                         {simStage==='fruit' && (
                           <CheckCircle className="absolute right-3 top-3 w-6 h-6 text-red-600" />
@@ -406,7 +406,7 @@ const AppleAdventure: React.FC = () => {
                         <button onClick={handleWater} className="flex items-center justify-center gap-2 px-3 py-2 rounded bg-gradient-to-r from-red-600 to-red-700 text-white hover:from-red-700 hover:to-red-800 border border-amber-400 shadow-sm">
                           <Droplet className="w-4 h-4" />浇水
                         </button>
-                        <button onClick={handleFertilize} className={`flex items-center justify-center gap-2 px-3 py-2 rounded ${fertilized ? 'bg-amber-300 text-red-700' : 'bg-white text-red-700 hover:bg-amber-50'} border border-amber-400`}>
+                        <button onClick={handleFertilize} className={`flex items-center justify-center gap-2 px-3 py-2 rounded ${fertilized ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-red-700' : 'bg-white text-red-700 hover:bg-gradient-to-r hover:from-amber-50 hover:to-yellow-50'} border border-amber-400 shadow-sm`}>
                           <FlaskConical className="w-4 h-4" />施肥
                         </button>
                         <button onClick={handleHarvest} disabled={simStage!=='fruit'} className={`flex items-center justify-center gap-2 px-3 py-2 rounded ${simStage==='fruit' ? 'bg-gradient-to-r from-amber-500 to-yellow-600 text-white hover:from-amber-600 hover:to-yellow-700 border border-red-400 shadow-sm' : 'bg-gray-100 text-gray-500'} `}>
@@ -479,7 +479,7 @@ const AppleAdventure: React.FC = () => {
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setCurrent('intro')}
-                  className="inline-flex items-center gap-2 text-sm text-gray-600 bg-gray-100 py-2 px-3 rounded hover:bg-gray-200"
+                  className="inline-flex items-center gap-2 text-sm text-red-700 bg-gradient-to-r from-amber-100 to-yellow-100 py-2 px-3 rounded hover:from-amber-200 hover:to-yellow-200 border border-amber-400 shadow-sm"
                 >
                   <RefreshCw className="w-4 h-4" />重来一次
                 </button>

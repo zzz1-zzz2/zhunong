@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Search, Scan, Star, MapPin, Calendar, Shield } from 'lucide-react'
+import { Search, Scan, Star, MapPin, Calendar, Shield, QrCode } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 
 interface Product {
@@ -107,6 +107,13 @@ const Home: React.FC = () => {
               className="bg-white text-red-700 px-6 py-3 rounded-lg font-semibold hover:bg-amber-50 transition-colors border border-amber-300"
             >
               故事线预览
+            </Link>
+            <Link
+              to="/traceability/ORG-APPLE-2024-001"
+              className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-700 hover:to-emerald-700 transition-all shadow-lg flex items-center space-x-2"
+            >
+              <QrCode className="w-5 h-5" />
+              <span>有机苹果溯源示例</span>
             </Link>
           </div>
         </div>

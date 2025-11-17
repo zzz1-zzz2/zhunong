@@ -10,8 +10,10 @@
     "preview": "vite preview",
     "check": "tsc --noEmit",
     "server:dev": "nodemon",
-    "dev": "concurrently \"npm run client:dev\" \"npm run server:dev\""
+    "dev": "concurrently \"npm run client:dev\" \"npm run server:dev\"",
+    "deploy": "npm run build && gh-pages -d dist"
   },
+  "homepage": "https://zzz1-zzz2.github.io/zhunong",
   "dependencies": {
     "@supabase/supabase-js": "^2.81.1",
     "@types/react-router-dom": "^5.3.3",
@@ -20,6 +22,7 @@
     "dotenv": "^17.2.1",
     "express": "^4.21.2",
     "lucide-react": "^0.511.0",
+    "qrcode.react": "^4.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.9.6",

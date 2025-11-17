@@ -22,6 +22,7 @@ import AdminLayout from './components/AdminLayout'
 import { AuthProvider } from './contexts/AuthContext'
 import StoryMap from './pages/play/StoryMap'
 import AppleAdventure from './pages/play/AppleAdventure'
+import TraceabilityDetail from './pages/TraceabilityDetail'
 
 function App() {
   return (
@@ -37,6 +38,8 @@ function App() {
               <Route path="/test-auth" element={<TestAuth />} />
               <Route path="/play/map" element={<StoryMap />} />
               <Route path="/play/apple" element={<AppleAdventure />} />
+              <Route path="/traceability/:productId" element={<TraceabilityDetail />} />
+              <Route path="/traceability/:productId" element={<TraceabilityDetail />} />
               
               {/* 用户端路由 */}
               <Route path="/" element={<Layout />}>

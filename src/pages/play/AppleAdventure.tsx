@@ -308,7 +308,7 @@ const AppleAdventure: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 flex items-center gap-4">
               {scene.icon}
-              <h1 className="text-2xl sm:text-3xl font-bold text-white drop-shadow">{scene.title}</h1>
+              <h1 className="text-3xl sm:text-4xl font-bold text-white drop-shadow">{scene.title}</h1>
               <button
                 onClick={() => {
                   if (!audioRef.current) return
@@ -318,13 +318,13 @@ const AppleAdventure: React.FC = () => {
                 className="ml-auto inline-flex items-center gap-2 bg-red-600/30 hover:bg-red-600/40 text-white px-3 py-2 rounded"
               >
                 {musicOn ? <PauseCircle className="w-5 h-5" /> : <Music className="w-5 h-5" />}
-                <span className="text-sm">背景音乐</span>
+                <span className="text-base">背景音乐</span>
               </button>
               <button
                 onClick={() => setEditingImages((v) => !v)}
                 className="ml-2 inline-flex items-center gap-2 bg-amber-600/30 hover:bg-amber-600/40 text-white px-3 py-2 rounded"
               >
-                <span className="text-sm">编辑图片</span>
+                <span className="text-base">编辑图片</span>
               </button>
             </div>
           </div>
@@ -332,11 +332,11 @@ const AppleAdventure: React.FC = () => {
           <div className="p-8">
             {editingImages && (
               <div className="mb-6 p-4 border rounded-lg bg-gradient-to-br from-amber-50 to-yellow-50 border-amber-300">
-                <div className="text-sm font-medium mb-3">为每个场景设置更合适的图片 URL：</div>
+                <div className="text-lg font-medium mb-3">为每个场景设置更合适的图片 URL：</div>
                 <div className="space-y-3">
                   {Object.values(scenes).map((s) => (
                     <div key={s.id} className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
-                      <label className="text-sm text-gray-700">{s.title}</label>
+                      <label className="text-base text-gray-700">{s.title}</label>
                       <input
                         value={imageOverrides[s.id] ?? ''}
                         onChange={(e) => setImageOverrides((prev) => ({ ...prev, [s.id]: e.target.value }))}
@@ -347,44 +347,44 @@ const AppleAdventure: React.FC = () => {
                   ))}
                 </div>
                 <div className="mt-3 flex items-center gap-3">
-                  <button onClick={saveImages} className="px-3 py-2 rounded bg-red-600 text-white text-sm border border-amber-400">保存</button>
-                  <button onClick={resetImages} className="px-3 py-2 rounded bg-gradient-to-r from-amber-200 to-yellow-200 text-red-700 text-sm border border-amber-400 hover:from-amber-300 hover:to-yellow-300 shadow-sm">恢复默认</button>
+                  <button onClick={saveImages} className="px-4 py-3 rounded bg-red-600 text-white text-base border border-amber-400">保存</button>
+                  <button onClick={resetImages} className="px-4 py-3 rounded bg-gradient-to-r from-amber-200 to-yellow-200 text-red-700 text-base border border-amber-400 hover:from-amber-300 hover:to-yellow-300 shadow-sm">恢复默认</button>
                 </div>
               </div>
             )}
             {current === 'intro' ? (
               <div className="space-y-6">
-                <div className="text-gray-700 leading-relaxed">
-                  <div className="font-medium mb-2">{user?.name ? `${identity || '追梦青年'}${user.name}，` : ''}欢迎踏上红色筑梦之旅。</div>
-                  <div>选择你的身份，凝聚青年力量助力乡村振兴：</div>
+                <div className="text-gray-700 leading-relaxed text-lg">
+                  <div className="font-medium mb-3 text-xl">{user?.name ? `${identity || '追梦青年'}${user.name}，` : ''}欢迎踏上红色筑梦之旅。</div>
+                  <div className="text-lg">选择你的身份，凝聚青年力量助力乡村振兴：</div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {['红色志愿者','田园爱好者','科技玩家'].map((role) => (
                     <button
                       key={role}
                       onClick={() => setIdentity(role)}
-                      className={`w-full py-2 px-3 rounded border ${identity === role ? 'bg-gradient-to-r from-amber-50 to-yellow-50 text-red-700 border-amber-400 shadow-sm' : 'bg-white text-gray-700 hover:bg-amber-50 border-amber-300'}`}
+                      className={`w-full py-3 px-4 rounded border ${identity === role ? 'bg-gradient-to-r from-amber-50 to-yellow-50 text-red-700 border-amber-400 shadow-sm' : 'bg-white text-gray-700 hover:bg-amber-50 border-amber-300'}`}
                     >
                       {role}
                     </button>
                   ))}
                 </div>
-                <div className="text-sm text-gray-600">{personaText}</div>
+                <div className="text-base text-gray-600">{personaText}</div>
                 <button
                   onClick={() => setCurrent('orchard')}
-                  className="w-full bg-red-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-red-700 transition-colors border border-amber-400"
+                  className="w-full bg-red-600 text-white py-4 px-6 rounded-lg font-bold hover:bg-red-700 transition-colors border border-amber-400 text-lg"
                 >
                   开始旅程
                 </button>
               </div>
             ) : (
               <>
-                <p className="text-gray-700 leading-relaxed mb-6">{scene.narrative}</p>
+                <p className="text-gray-700 leading-relaxed mb-6 text-lg">{scene.narrative}</p>
 
                 {current === 'orchard' && (
                   <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="bg-gradient-to-br from-amber-50 to-yellow-50 border border-amber-300 rounded-lg p-4 shadow-sm">
-                      <div className="text-sm text-gray-600 mb-3">互动：点击种子 → 浇水 → 施肥 → 成长 → 收获</div>
+                      <div className="text-base text-gray-600 mb-3">互动：点击种子 → 浇水 → 施肥 → 成长 → 收获</div>
                       <div className="h-40 rounded-lg bg-gradient-to-br from-red-100 via-amber-50 to-yellow-100 relative overflow-hidden">
                         <div
                           onClick={handleSeedClick}
@@ -403,23 +403,23 @@ const AppleAdventure: React.FC = () => {
                       </div>
 
                       <div className="mt-4 grid grid-cols-3 gap-2">
-                        <button onClick={handleWater} className="flex items-center justify-center gap-2 px-3 py-2 rounded bg-gradient-to-r from-red-600 to-red-700 text-white hover:from-red-700 hover:to-red-800 border border-amber-400 shadow-sm">
+                        <button onClick={handleWater} className="flex items-center justify-center gap-2 px-4 py-3 rounded bg-gradient-to-r from-red-600 to-red-700 text-white hover:from-red-700 hover:to-red-800 border border-amber-400 shadow-sm text-base">
                           <Droplet className="w-4 h-4" />浇水
                         </button>
-                        <button onClick={handleFertilize} className={`flex items-center justify-center gap-2 px-3 py-2 rounded ${fertilized ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-red-700' : 'bg-white text-red-700 hover:bg-gradient-to-r hover:from-amber-50 hover:to-yellow-50'} border border-amber-400 shadow-sm`}>
+                        <button onClick={handleFertilize} className={`flex items-center justify-center gap-2 px-4 py-3 rounded ${fertilized ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-red-700' : 'bg-white text-red-700 hover:bg-gradient-to-r hover:from-amber-50 hover:to-yellow-50'} border border-amber-400 shadow-sm text-base`}>
                           <FlaskConical className="w-4 h-4" />施肥
                         </button>
-                        <button onClick={handleHarvest} disabled={simStage!=='fruit'} className={`flex items-center justify-center gap-2 px-3 py-2 rounded ${simStage==='fruit' ? 'bg-gradient-to-r from-amber-500 to-yellow-600 text-white hover:from-amber-600 hover:to-yellow-700 border border-red-400 shadow-sm' : 'bg-gray-100 text-gray-500'} `}>
+                        <button onClick={handleHarvest} disabled={simStage!=='fruit'} className={`flex items-center justify-center gap-2 px-4 py-3 rounded ${simStage==='fruit' ? 'bg-gradient-to-r from-amber-500 to-yellow-600 text-white hover:from-amber-600 hover:to-yellow-700 border border-red-400 shadow-sm text-base' : 'bg-gray-100 text-gray-500 text-base'} `}>
                           <CheckCircle className="w-4 h-4" />收获
                         </button>
                       </div>
 
                       <div className="mt-4 space-y-2">
-                        <div className="text-xs text-gray-600">水分 {moisture}%</div>
+                        <div className="text-sm text-gray-600 font-medium">水分 {moisture}%</div>
                         <div className="w-full h-2 bg-gray-200 rounded">
                           <div className="h-2 bg-gradient-to-r from-amber-400 to-yellow-500 rounded" style={{ width: `${moisture}%` }} />
                         </div>
-                        <div className="text-xs text-gray-600">成长 {growth}%</div>
+                        <div className="text-sm text-gray-600 font-medium">成长 {growth}%</div>
                         <div className="w-full h-2 bg-gray-200 rounded">
                           <div className="h-2 bg-gradient-to-r from-red-500 to-red-700 rounded" style={{ width: `${growth}%` }} />
                         </div>
@@ -427,9 +427,9 @@ const AppleAdventure: React.FC = () => {
                     </div>
 
                     <div className="bg-white border rounded-lg p-4">
-                      <div className="text-sm text-gray-700 mb-2">阶段：{simStage}</div>
-                      <div className="text-xs text-gray-600">施肥：{fertilized ? '是' : '否'}</div>
-                      <div className="text-xs text-gray-600">提示：点击播种后需浇水，达到 25% 会发芽，60% 开花，100% 结果，可收获进入仓储流程。</div>
+                      <div className="text-base text-gray-700 mb-2 font-medium">阶段：{simStage}</div>
+                      <div className="text-sm text-gray-600 mb-1">施肥：{fertilized ? '是' : '否'}</div>
+                      <div className="text-sm text-gray-600 leading-relaxed">提示：点击播种后需浇水，达到 25% 会发芽，60% 开花，100% 结果，可收获进入仓储流程。</div>
                     </div>
                   </div>
                 )}
@@ -462,7 +462,7 @@ const AppleAdventure: React.FC = () => {
                     }
                     handleChoice(c.next)
                   }}
-                  className="flex items-center justify-between w-full bg-white text-red-700 py-3 px-4 rounded-lg font-medium hover:bg-amber-50 transition-colors transform hover:translate-x-0.5 border border-amber-400"
+                  className="flex items-center justify-between w-full bg-white text-red-700 py-4 px-6 rounded-lg font-bold hover:bg-amber-50 transition-colors transform hover:translate-x-0.5 border border-amber-400 text-lg"
                 >
                   <span>{c.text}</span>
                   <ChevronRight className="w-5 h-5" />
@@ -471,22 +471,22 @@ const AppleAdventure: React.FC = () => {
             </div>
 
             {lastTip && (
-              <div className="mt-6 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-300 text-amber-800 rounded-lg shadow-sm">{lastTip}</div>
+              <div className="mt-6 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-300 text-amber-800 rounded-lg shadow-sm text-lg font-medium">{lastTip}</div>
             )}
 
             <div className="mt-8 flex items-center justify-between">
-              <div className="text-sm text-gray-500">场景：{scene.id}</div>
+              <div className="text-base text-gray-500 font-medium">场景：{scene.id}</div>
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setCurrent('intro')}
-                  className="inline-flex items-center gap-2 text-sm text-red-700 bg-gradient-to-r from-amber-100 to-yellow-100 py-2 px-3 rounded hover:from-amber-200 hover:to-yellow-200 border border-amber-400 shadow-sm"
+                  className="inline-flex items-center gap-2 text-base text-red-700 bg-gradient-to-r from-amber-100 to-yellow-100 py-3 px-4 rounded hover:from-amber-200 hover:to-yellow-200 border border-amber-400 shadow-sm"
                 >
                   <RefreshCw className="w-4 h-4" />重来一次
                 </button>
                 {current === 'market' && (
                 <button
                   onClick={() => navigate('/')}
-                  className="inline-flex items-center gap-2 text-sm bg-red-600 text-white py-2 px-3 rounded hover:bg-red-700 border border-amber-400"
+                  className="inline-flex items-center gap-2 text-base bg-red-600 text-white py-3 px-4 rounded hover:bg-red-700 border border-amber-400 font-bold"
                 >
                   立即兑换
                 </button>

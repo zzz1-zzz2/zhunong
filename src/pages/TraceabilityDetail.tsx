@@ -77,7 +77,7 @@ const mockAppleData: TraceabilityData = {
   blockchainHash: "0x1a2b3c4d5e6f7890abcdef1234567890abcdef1234567890abcdef12345678",
   farmInfo: {
     name: "绿野有机果园",
-    location: "山东省烟台市栖霞市",
+    location: "辽宁省盖县",
     coordinates: { lat: 37.3034, lng: 120.8349 },
     certification: ["有机认证", "GAP认证", "ISO22000"],
     farmerName: "张师傅"
@@ -162,19 +162,19 @@ const mockAppleData: TraceabilityData = {
     transport: [
       {
         timestamp: "2024-11-11T08:00:00Z",
-        location: "绿野有机果园",
+        location: "辽宁省盖县",
         temperature: "3.2°C",
         handler: "李师傅"
       },
       {
         timestamp: "2024-11-11T14:30:00Z",
-        location: "栖霞市冷链物流中心",
+        location: "盖县冷链物流中心",
         temperature: "2.8°C",
         handler: "王主管"
       },
       {
         timestamp: "2024-11-12T09:15:00Z",
-        location: "烟台市配送中心",
+        location: "盖县配送中心",
         temperature: "3.5°C",
         handler: "赵司机"
       }
@@ -234,18 +234,18 @@ const TraceabilityDetail: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-8">
       <div className="max-w-6xl mx-auto">
         {/* 头部信息 */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
+        <div className="bg-white rounded-2xl shadow-xl p-12 mb-8">
           <div className="flex flex-col lg:flex-row items-center justify-between mb-6">
-            <div className="flex items-center space-x-4 mb-4 lg:mb-0">
-              <div className="w-16 h-16 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl flex items-center justify-center">
-                <Leaf className="w-8 h-8 text-white" />
+            <div className="flex items-center space-x-6 mb-6 lg:mb-0">
+              <div className="w-20 h-20 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl flex items-center justify-center">
+                <Leaf className="w-10 h-10 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-800">{data.productName}</h1>
-                <p className="text-gray-600">批次号: {data.batchNumber}</p>
+                <h1 className="text-4xl font-bold text-gray-800">{data.productName}</h1>
+                <p className="text-gray-600 text-lg">批次号: {data.batchNumber}</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -257,15 +257,15 @@ const TraceabilityDetail: React.FC = () => {
                   includeMargin={true}
                   className="border-2 border-gray-200 rounded-lg"
                 />
-                <p className="text-sm text-gray-600 mt-1">扫码验证</p>
+                <p className="text-base text-gray-600 mt-2">扫码验证</p>
               </div>
               <div className="text-right">
                 <div className="flex items-center space-x-2 mb-2">
                   <Shield className="w-5 h-5 text-red-500" />
-                  <span className="text-sm font-medium text-red-600">区块链验证</span>
+                  <span className="text-base font-bold text-red-600">区块链验证</span>
                 </div>
                 <div className="bg-gray-100 rounded-lg p-2">
-                  <p className="text-xs text-gray-500 font-mono break-all max-w-32">
+                  <p className="text-sm text-gray-500 font-mono break-all max-w-40">
                     {data.blockchainHash.slice(0, 16)}...
                   </p>
                 </div>
@@ -274,50 +274,50 @@ const TraceabilityDetail: React.FC = () => {
           </div>
 
           {/* 认证徽章 */}
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex flex-wrap gap-3 mb-8">
             {data.farmInfo.certification.map((cert, index) => (
-              <div key={index} className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1">
-                <CheckCircle className="w-4 h-4" />
+              <div key={index} className="bg-green-100 text-green-800 px-5 py-3 rounded-full text-lg font-bold flex items-center space-x-3">
+                <CheckCircle className="w-5 h-5" />
                 <span>{cert}</span>
               </div>
             ))}
           </div>
 
           {/* 快速信息卡片 */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-blue-50 rounded-xl p-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-blue-50 rounded-xl p-6">
               <div className="flex items-center space-x-2 mb-2">
-                <MapPin className="w-5 h-5 text-blue-600" />
-                <span className="text-sm font-medium text-blue-800">产地</span>
+                <MapPin className="w-6 h-6 text-blue-600" />
+                <span className="text-lg font-bold text-blue-800">产地</span>
               </div>
-              <p className="text-sm text-gray-700">{data.farmInfo.location}</p>
+              <p className="text-base text-gray-700 font-medium">{data.farmInfo.location}</p>
             </div>
-            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-4 border border-amber-200">
+            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-6 border border-amber-200">
               <div className="flex items-center space-x-2 mb-2">
-                <User className="w-5 h-5 text-red-600" />
-                <span className="text-sm font-medium text-red-800">种植者</span>
+                <User className="w-6 h-6 text-red-600" />
+                <span className="text-lg font-bold text-red-800">种植者</span>
               </div>
-              <p className="text-sm text-gray-700">{data.farmInfo.farmerName}</p>
+              <p className="text-base text-gray-700 font-medium">{data.farmInfo.farmerName}</p>
             </div>
-            <div className="bg-orange-50 rounded-xl p-4">
+            <div className="bg-orange-50 rounded-xl p-6">
               <div className="flex items-center space-x-2 mb-2">
-                <Calendar className="w-5 h-5 text-orange-600" />
-                <span className="text-sm font-medium text-orange-800">收获日期</span>
+                <Calendar className="w-6 h-6 text-orange-600" />
+                <span className="text-lg font-bold text-orange-800">收获日期</span>
               </div>
-              <p className="text-sm text-gray-700">{formatDate(data.growthCycle.harvestDate)}</p>
+              <p className="text-base text-gray-700 font-medium">{formatDate(data.growthCycle.harvestDate)}</p>
             </div>
-            <div className="bg-purple-50 rounded-xl p-4">
+            <div className="bg-purple-50 rounded-xl p-6">
               <div className="flex items-center space-x-2 mb-2">
-                <Clock className="w-5 h-5 text-purple-600" />
-                <span className="text-sm font-medium text-purple-800">冷链时长</span>
+                <Clock className="w-6 h-6 text-purple-600" />
+                <span className="text-lg font-bold text-purple-800">冷链时长</span>
               </div>
-              <p className="text-sm text-gray-700">{data.logistics.coldChain.duration}</p>
+              <p className="text-base text-gray-700 font-medium">{data.logistics.coldChain.duration}</p>
             </div>
           </div>
         </div>
 
         {/* 导航标签 */}
-        <div className="bg-white rounded-2xl shadow-lg p-4 mb-6">
+        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
           <div className="flex flex-wrap gap-2">
             {[
               { id: 'overview', label: '总览', icon: Shield },
@@ -331,13 +331,13 @@ const TraceabilityDetail: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all ${
+                className={`flex items-center space-x-3 px-8 py-4 rounded-lg font-bold transition-all text-xl ${
                   activeTab === tab.id
                     ? 'bg-blue-600 text-white shadow-lg'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
-                <tab.icon className="w-4 h-4" />
+                <tab.icon className="w-5 h-5" />
                 <span>{tab.label}</span>
               </button>
             ))}
@@ -345,22 +345,22 @@ const TraceabilityDetail: React.FC = () => {
         </div>
 
         {/* 内容区域 */}
-        <div className="bg-white rounded-2xl shadow-lg p-8">
+        <div className="bg-white rounded-2xl shadow-lg p-12">
           {activeTab === 'overview' && (
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">产品溯源总览</h2>
+              <h2 className="text-4xl font-bold text-gray-800 mb-8">产品溯源总览</h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="bg-gradient-to-r from-green-100 to-green-50 rounded-xl p-6">
-                  <h3 className="text-lg font-semibold text-green-800 mb-4 flex items-center">
-                    <Leaf className="w-5 h-5 mr-2" />
+                <div className="bg-gradient-to-r from-green-100 to-green-50 rounded-xl p-8">
+                  <h3 className="text-3xl font-bold text-green-800 mb-8 flex items-center">
+                    <Leaf className="w-6 h-6 mr-3" />
                     生长周期
                   </h3>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">种植日期</span>
-                      <span className="font-medium">{formatDate(data.growthCycle.plantingDate)}</span>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center py-2">
+                      <span className="text-lg text-gray-600">种植日期</span>
+                      <span className="text-lg font-medium">{formatDate(data.growthCycle.plantingDate)}</span>
                     </div>
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center py-2">
                       <span className="text-gray-600">开花日期</span>
                       <span className="font-medium">{formatDate(data.growthCycle.floweringDate)}</span>
                     </div>
@@ -375,16 +375,16 @@ const TraceabilityDetail: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-blue-100 to-blue-50 rounded-xl p-6">
-                  <h3 className="text-lg font-semibold text-blue-800 mb-4 flex items-center">
-                    <Shield className="w-5 h-5 mr-2" />
+                <div className="bg-gradient-to-r from-blue-100 to-blue-50 rounded-xl p-8">
+                  <h3 className="text-2xl font-semibold text-blue-800 mb-6 flex items-center">
+                    <Shield className="w-6 h-6 mr-3" />
                     质量检测
                   </h3>
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {data.qualityTests.slice(0, 2).map((test, index) => (
                       <div key={index} className="flex justify-between items-center">
                         <span className="text-gray-600">{test.testType}</span>
-                        <span className="font-medium text-red-600">{test.result}</span>
+                        <span className="text-lg font-medium text-red-600">{test.result}</span>
                       </div>
                     ))}
                   </div>
@@ -395,39 +395,39 @@ const TraceabilityDetail: React.FC = () => {
 
           {activeTab === 'farm' && (
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">农场信息</h2>
+              <h2 className="text-3xl font-bold text-gray-800 mb-8">农场信息</h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="bg-gray-50 rounded-xl p-6">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-4">基本信息</h3>
-                  <div className="space-y-3">
+                <div className="bg-gray-50 rounded-xl p-8">
+                  <h3 className="text-2xl font-semibold text-gray-800 mb-6">基本信息</h3>
+                  <div className="space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">农场名称</span>
-                      <span className="font-medium">{data.farmInfo.name}</span>
+                      <span className="text-lg text-gray-600">农场名称</span>
+                      <span className="text-lg font-medium">{data.farmInfo.name}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">农场位置</span>
-                      <span className="font-medium">{data.farmInfo.location}</span>
+                      <span className="text-lg text-gray-600">农场位置</span>
+                      <span className="text-lg font-medium">{data.farmInfo.location}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">种植者</span>
-                      <span className="font-medium">{data.farmInfo.farmerName}</span>
+                      <span className="text-lg text-gray-600">种植者</span>
+                      <span className="text-lg font-medium">{data.farmInfo.farmerName}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">坐标</span>
-                      <span className="font-medium text-sm">
+                      <span className="text-lg text-gray-600">坐标</span>
+                      <span className="text-lg font-medium">
                         {data.farmInfo.coordinates.lat.toFixed(4)}, {data.farmInfo.coordinates.lng.toFixed(4)}
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-green-50 rounded-xl p-6">
-                  <h3 className="text-lg font-semibold text-green-800 mb-4">认证信息</h3>
-                  <div className="space-y-2">
+                <div className="bg-green-50 rounded-xl p-8">
+                  <h3 className="text-2xl font-semibold text-green-800 mb-6">认证信息</h3>
+                  <div className="space-y-3">
                     {data.farmInfo.certification.map((cert, index) => (
                       <div key={index} className="flex items-center space-x-2">
-                        <CheckCircle className="w-4 h-4 text-red-600" />
-                        <span className="font-medium">{cert}</span>
+                        <CheckCircle className="w-5 h-5 text-red-600" />
+                        <span className="text-lg font-medium">{cert}</span>
                       </div>
                     ))}
                   </div>
@@ -438,10 +438,10 @@ const TraceabilityDetail: React.FC = () => {
 
           {activeTab === 'growth' && (
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">生长周期记录</h2>
+              <h2 className="text-3xl font-bold text-gray-800 mb-8">生长周期记录</h2>
               <div className="relative">
                 <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-green-300"></div>
-                <div className="space-y-6">
+                <div className="space-y-8">
                   {[
                     { date: data.growthCycle.plantingDate, title: '种植', description: '苹果树苗定植', icon: '🌱' },
                     { date: data.growthCycle.floweringDate, title: '开花', description: '苹果树开花期', icon: '🌸' },
@@ -452,12 +452,12 @@ const TraceabilityDetail: React.FC = () => {
                       <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold z-10">
                         {stage.icon}
                       </div>
-                      <div className="bg-white border border-gray-200 rounded-lg p-4 flex-1">
-                        <div className="flex justify-between items-center mb-2">
-                          <h3 className="font-semibold text-gray-800">{stage.title}</h3>
-                          <span className="text-sm text-gray-500">{formatDate(stage.date)}</span>
+                      <div className="bg-white border border-gray-200 rounded-lg p-6 flex-1">
+                        <div className="flex justify-between items-center mb-3">
+                          <h3 className="text-xl font-semibold text-gray-800">{stage.title}</h3>
+                          <span className="text-base text-gray-500">{formatDate(stage.date)}</span>
                         </div>
-                        <p className="text-gray-600">{stage.description}</p>
+                        <p className="text-lg text-gray-600">{stage.description}</p>
                       </div>
                     </div>
                   ))}
@@ -468,23 +468,23 @@ const TraceabilityDetail: React.FC = () => {
 
           {activeTab === 'operations' && (
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">农事操作记录</h2>
+              <h2 className="text-3xl font-bold text-gray-800 mb-8">农事操作记录</h2>
               
-              <div className="mb-8">
-                <h3 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
-                  <Leaf className="w-5 h-5 mr-2 text-red-600" />
+              <div className="mb-12">
+                <h3 className="text-2xl font-semibold text-gray-700 mb-6 flex items-center">
+                  <Leaf className="w-6 h-6 mr-3 text-red-600" />
                   施肥记录
                 </h3>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   {data.farmingOperations.fertilization.map((fert, index) => (
-                    <div key={index} className="bg-green-50 rounded-xl p-4">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="font-medium text-green-800">{fert.type}</span>
+                    <div key={index} className="bg-green-50 rounded-xl p-6">
+                      <div className="flex justify-between items-center mb-3">
+                        <span className="text-lg font-medium text-green-800">{fert.type}</span>
                         <span className="text-sm text-gray-500">{formatDate(fert.date)}</span>
                       </div>
-                      <div className="text-sm text-gray-600 space-y-1">
-                        <div>用量: {fert.amount}</div>
-                        <div>方法: {fert.method}</div>
+                      <div className="text-base text-gray-600 space-y-2">
+                        <div className="py-1">用量: {fert.amount}</div>
+                        <div className="py-1">方法: {fert.method}</div>
                       </div>
                     </div>
                   ))}
@@ -492,8 +492,8 @@ const TraceabilityDetail: React.FC = () => {
               </div>
 
               <div className="mb-8">
-                <h3 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
-                  <Shield className="w-5 h-5 mr-2 text-blue-600" />
+                <h3 className="text-2xl font-semibold text-gray-700 mb-6 flex items-center">
+                  <Shield className="w-6 h-6 mr-3 text-blue-600" />
                   病虫害防治
                 </h3>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

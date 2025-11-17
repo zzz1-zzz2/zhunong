@@ -234,18 +234,18 @@ const TraceabilityDetail: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 via-amber-50 to-yellow-50 p-8">
       <div className="max-w-6xl mx-auto">
         {/* 头部信息 */}
-        <div className="bg-white rounded-2xl shadow-xl p-12 mb-8">
+        <div className="bg-white rounded-2xl shadow-2xl p-12 mb-8 border-2 border-red-200">
           <div className="flex flex-col lg:flex-row items-center justify-between mb-6">
             <div className="flex items-center space-x-6 mb-6 lg:mb-0">
-              <div className="w-20 h-20 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl flex items-center justify-center">
+              <div className="w-20 h-20 bg-gradient-to-r from-red-600 to-red-700 rounded-2xl flex items-center justify-center shadow-lg">
                 <Leaf className="w-10 h-10 text-white" />
               </div>
               <div>
-                <h1 className="text-4xl font-bold text-gray-800">{data.productName}</h1>
-                <p className="text-gray-600 text-lg">批次号: {data.batchNumber}</p>
+                <h1 className="text-4xl font-bold text-red-800">{data.productName}</h1>
+                <p className="text-red-600 text-lg font-medium">批次号: {data.batchNumber}</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -257,12 +257,12 @@ const TraceabilityDetail: React.FC = () => {
                   includeMargin={true}
                   className="border-2 border-gray-200 rounded-lg"
                 />
-                <p className="text-base text-gray-600 mt-2">扫码验证</p>
+                <p className="text-lg text-red-600 font-bold mt-3">扫码验证</p>
               </div>
               <div className="text-right">
                 <div className="flex items-center space-x-2 mb-2">
-                  <Shield className="w-5 h-5 text-red-500" />
-                  <span className="text-base font-bold text-red-600">区块链验证</span>
+                  <Shield className="w-6 h-6 text-red-600" />
+                  <span className="text-lg font-bold text-red-800">区块链验证</span>
                 </div>
                 <div className="bg-gray-100 rounded-lg p-2">
                   <p className="text-sm text-gray-500 font-mono break-all max-w-40">
@@ -274,41 +274,41 @@ const TraceabilityDetail: React.FC = () => {
           </div>
 
           {/* 认证徽章 */}
-          <div className="flex flex-wrap gap-3 mb-8">
+          <div className="flex flex-wrap gap-4 mb-8">
             {data.farmInfo.certification.map((cert, index) => (
-              <div key={index} className="bg-green-100 text-green-800 px-5 py-3 rounded-full text-lg font-bold flex items-center space-x-3">
-                <CheckCircle className="w-5 h-5" />
+              <div key={index} className="bg-gradient-to-r from-red-100 to-amber-100 text-red-800 px-6 py-4 rounded-full text-xl font-bold flex items-center space-x-3 shadow-lg border border-amber-400">
+                <CheckCircle className="w-6 h-6 text-red-600" />
                 <span>{cert}</span>
               </div>
             ))}
           </div>
 
           {/* 快速信息卡片 */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-blue-50 rounded-xl p-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="bg-gradient-to-br from-red-50 to-amber-50 rounded-xl p-8 shadow-lg border-2 border-red-200">
               <div className="flex items-center space-x-2 mb-2">
-                <MapPin className="w-6 h-6 text-blue-600" />
-                <span className="text-lg font-bold text-blue-800">产地</span>
+                <MapPin className="w-8 h-8 text-red-600" />
+                <span className="text-xl font-bold text-red-800">产地</span>
               </div>
               <p className="text-base text-gray-700 font-medium">{data.farmInfo.location}</p>
             </div>
-            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-6 border border-amber-200">
+            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-8 border-2 border-amber-400 shadow-lg">
               <div className="flex items-center space-x-2 mb-2">
-                <User className="w-6 h-6 text-red-600" />
-                <span className="text-lg font-bold text-red-800">种植者</span>
+                <User className="w-8 h-8 text-red-600" />
+                <span className="text-xl font-bold text-red-800">种植者</span>
               </div>
               <p className="text-base text-gray-700 font-medium">{data.farmInfo.farmerName}</p>
             </div>
-            <div className="bg-orange-50 rounded-xl p-6">
+            <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-8 shadow-lg border-2 border-orange-200">
               <div className="flex items-center space-x-2 mb-2">
-                <Calendar className="w-6 h-6 text-orange-600" />
-                <span className="text-lg font-bold text-orange-800">收获日期</span>
+                <Calendar className="w-8 h-8 text-orange-600" />
+                <span className="text-xl font-bold text-orange-800">收获日期</span>
               </div>
               <p className="text-base text-gray-700 font-medium">{formatDate(data.growthCycle.harvestDate)}</p>
             </div>
-            <div className="bg-purple-50 rounded-xl p-6">
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8 shadow-lg border-2 border-purple-200">
               <div className="flex items-center space-x-2 mb-2">
-                <Clock className="w-6 h-6 text-purple-600" />
+                <Clock className="w-8 h-8 text-purple-600" />
                 <span className="text-lg font-bold text-purple-800">冷链时长</span>
               </div>
               <p className="text-base text-gray-700 font-medium">{data.logistics.coldChain.duration}</p>
@@ -317,7 +317,7 @@ const TraceabilityDetail: React.FC = () => {
         </div>
 
         {/* 导航标签 */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 mb-8 border-2 border-red-200">
           <div className="flex flex-wrap gap-2">
             {[
               { id: 'overview', label: '总览', icon: Shield },
@@ -331,13 +331,13 @@ const TraceabilityDetail: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center space-x-3 px-8 py-4 rounded-lg font-bold transition-all text-xl ${
+                className={`flex items-center space-x-4 px-10 py-5 rounded-lg font-bold transition-all text-2xl ${
                   activeTab === tab.id
                     ? 'bg-blue-600 text-white shadow-lg'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
-                <tab.icon className="w-5 h-5" />
+                <tab.icon className="w-6 h-6" />
                 <span>{tab.label}</span>
               </button>
             ))}
@@ -345,20 +345,20 @@ const TraceabilityDetail: React.FC = () => {
         </div>
 
         {/* 内容区域 */}
-        <div className="bg-white rounded-2xl shadow-lg p-12">
+        <div className="bg-white rounded-2xl shadow-2xl p-12 border-2 border-red-200">
           {activeTab === 'overview' && (
             <div className="space-y-6">
-              <h2 className="text-4xl font-bold text-gray-800 mb-8">产品溯源总览</h2>
+              <h2 className="text-4xl font-bold text-red-800 mb-8">产品溯源总览</h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="bg-gradient-to-r from-green-100 to-green-50 rounded-xl p-8">
-                  <h3 className="text-3xl font-bold text-green-800 mb-8 flex items-center">
-                    <Leaf className="w-6 h-6 mr-3" />
+                <div className="bg-gradient-to-r from-red-100 to-amber-100 rounded-xl p-8 shadow-lg border-2 border-red-300">
+                  <h3 className="text-3xl font-bold text-red-800 mb-8 flex items-center">
+                    <Leaf className="w-8 h-8 mr-4 text-red-600" />
                     生长周期
                   </h3>
                   <div className="space-y-4">
                     <div className="flex justify-between items-center py-2">
-                      <span className="text-lg text-gray-600">种植日期</span>
-                      <span className="text-lg font-medium">{formatDate(data.growthCycle.plantingDate)}</span>
+                      <span className="text-xl text-red-700 font-medium">种植日期</span>
+                      <span className="text-xl font-bold text-red-800">{formatDate(data.growthCycle.plantingDate)}</span>
                     </div>
                     <div className="flex justify-between items-center py-2">
                       <span className="text-gray-600">开花日期</span>
@@ -375,16 +375,16 @@ const TraceabilityDetail: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-blue-100 to-blue-50 rounded-xl p-8">
-                  <h3 className="text-2xl font-semibold text-blue-800 mb-6 flex items-center">
-                    <Shield className="w-6 h-6 mr-3" />
+                <div className="bg-gradient-to-r from-amber-100 to-yellow-100 rounded-xl p-8 shadow-lg border-2 border-amber-400">
+                  <h3 className="text-3xl font-bold text-red-800 mb-6 flex items-center">
+                    <Shield className="w-8 h-8 mr-4 text-red-600" />
                     质量检测
                   </h3>
                   <div className="space-y-4">
                     {data.qualityTests.slice(0, 2).map((test, index) => (
                       <div key={index} className="flex justify-between items-center">
                         <span className="text-gray-600">{test.testType}</span>
-                        <span className="text-lg font-medium text-red-600">{test.result}</span>
+                        <span className="text-xl font-bold text-red-800">{test.result}</span>
                       </div>
                     ))}
                   </div>

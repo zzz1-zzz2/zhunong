@@ -24,7 +24,7 @@ const AppleAdventure: React.FC = () => {
       title: '苹果奇遇记 · 青年红色筑梦',
       narrative: '面向乡村振兴的青年红色筑梦赛道，跟随这颗“希望之果”，完成合规与品质并重的旅程，连接产业与市场。',
       icon: <Play className="w-10 h-10 text-red-600" />,
-      image: '/青年红色筑梦.png',
+      image: '/%E9%9D%92%E5%B9%B4%E7%BA%A2%E8%89%B2%E7%AD%91%E6%A2%A6.png',
       choices: [
         { text: '开始旅程', next: 'site' }
       ]
@@ -34,7 +34,7 @@ const AppleAdventure: React.FC = () => {
       title: '选址种植',
       narrative: '为苹果选择适宜的种植环境。向阳地有利于糖度积累，但需要精细水分管理；背阴地甜度略低，但抗旱压力较小。',
       icon: <Sprout className="w-10 h-10 text-red-500" />,
-      image: '/选址种植场景.png',
+      image: '/%E9%80%89%E5%9D%80%E7%A7%8D%E6%A4%8D%E5%9C%BA%E6%99%AF.png',
       choices: [
         { text: '向阳地', next: 'pest' },
         { text: '背阴地', next: 'pest' }
@@ -45,7 +45,7 @@ const AppleAdventure: React.FC = () => {
       title: '病虫害监测',
       narrative: '果园工作人员穿着红色背心进行病虫害巡查，使用数字设备记录数据。通过专业监测设备收集病虫害数据，确保苹果健康成长。',
       icon: <Leaf className="w-10 h-10 text-red-500" />,
-      image: '/病虫害防治场景.png',
+      image: '/%E7%97%85%E8%99%AB%E5%AE%B3%E9%98%B2%E6%B2%BB%E5%9C%BA%E6%99%AF.png',
       choices: [
         { text: 'AI 植保算法', next: 'irrigation' },
         { text: '传统人工巡园', next: 'irrigation' }
@@ -56,7 +56,7 @@ const AppleAdventure: React.FC = () => {
       title: '智能灌溉监测',
       narrative: '现代化滴灌系统正在运行，土壤传感器实时监测湿度、温度和pH值。数据显示：北区果园土壤湿度65%，温度24.5°C，pH值6.8，各项指标正常。工作人员穿着红色背心，使用数字设备检查灌溉管线。',
       icon: <Leaf className="w-10 h-10 text-emerald-600" />,
-      image: '/智能灌溉场景.png',
+      image: '/%E6%99%BA%E8%83%BD%E7%81%8C%E6%BA%89%E5%9C%BA%E6%99%AF.png',
       choices: [
         { text: '查看详细数据', next: 'data_monitoring' },
         { text: '继续灌溉', next: 'orchard' }
@@ -89,7 +89,7 @@ const AppleAdventure: React.FC = () => {
       title: '果园采摘',
       narrative: '在认证果园里，苹果通过智能采摘记录设备完成批次绑定。请选择采摘后的处理方式。',
       icon: <Sprout className="w-10 h-10 text-red-500" />,
-      image: '/采摘收获场景.png',
+      image: '/%E6%91%98%E6%91%98%E6%94%B6%E8%8E%B7%E5%9C%BA%E6%99%AF.png',
       choices: [
         { text: '进行分级与清洗', next: 'warehouse' },
         { text: '直接装箱出库', next: 'transport_risk' }
@@ -100,7 +100,7 @@ const AppleAdventure: React.FC = () => {
       title: '冷链仓储',
       narrative: '苹果进入规范仓储，温湿度与批次信息写入链上，形成关键溯源节点。下一步选择运输方式。',
       icon: <Leaf className="w-10 h-10 text-red-500" />,
-      image: '/冷链运输.png',
+      image: '/%E5%86%B7%E9%93%BE%E8%BF%90%E8%BE%93.png',
       choices: [
         { text: '低温冷链运输', next: 'packaging' },
         { text: '常温运输', next: 'transport_risk' }
@@ -111,7 +111,7 @@ const AppleAdventure: React.FC = () => {
       title: '包装材质',
       narrative: '选择更适合流通的包装。环保纸箱利于透气与减震；塑料筐耐用但在高温下通风性稍差。',
       icon: <Leaf className="w-10 h-10 text-red-500" />,
-      image: '/分级包装场景.png',
+      image: '/%E5%88%86%E7%BA%A7%E5%8C%85%E8%A3%85%E5%9C%BA%E6%99%AF.png',
       choices: [
         { text: '环保纸箱', next: 'transport' },
         { text: '塑料筐', next: 'transport' }
@@ -133,7 +133,7 @@ const AppleAdventure: React.FC = () => {
       title: '销售渠道',
       narrative: '不同渠道影响消费者体验与口碑。电商强调履约速度；线下精选更看重现场品控与陈列。',
       icon: <Store className="w-10 h-10 text-red-600" />,
-      image: '/上架商超.png',
+      image: '/%E4%B8%8A%E6%9E%B6%E5%95%86%E8%B6%85.png',
       choices: [
         { text: '完成上架', next: 'market' }
       ]

@@ -24,7 +24,7 @@ const AppleAdventure: React.FC = () => {
       title: '苹果奇遇记 · 青年红色筑梦',
       narrative: '面向乡村振兴的青年红色筑梦赛道，跟随这颗“希望之果”，完成合规与品质并重的旅程，连接产业与市场。',
       icon: <Play className="w-10 h-10 text-red-600" />,
-      image: 'https://images.unsplash.com/photo-1517940310602-10524279f6f9?auto=format&fit=crop&w=1600&q=60',
+      image: 'https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E7%BA%A2%E8%89%B2%E9%9D%92%E5%B9%B4%E5%9B%A2%E9%98%9F%E5%9C%A8%E5%86%9C%E6%9D%91%E6%9E%9C%E5%9B%AD%EF%BC%8C%E6%BB%A1%E6%BB%A1%E5%B8%8C%E6%9C%9B%E7%9A%84%E6%B0%9B%E5%9B%B4%EF%BC%8C%E7%BA%A2%E8%89%B2%E4%B8%BB%E9%A2%98%EF%BC%8C%E7%8E%B0%E4%BB%A3%E4%B8%8E%E4%BC%A0%E7%BB%9F%E7%BB%93%E5%90%88%EF%BC%8C%E4%B9%A1%E6%9D%91%E6%8C%AF%E5%85%B4%E8%83%8C%E6%99%AF%EF%BC%8C%E6%B8%A9%E6%9A%96%E9%98%B3%E5%85%89%EF%BC%8C%E4%B8%93%E4%B8%9A%E6%91%84%E5%BD%B1%E9%A3%8E%E6%A0%BC&image_size=landscape_16_9',
       choices: [
         { text: '开始旅程', next: 'site' }
       ]
@@ -34,7 +34,7 @@ const AppleAdventure: React.FC = () => {
       title: '选址种植',
       narrative: '为苹果选择适宜的种植环境。向阳地有利于糖度积累，但需要精细水分管理；背阴地甜度略低，但抗旱压力较小。',
       icon: <Sprout className="w-10 h-10 text-red-500" />,
-      image: 'https://images.unsplash.com/photo-1567954016-0b6b0d2a343b?auto=format&fit=crop&w=1600&q=60',
+      image: 'https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E8%8B%B9%E6%9E%9C%E5%9B%AD%E9%80%89%E5%9D%80%E5%9C%BA%E6%99%AF%EF%BC%8C%E5%B1%B1%E5%9C%B0%E6%9E%9C%E5%9B%AD%EF%BC%8C%E5%90%91%E9%98%B3%E5%9D%A1%E5%9C%B0%EF%BC%8C%E8%8B%B9%E6%9E%9C%E6%A0%91%E8%8B%97%EF%BC%8C%E5%9C%9F%E5%A3%A4%E6%A3%80%E6%B5%8B%EF%BC%8C%E5%86%9C%E4%B8%9A%E4%B8%93%E5%AE%B6%E6%8C%87%E5%AF%BC%EF%BC%8C%E7%8E%B0%E4%BB%A3%E5%8C%96%E5%86%9C%E4%B8%9A%E8%AE%BE%E5%A4%87%EF%BC%8C%E7%BB%BF%E8%89%B2%E5%86%9C%E4%B8%9A%E6%A6%82%E5%BF%B5&image_size=landscape_16_9',
       choices: [
         { text: '向阳地', next: 'pest' },
         { text: '背阴地', next: 'pest' }
@@ -42,10 +42,10 @@ const AppleAdventure: React.FC = () => {
     },
     pest: {
       id: 'pest',
-      title: '病虫害防治',
-      narrative: '选择防治策略。AI 植保算法可早期识别病虫害并精准用药；传统人工依赖经验，识别及时性与准确率稍弱。',
+      title: '病虫害监测',
+      narrative: '果园工作人员穿着红色背心进行病虫害巡查，使用数字设备记录数据。通过专业监测设备收集病虫害数据，确保苹果健康成长。',
       icon: <Leaf className="w-10 h-10 text-red-500" />,
-      image: 'https://picsum.photos/id/1040/1600/900',
+      image: '/images/agricultural-data/orchard-work-scene.svg',
       choices: [
         { text: 'AI 植保算法', next: 'irrigation' },
         { text: '传统人工巡园', next: 'irrigation' }
@@ -53,13 +53,35 @@ const AppleAdventure: React.FC = () => {
     },
     irrigation: {
       id: 'irrigation',
-      title: '灌溉策略',
-      narrative: '灌溉方式影响根系活力与糖酸比。滴灌更节水、控制更精准；漫灌快速但水分利用率较低。',
+      title: '智能灌溉监测',
+      narrative: '现代化滴灌系统正在运行，土壤传感器实时监测湿度、温度和pH值。数据显示：北区果园土壤湿度65%，温度24.5°C，pH值6.8，各项指标正常。工作人员穿着红色背心，使用数字设备检查灌溉管线。',
       icon: <Leaf className="w-10 h-10 text-emerald-600" />,
-      image: 'https://picsum.photos/id/1056/1600/900',
+      image: '/images/agricultural-data/soil-sensor-device.svg',
       choices: [
-        { text: '滴灌', next: 'orchard' },
-        { text: '漫灌', next: 'orchard' }
+        { text: '查看详细数据', next: 'data_monitoring' },
+        { text: '继续灌溉', next: 'orchard' }
+      ]
+    },
+    data_monitoring: {
+      id: 'data_monitoring',
+      title: '农业数据分析',
+      narrative: '基于豆包AI生成的真实农业数据：土壤湿度65%，养分含量78%，pH值6.8，有机质82%。实验样本55*显示标准灌溉产量3.2kg/株，样本26*精准灌溉产量3.8kg/株，产量提升18.75%。',
+      icon: <FlaskConical className="w-10 h-10 text-blue-600" />,
+      image: '/images/agricultural-data/data-analysis-chart.svg',
+      choices: [
+        { text: '查看实验样本', next: 'experiment_samples' },
+        { text: '继续果园管理', next: 'orchard' }
+      ]
+    },
+    experiment_samples: {
+      id: 'experiment_samples',
+      title: '实验样本收集',
+      narrative: '田间试验数据收集：样本55*（标准灌溉）产量3.2kg/株，样本26*（精准灌溉）产量3.8kg/株。透明样本袋标记清晰，白色网格线划分试验区域，确保数据准确性。',
+      icon: <FlaskConical className="w-10 h-10 text-purple-600" />,
+      image: '/images/agricultural-data/experiment-samples.svg',
+      choices: [
+        { text: '分析实验结果', next: 'orchard' },
+        { text: '调整灌溉策略', next: 'orchard' }
       ]
     },
     orchard: {
@@ -67,7 +89,7 @@ const AppleAdventure: React.FC = () => {
       title: '果园采摘',
       narrative: '在认证果园里，苹果通过智能采摘记录设备完成批次绑定。请选择采摘后的处理方式。',
       icon: <Sprout className="w-10 h-10 text-red-500" />,
-      image: 'https://images.unsplash.com/photo-1601004890684-d8cbfef1c8f6?auto=format&fit=crop&w=1600&q=60',
+      image: 'https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E8%8B%B9%E6%9E%9C%E6%91%98%E5%8F%81%E5%9C%BA%E6%99%AF%EF%BC%8C%E5%86%9C%E6%B0%91%E6%91%98%E5%8F%81%E6%88%90%E7%86%9F%E8%8B%B9%E6%9E%9C%EF%BC%8C%E6%9E%9C%E5%9B%AD%E4%B8%B0%E6%94%B6%EF%BC%8C%E6%99%BA%E8%83%BD%E6%91%98%E5%8F%81%E8%AE%BE%E5%A4%87%EF%BC%8C%E8%8B%B9%E6%9E%9C%E5%88%86%E7%BA%A7%EF%BC%8C%E5%86%9C%E4%BA%A7%E5%93%81%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%EF%BC%8C%E5%96%9C%E6%82%A6%E7%9A%84%E4%B8%B0%E6%94%B6%E6%B0%9B%E5%9B%B4&image_size=landscape_16_9',
       choices: [
         { text: '进行分级与清洗', next: 'warehouse' },
         { text: '直接装箱出库', next: 'transport_risk' }
@@ -78,7 +100,7 @@ const AppleAdventure: React.FC = () => {
       title: '冷链仓储',
       narrative: '苹果进入规范仓储，温湿度与批次信息写入链上，形成关键溯源节点。下一步选择运输方式。',
       icon: <Leaf className="w-10 h-10 text-red-500" />,
-      image: 'https://picsum.photos/id/1039/1600/900',
+      image: 'https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E7%8E%B0%E4%BB%A3%E5%8C%96%E5%86%B7%E9%93%BE%E4%BB%93%E5%82%A8%E4%B8%AD%E5%BF%83%EF%BC%8C%E8%8B%B9%E6%9E%9C%E5%86%B7%E8%97%8F%E5%BA%93%EF%BC%8C%E6%B8%A9%E6%8E%A7%E7%B3%BB%E7%BB%9F%EF%BC%8C%E6%99%BA%E8%83%BD%E4%BB%93%E5%82%A8%E7%AE%A1%E7%90%86%EF%BC%8C%E5%86%9C%E4%BA%A7%E5%93%81%E4%BF%9D%E9%B2%9C%EF%BC%8C%E5%86%B7%E9%93%BE%E7%89%A9%E6%B5%81%EF%BC%8C%E4%BB%93%E5%82%A8%E6%9C%BA%E5%99%A8%E4%BA%BA&image_size=landscape_16_9',
       choices: [
         { text: '低温冷链运输', next: 'packaging' },
         { text: '常温运输', next: 'transport_risk' }
@@ -89,7 +111,7 @@ const AppleAdventure: React.FC = () => {
       title: '包装材质',
       narrative: '选择更适合流通的包装。环保纸箱利于透气与减震；塑料筐耐用但在高温下通风性稍差。',
       icon: <Leaf className="w-10 h-10 text-red-500" />,
-      image: 'https://picsum.photos/id/1062/1600/900',
+      image: 'https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E8%8B%B9%E6%9E%9C%E5%8C%85%E8%A3%85%E7%94%9F%E4%BA%A7%E7%BA%BF%EF%BC%8C%E7%8E%AF%E4%BF%9D%E7%BA%B8%E7%AE%B1%E5%8C%85%E8%A3%85%EF%BC%8C%E5%8F%AF%E9%99%8D%E8%A7%A3%E6%9D%90%E6%96%99%EF%BC%8C%E7%BB%BF%E8%89%B2%E5%8C%85%E8%A3%85%E6%A6%82%E5%BF%B5%EF%BC%8C%E6%99%BA%E8%83%BD%E5%8C%85%E8%A3%85%E8%AE%BE%E5%A4%87%EF%BC%8C%E5%86%9C%E4%BA%A7%E5%93%81%E5%8C%85%E8%A3%85%EF%BC%8C%E5%8F%AF%E6%8C%81%E7%BB%AD%E5%8F%91%E5%B1%95&image_size=landscape_16_9',
       choices: [
         { text: '环保纸箱', next: 'transport' },
         { text: '塑料筐', next: 'transport' }
@@ -100,7 +122,7 @@ const AppleAdventure: React.FC = () => {
       title: '冷链运输',
       narrative: '车辆载入电子温度记录仪，里程、温度、司机与车辆信息写入链上，形成完整运输记录。',
       icon: <Truck className="w-10 h-10 text-red-600" />,
-      image: 'https://picsum.photos/id/1063/1600/900',
+      image: 'https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E5%86%B7%E9%93%BE%E8%BF%90%E8%BE%93%E8%BD%A6%E8%BE%86%EF%BC%8C%E5%86%B7%E8%97%8F%E5%8D%A1%E8%BD%A6%EF%BC%8CGPS%E6%B8%A9%E6%8E%A7%E7%9B%91%E6%B5%8B%EF%BC%8C%E6%99%BA%E8%83%BD%E7%89%A9%E6%B5%81%EF%BC%8C%E5%86%9C%E4%BA%A7%E5%93%81%E8%BF%90%E8%BE%93%EF%BC%8C%E5%86%B7%E9%93%BE%E9%85%8D%E9%80%81%EF%BC%8C%E8%BF%90%E8%BE%93%E8%BF%BD%E8%B8%AA%E7%B3%BB%E7%BB%9F&image_size=landscape_16_9',
       choices: [
         { text: '电商直销', next: 'channel' },
         { text: '线下精选', next: 'channel' }
@@ -111,7 +133,7 @@ const AppleAdventure: React.FC = () => {
       title: '销售渠道',
       narrative: '不同渠道影响消费者体验与口碑。电商强调履约速度；线下精选更看重现场品控与陈列。',
       icon: <Store className="w-10 h-10 text-red-600" />,
-      image: 'https://picsum.photos/id/1067/1600/900',
+      image: 'https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E8%8B%B9%E6%9E%9C%E9%94%80%E5%94%AE%E6%B8%A0%E9%81%93%EF%BC%8C%E7%94%B5%E5%95%86%E5%B9%B3%E5%8F%B0%EF%BC%8C%E7%BA%BF%E4%B8%8B%E8%B6%85%E5%B8%82%EF%BC%8C%E5%86%9C%E4%BA%A7%E5%93%81%E5%B8%82%E5%9C%BA%EF%BC%8C%E6%95%B0%E5%AD%97%E5%8C%96%E9%94%80%E5%94%AE%EF%BC%8C%E6%96%B0%E9%9B%B6%E5%94%AE%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%A4%9A%E6%B8%A0%E9%81%93%E8%90%A5%E9%94%80%EF%BC%8C%E6%B6%88%E8%B4%B9%E8%80%85%E8%B4%AD%E4%B9%B0%E5%9C%BA%E6%99%AF&image_size=landscape_16_9',
       choices: [
         { text: '完成上架', next: 'market' }
       ]
@@ -121,7 +143,7 @@ const AppleAdventure: React.FC = () => {
       title: '运输异常',
       narrative: '由于缺少规范分级/冷链，品质风险上升，监管提示该批次需复检。你可以返回并选择合规流程。',
       icon: <Truck className="w-10 h-10 text-red-500" />,
-      image: 'https://images.unsplash.com/photo-1544829099-291d1f0bb7f7?auto=format&fit=crop&w=1600&q=60',
+      image: 'https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E8%BF%90%E8%BE%93%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%8C%E5%86%B7%E9%93%BE%E4%B8%AD%E6%96%AD%EF%BC%8C%E6%B8%A9%E5%BA%A6%E5%BC%82%E5%B8%B8%E8%AD%A6%E6%8A%A5%EF%BC%8C%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%EF%BC%8C%E8%B4%A8%E9%87%8F%E6%8E%A7%E5%88%B6%EF%BC%8C%E9%A3%8E%E9%99%A9%E7%AE%A1%E7%90%86%EF%BC%8C%E5%86%9C%E4%BA%A7%E5%93%81%E6%8D%9F%E8%80%97%EF%BC%8C%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%9C%BA%E6%99%AF&image_size=landscape_16_9',
       choices: [
         { text: '返回果园重新选择', next: 'orchard' },
         { text: '进入仓储再试一次', next: 'warehouse' }
@@ -132,7 +154,7 @@ const AppleAdventure: React.FC = () => {
       title: '商超上架',
       narrative: '批次上架完成，消费者可扫码查看从果园到商超的完整链路，你已完成一次合规溯源旅程。',
       icon: <Store className="w-10 h-10 text-red-600" />,
-      image: 'https://picsum.photos/id/1074/1600/900',
+      image: 'https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=%E8%8B%B9%E6%9E%9C%E5%95%86%E8%B6%85%E4%B8%8A%E6%9E%B6%EF%BC%8C%E8%B6%85%E5%B8%82%E6%B0%B4%E6%9E%9C%E5%8C%BA%EF%BC%8C%E7%B2%BE%E7%BE%8E%E9%99%88%E5%88%97%EF%BC%8C%E6%B6%88%E8%B4%B9%E8%80%85%E9%80%89%E8%B4%AD%EF%BC%8C%E6%BA%AF%E6%BA%90%E6%A0%87%E7%AD%BE%EF%BC%8C%E5%93%81%E8%B4%A8%E4%BF%9D%E8%AF%81%EF%BC%8C%E9%9B%B6%E5%94%AE%E7%BB%88%E7%AB%AF%EF%BC%8C%E8%B4%AD%E7%89%A9%E4%BD%93%E9%AA%8C&image_size=landscape_16_9',
       choices: [
         { text: '重新体验', next: 'intro' }
       ]

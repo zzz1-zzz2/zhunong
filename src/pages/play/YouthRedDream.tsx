@@ -258,6 +258,19 @@ const AppleAdventure: React.FC = () => {
     }
   }, [current, simStage])
 
+  // 智能成长提示
+  useEffect(() => {
+    if (current === 'orchard' && growth > 0) {
+      if (growth >= 20 && growth < 25 && simStage === 'watered') {
+        setTimeout(() => setLastTip('植物快要发芽了！继续保持水分充足。'), 1000)
+      } else if (growth >= 55 && growth < 60 && simStage === 'sprout') {
+        setTimeout(() => setLastTip('植物快要开花了！看起来生长得很好。'), 1000)
+      } else if (growth >= 95 && growth < 100 && simStage === 'flower') {
+        setTimeout(() => setLastTip('快要结果了！再坚持一下就能收获了。'), 1000)
+      }
+    }
+  }, [growth, current, simStage])
+
   useEffect(() => {
     if (growthTimer.current) window.clearInterval(growthTimer.current)
     if (current === 'orchard' && simStage !== 'harvested') {
@@ -302,6 +315,11 @@ const AppleAdventure: React.FC = () => {
     // 显示浇水特效
     setShowWaterEffect(true)
     setTimeout(() => setShowWaterEffect(false), 1000)
+    
+    // 智能提示：如果水分太低，提醒用户
+    if (moisture < 20) {
+      setTimeout(() => setLastTip('水分充足！继续保持，植物正在健康成长。'), 1500)
+    }
   }
   const handleFertilize = () => {
     if (current !== 'orchard') return

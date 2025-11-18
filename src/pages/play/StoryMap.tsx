@@ -56,7 +56,7 @@ const StoryMap: React.FC = () => {
           <div className="text-xs text-gray-600">{node.subtitle}</div>
         </div>
         <button
-          onClick={() => navigate('/play/apple')}
+          onClick={() => navigate('/play/youth-red-dream')}
           className="ml-auto text-xs inline-flex items-center gap-1 px-2 py-1 rounded bg-red-600 text-white hover:bg-red-700"
         >
           预览
@@ -127,7 +127,7 @@ const StoryMap: React.FC = () => {
             {renderNode(nodes.find(n => n.id === 'market')!)}
             <div className="pt-2">
               <button
-                onClick={() => navigate('/play/apple')}
+                onClick={() => navigate('/play/youth-red-dream')}
                 className="w-full bg-red-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-red-700 border border-amber-400"
               >
                 进入互动剧

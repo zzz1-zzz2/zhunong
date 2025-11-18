@@ -97,7 +97,7 @@ const Home: React.FC = () => {
               立即注册
             </Link>
             <Link
-              to="/play/apple"
+              to="/play/youth-red-dream"
               className="bg-white text-red-700 px-10 py-5 rounded-lg font-bold hover:bg-amber-50 transition-colors border border-amber-300 text-lg"
             >
               互动剧入口

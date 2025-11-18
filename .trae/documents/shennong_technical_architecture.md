@@ -46,51 +46,60 @@ graph TD
 
 ## 2. 技术描述
 
-- **前端**: React@18 + TypeScript + Vite + TailwindCSS@3
-- **移动端**: React Native@0.72 (跨平台移动应用)
-- **后端**: Supabase (PostgreSQL数据库、认证、存储)
-- **区块链**: Ethereum + Web3.js + 智能合约 (Solidity)
-- **文件存储**: IPFS + Supabase存储
-- **AI服务**: Python@3.9 + FastAPI + TensorFlow@2.13
-- **监控**: Sentry (错误监控) + Google Analytics (用户行为)
+* **前端**: React\@18 + TypeScript + Vite + TailwindCSS\@3
+
+* **移动端**: React Native\@0.72 (跨平台移动应用)
+
+* **后端**: Supabase (PostgreSQL数据库、认证、存储)
+
+* **区块链**: Ethereum + Web3.js + 智能合约 (Solidity)
+
+* **文件存储**: IPFS + Supabase存储
+
+* **AI服务**: Python\@3.9 + FastAPI + TensorFlow\@2.13
+
+* **监控**: Sentry (错误监控) + Google Analytics (用户行为)
 
 ## 3. 路由定义
 
-| 路由 | 用途 |
-|------|------|
-| / | 首页，产品展示和搜索 |
-| /product/:id | 产品详情页，展示溯源信息 |
-| /scan | 扫码页面，调用摄像头 |
-| /profile | 个人中心，用户信息管理 |
-| /orders | 订单管理页面 |
-| /merchant | 商户后台首页 |
-| /merchant/products | 产品管理页面 |
-| /merchant/traceability | 溯源数据录入 |
-| /merchant/orders | 订单处理页面 |
-| /admin | 监管平台首页 |
-| /admin/monitoring | 数据监控页面 |
-| /admin/enterprises | 企业管理页面 |
-| /auth/login | 登录页面 |
-| /auth/register | 注册页面 |
+| 路由                     | 用途           |
+| ---------------------- | ------------ |
+| /                      | 首页，产品展示和搜索   |
+| /product/:id           | 产品详情页，展示溯源信息 |
+| /scan                  | 扫码页面，调用摄像头   |
+| /profile               | 个人中心，用户信息管理  |
+| /orders                | 订单管理页面       |
+| /merchant              | 商户后台首页       |
+| /merchant/products     | 产品管理页面       |
+| /merchant/traceability | 溯源数据录入       |
+| /merchant/orders       | 订单处理页面       |
+| /admin                 | 监管平台首页       |
+| /admin/monitoring      | 数据监控页面       |
+| /admin/enterprises     | 企业管理页面       |
+| /auth/login            | 登录页面         |
+| /auth/register         | 注册页面         |
 
 ## 4. API接口定义
 
 ### 4.1 用户认证API
 
 **用户注册**
+
 ```
 POST /api/auth/register
 ```
 
 请求参数：
-| 参数名 | 类型 | 必填 | 描述 |
-|--------|------|------|------|
-| phone | string | 是 | 手机号 |
-| password | string | 是 | 密码 |
-| userType | string | 是 | 用户类型：consumer/farmer/enterprise |
-| verifyCode | string | 是 | 短信验证码 |
+
+| 参数名        | 类型     | 必填 | 描述                              |
+| ---------- | ------ | -- | ------------------------------- |
+| phone      | string | 是  | 手机号                             |
+| password   | string | 是  | 密码                              |
+| userType   | string | 是  | 用户类型：consumer/farmer/enterprise |
+| verifyCode | string | 是  | 短信验证码                           |
 
 响应：
+
 ```json
 {
   "code": 200,
@@ -103,42 +112,49 @@ POST /api/auth/register
 ```
 
 **用户登录**
+
 ```
 POST /api/auth/login
 ```
 
 请求参数：
-| 参数名 | 类型 | 必填 | 描述 |
-|--------|------|------|------|
-| phone | string | 是 | 手机号 |
-| password | string | 是 | 密码 |
+
+| 参数名      | 类型     | 必填 | 描述  |
+| -------- | ------ | -- | --- |
+| phone    | string | 是  | 手机号 |
+| password | string | 是  | 密码  |
 
 ### 4.2 产品管理API
 
 **获取产品列表**
+
 ```
 GET /api/products
 ```
 
 查询参数：
-| 参数名 | 类型 | 必填 | 描述 |
-|--------|------|------|------|
-| page | number | 否 | 页码，默认1 |
-| limit | number | 否 | 每页数量，默认20 |
-| category | string | 否 | 产品分类 |
-| keyword | string | 否 | 搜索关键词 |
+
+| 参数名      | 类型     | 必填 | 描述        |
+| -------- | ------ | -- | --------- |
+| page     | number | 否  | 页码，默认1    |
+| limit    | number | 否  | 每页数量，默认20 |
+| category | string | 否  | 产品分类      |
+| keyword  | string | 否  | 搜索关键词     |
 
 **获取产品详情**
+
 ```
 GET /api/products/:id
 ```
 
 **创建产品**
+
 ```
 POST /api/products
 ```
 
 请求体：
+
 ```json
 {
   "name": "有机苹果",
@@ -155,16 +171,19 @@ POST /api/products
 ### 4.3 溯源数据API
 
 **获取溯源信息**
+
 ```
 GET /api/traceability/:productId
 ```
 
 **上传溯源数据**
+
 ```
 POST /api/traceability
 ```
 
 请求体：
+
 ```json
 {
   "productId": "uuid",
@@ -186,16 +205,19 @@ POST /api/traceability
 ### 4.4 区块链API
 
 **获取链上数据**
+
 ```
 GET /api/blockchain/transaction/:txHash
 ```
 
 **验证数据完整性**
+
 ```
 POST /api/blockchain/verify
 ```
 
 请求体：
+
 ```json
 {
   "dataHash": "0x123...",
@@ -334,6 +356,7 @@ erDiagram
 ### 6.2 数据定义语言
 
 **用户表 (users)**
+
 ```sql
 -- 创建用户表
 CREATE TABLE users (
@@ -354,6 +377,7 @@ CREATE INDEX idx_users_type ON users(user_type);
 ```
 
 **产品表 (products)**
+
 ```sql
 -- 创建产品表
 CREATE TABLE products (
@@ -377,7 +401,8 @@ CREATE INDEX idx_products_category ON products(category);
 CREATE INDEX idx_products_available ON products(is_available);
 ```
 
-**溯源数据表 (traceability_records)**
+**溯源数据表 (traceability\_records)**
+
 ```sql
 -- 创建溯源数据表
 CREATE TABLE traceability_records (
@@ -398,7 +423,8 @@ CREATE INDEX idx_traceability_stage ON traceability_records(stage);
 CREATE INDEX idx_traceability_tx ON traceability_records(tx_hash);
 ```
 
-**区块链记录表 (blockchain_records)**
+**区块链记录表 (blockchain\_records)**
+
 ```sql
 -- 创建区块链记录表
 CREATE TABLE blockchain_records (
@@ -417,6 +443,7 @@ CREATE INDEX idx_blockchain_block ON blockchain_records(block_number);
 ```
 
 **权限设置**
+
 ```sql
 -- 授予匿名用户基本查询权限
 GRANT SELECT ON users TO anon;
@@ -434,20 +461,29 @@ GRANT ALL PRIVILEGES ON blockchain_records TO authenticated;
 ## 7. AI服务设计
 
 ### 7.1 图像识别服务
-- **农产品识别**: 识别产品种类、成熟度、品质等级
-- **病虫害检测**: 通过图像识别农作物病虫害
-- **产地识别**: 基于图像特征辅助判断产品产地
+
+* **农产品识别**: 识别产品种类、成熟度、品质等级
+
+* **病虫害检测**: 通过图像识别农作物病虫害
+
+* **产地识别**: 基于图像特征辅助判断产品产地
 
 ### 7.2 数据分析服务
-- **价格预测**: 基于历史数据和市场趋势预测产品价格
-- **产量预测**: 结合气候数据和种植情况预测产量
-- **质量评估**: 综合分析多维度数据评估产品质量等级
-- **风险预警**: 识别异常数据，预警潜在质量风险
+
+* **价格预测**: 基于历史数据和市场趋势预测产品价格
+
+* **产量预测**: 结合气候数据和种植情况预测产量
+
+* **质量评估**: 综合分析多维度数据评估产品质量等级
+
+* **风险预警**: 识别异常数据，预警潜在质量风险
 
 ### 7.3 API接口
+
 ```
 POST /api/ai/image-recognition
 POST /api/ai/price-prediction
 POST /api/ai/quality-assessment
 GET /api/ai/risk-warning/:productId
 ```
+

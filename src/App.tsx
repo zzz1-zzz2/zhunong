@@ -21,7 +21,7 @@ import MerchantLayout from './components/MerchantLayout'
 import AdminLayout from './components/AdminLayout'
 import { AuthProvider } from './contexts/AuthContext'
 import StoryMap from './pages/play/StoryMap'
-import AppleAdventure from './pages/play/AppleAdventure'
+import YouthRedDream from './pages/play/YouthRedDream'
 import TraceabilityDetail from './pages/TraceabilityDetail'
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
               <Route path="/scan" element={<Scan />} />
               <Route path="/test-auth" element={<TestAuth />} />
               <Route path="/play/map" element={<StoryMap />} />
-              <Route path="/play/apple" element={<AppleAdventure />} />
+              <Route path="/play/apple" element={<YouthRedDream />} />
               <Route path="/traceability/:productId" element={<TraceabilityDetail />} />
               <Route path="/traceability/:productId" element={<TraceabilityDetail />} />
               
@@ -77,7 +77,7 @@ function App() {
               <Route path="/scan" element={<Scan />} />
               <Route path="/test-auth" element={<TestAuth />} />
               <Route path="/play/map" element={<StoryMap />} />
-              <Route path="/play/apple" element={<AppleAdventure />} />
+              <Route path="/play/apple" element={<YouthRedDream />} />
               
               {/* 用户端路由 */}
               <Route path="/" element={<Layout />}>

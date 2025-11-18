@@ -37,7 +37,7 @@ function App() {
               <Route path="/scan" element={<Scan />} />
               <Route path="/test-auth" element={<TestAuth />} />
               <Route path="/play/map" element={<StoryMap />} />
-              <Route path="/play/apple" element={<YouthRedDream />} />
+              <Route path="/play/youth-red-dream" element={<YouthRedDream />} />
               <Route path="/traceability/:productId" element={<TraceabilityDetail />} />
               <Route path="/traceability/:productId" element={<TraceabilityDetail />} />
               
@@ -77,7 +77,7 @@ function App() {
               <Route path="/scan" element={<Scan />} />
               <Route path="/test-auth" element={<TestAuth />} />
               <Route path="/play/map" element={<StoryMap />} />
-              <Route path="/play/apple" element={<YouthRedDream />} />
+              <Route path="/play/youth-red-dream" element={<YouthRedDream />} />
               
               {/* 用户端路由 */}
               <Route path="/" element={<Layout />}>

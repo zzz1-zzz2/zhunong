@@ -171,6 +171,7 @@ const AppleAdventure: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const [musicOn, setMusicOn] = useState<boolean>(false)
   const [editingImages, setEditingImages] = useState<boolean>(false)
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({})
   const [imageOverrides, setImageOverrides] = useState<Record<string, string>>(() => {
     try {
       const raw = localStorage.getItem('apple_adventure_images')
@@ -302,9 +303,33 @@ const AppleAdventure: React.FC = () => {
               alt={scene.title}
               className="absolute inset-0 w-full h-full object-cover transform transition duration-700 group-hover:scale-105"
               onError={(e) => {
-                (e.currentTarget as HTMLImageElement).style.display = 'none'
+                const imgUrl = imageOverrides[scene.id] || scene.image;
+                console.error('Image failed to load:', imgUrl)
+                console.error('Full URL:', new URL(imgUrl, window.location.origin).href)
+                setImageErrors(prev => ({ ...prev, [scene.id]: true }))
               }}
             />
+            {imageErrors[scene.id] && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-red-200 to-amber-200">
+                <div className="text-center p-4">
+                  <div className="text-red-800 font-bold text-lg mb-2">图片加载失败</div>
+                  <div className="text-red-600 text-sm mb-4">{imageOverrides[scene.id] || scene.image}</div>
+                  <button 
+                    onClick={() => {
+                      setImageErrors(prev => ({ ...prev, [scene.id]: false }))
+                      // Force re-render by changing the src slightly
+                      const img = document.querySelector(`img[alt="${scene.title}"]`) as HTMLImageElement
+                      if (img) {
+                        img.src = imageOverrides[scene.id] || scene.image
+                      }
+                    }}
+                    className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                  >
+                    重新加载
+                  </button>
+                </div>
+              </div>
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 flex items-center gap-4">
               {scene.icon}

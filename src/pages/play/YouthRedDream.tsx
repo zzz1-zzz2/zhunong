@@ -249,27 +249,42 @@ const AppleAdventure: React.FC = () => {
   const [showFertilizerEffect, setShowFertilizerEffect] = useState<boolean>(false)
   const growthTimer = useRef<number | null>(null)
 
+  // 重置种植模拟当进入果园场景时
+  useEffect(() => {
+    if (current === 'orchard' && simStage === 'seed') {
+      // 确保在种子阶段时，成长值为0
+      setGrowth(0)
+      setMoisture(0)
+    }
+  }, [current, simStage])
+
   useEffect(() => {
     if (growthTimer.current) window.clearInterval(growthTimer.current)
     if (current === 'orchard' && simStage !== 'harvested') {
       growthTimer.current = window.setInterval(() => {
-        setMoisture(m => Math.max(0, m - 2))
-        setGrowth(g => {
-          const canGrow = moisture > 0 && ['planted','watered','sprout','flower'].includes(simStage)
-          if (!canGrow) return g
-          const inc = fertilized ? 4 : 2
-          const ng = Math.min(100, g + inc)
-          if (ng >= 25 && simStage === 'watered') setSimStage('sprout')
-          if (ng >= 60 && (simStage === 'sprout' || simStage === 'watered')) setSimStage('flower')
-          if (ng >= 100 && simStage !== 'fruit') setSimStage('fruit')
-          return ng
+        setMoisture(m => {
+          const newMoisture = Math.max(0, m - 2)
+          
+          // 更新成长值，使用新的水分值
+          setGrowth(g => {
+            const canGrow = newMoisture > 0 && ['planted','watered','sprout','flower'].includes(simStage)
+            if (!canGrow) return g
+            const inc = fertilized ? 4 : 2
+            const ng = Math.min(100, g + inc)
+            if (ng >= 25 && simStage === 'watered') setSimStage('sprout')
+            if (ng >= 60 && (simStage === 'sprout' || simStage === 'watered')) setSimStage('flower')
+            if (ng >= 100 && simStage !== 'fruit') setSimStage('fruit')
+            return ng
+          })
+          
+          return newMoisture
         })
       }, 800)
     }
     return () => {
       if (growthTimer.current) window.clearInterval(growthTimer.current)
     }
-  }, [current, simStage, fertilized, moisture])
+  }, [current, simStage, fertilized])
 
   const handleSeedClick = () => {
     if (simStage !== 'seed') return
@@ -279,7 +294,10 @@ const AppleAdventure: React.FC = () => {
   const handleWater = () => {
     if (current !== 'orchard') return
     setMoisture(m => Math.min(100, m + 35))
-    if (simStage === 'planted') setSimStage('watered')
+    // 允许在planted和watered阶段浇水
+    if (simStage === 'planted' || simStage === 'watered') {
+      setSimStage('watered')
+    }
     setLastTip('补充水分，促进生长。')
     // 显示浇水特效
     setShowWaterEffect(true)
@@ -533,7 +551,7 @@ const AppleAdventure: React.FC = () => {
                         simStage === 'fruit' ? '🍎 结果期' :
                         simStage === 'harvested' ? '✅🍎 已收获' :
                         '未知状态'
-                      }</div>
+                      } (成长值: {growth}%)</div>
                       <div className="text-lg text-red-700 mb-2 font-medium">施肥：{fertilized ? '是' : '否'}</div>
                       <div className="text-lg text-red-700 leading-relaxed font-medium">提示：点击🌱播种→💧浇水→施肥→🌱发芽(25%)→🌸开花(60%)→🍎结果(100%)→✅收获</div>
                     </div>

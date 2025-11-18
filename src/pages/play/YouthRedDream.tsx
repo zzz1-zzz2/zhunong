@@ -245,6 +245,8 @@ const AppleAdventure: React.FC = () => {
   const [moisture, setMoisture] = useState<number>(0)
   const [growth, setGrowth] = useState<number>(0)
   const [fertilized, setFertilized] = useState<boolean>(false)
+  const [showWaterEffect, setShowWaterEffect] = useState<boolean>(false)
+  const [showFertilizerEffect, setShowFertilizerEffect] = useState<boolean>(false)
   const growthTimer = useRef<number | null>(null)
 
   useEffect(() => {
@@ -279,11 +281,17 @@ const AppleAdventure: React.FC = () => {
     setMoisture(m => Math.min(100, m + 35))
     if (simStage === 'planted') setSimStage('watered')
     setLastTip('补充水分，促进生长。')
+    // 显示浇水特效
+    setShowWaterEffect(true)
+    setTimeout(() => setShowWaterEffect(false), 1000)
   }
   const handleFertilize = () => {
     if (current !== 'orchard') return
     setFertilized(true)
     setLastTip('施肥完成，增长速度提升。')
+    // 显示施肥特效
+    setShowFertilizerEffect(true)
+    setTimeout(() => setShowFertilizerEffect(false), 1000)
   }
   const handleHarvest = () => {
     if (simStage !== 'fruit') return
@@ -409,21 +417,84 @@ const AppleAdventure: React.FC = () => {
                 {current === 'orchard' && (
                   <div className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="bg-gradient-to-br from-red-50 to-amber-50 border-2 border-red-300 rounded-lg p-6 shadow-lg">
-                      <div className="text-lg text-red-700 font-bold mb-4">互动：点击种子 → 浇水 → 施肥 → 成长 → 收获</div>
+                      <div className="text-lg text-red-700 font-bold mb-4">🌱→💧→🌰→🌱→🌸→🍎→✅ 种子到苹果的成长之旅</div>
                       <div className="h-48 rounded-lg bg-gradient-to-br from-red-100 via-amber-50 to-yellow-100 relative overflow-hidden border-2 border-amber-400">
-                        <div
-                          onClick={handleSeedClick}
-                          className={`absolute left-1/2 -translate-x-1/2 bottom-4 w-10 h-10 rounded-full ${simStage==='seed' ? 'bg-gradient-to-r from-amber-400 to-yellow-500 cursor-pointer shadow-lg' : 'bg-gradient-to-r from-amber-300 to-yellow-400'} border-2 border-red-400`}
-                          title="点击播种"
-                        />
+                        {/* 种子阶段 */}
+                        {simStage === 'seed' && (
+                          <div
+                            onClick={handleSeedClick}
+                            className="absolute left-1/2 -translate-x-1/2 bottom-8 text-6xl cursor-pointer hover:scale-110 transition-transform animate-pulse"
+                            title="点击播种"
+                          >
+                            🌱
+                          </div>
+                        )}
+                        
+                        {/* 已播种阶段 */}
+                        {simStage === 'planted' && (
+                          <div className="absolute left-1/2 -translate-x-1/2 bottom-8 text-5xl animate-bounce">
+                            🌰
+                          </div>
+                        )}
+                        
+                        {/* 浇水后阶段 */}
+                        {simStage === 'watered' && (
+                          <div className="absolute left-1/2 -translate-x-1/2 bottom-8 text-5xl">
+                            <span className="animate-bounce">💧</span>
+                            <span className="ml-2 animate-pulse">🌰</span>
+                          </div>
+                        )}
+                        
+                        {/* 发芽阶段 */}
+                        {simStage === 'sprout' && (
+                          <div className="absolute left-1/2 -translate-x-1/2 bottom-8 text-5xl animate-bounce">
+                            🌱
+                          </div>
+                        )}
+                        
+                        {/* 开花阶段 */}
+                        {simStage === 'flower' && (
+                          <div className="absolute left-1/2 -translate-x-1/2 bottom-8 text-5xl animate-pulse">
+                            🌸
+                          </div>
+                        )}
+                        
+                        {/* 结果阶段 */}
+                        {simStage === 'fruit' && (
+                          <div className="absolute left-1/2 -translate-x-1/2 bottom-8 text-5xl animate-bounce">
+                            🍎
+                          </div>
+                        )}
+                        
+                        {/* 收获后阶段 */}
+                        {simStage === 'harvested' && (
+                          <div className="absolute left-1/2 -translate-x-1/2 bottom-8 text-5xl">
+                            <span className="animate-spin">✅</span>
+                            <span className="ml-2 animate-bounce">🍎</span>
+                          </div>
+                        )}
+                        
+                        {/* 土壤基底 */}
                         {simStage !== 'seed' && (
-                          <div className="absolute left-1/2 -translate-x-1/2 bottom-4 w-28 h-3 bg-gradient-to-r from-amber-700 to-red-800 rounded" />
+                          <div className="absolute left-1/2 -translate-x-1/2 bottom-4 w-32 h-4 bg-gradient-to-r from-amber-700 to-red-800 rounded-full" />
                         )}
-                        {['sprout','flower','fruit','harvested'].includes(simStage) && (
-                          <Sprout className="absolute left-1/2 -translate-x-1/2 bottom-8 w-10 h-10 text-red-600" />
+                        
+                        {/* 浇水特效 */}
+                        {showWaterEffect && (
+                          <div className="absolute inset-0 pointer-events-none">
+                            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 text-4xl animate-bounce">
+                              💧💧💧
+                            </div>
+                          </div>
                         )}
-                        {simStage==='fruit' && (
-                          <CheckCircle className="absolute right-3 top-3 w-6 h-6 text-red-600" />
+                        
+                        {/* 施肥特效 */}
+                        {showFertilizerEffect && (
+                          <div className="absolute inset-0 pointer-events-none">
+                            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 text-3xl animate-ping">
+                              ✨✨✨
+                            </div>
+                          </div>
                         )}
                       </div>
 
@@ -453,8 +524,18 @@ const AppleAdventure: React.FC = () => {
 
                     <div className="bg-white border-2 border-red-200 rounded-lg p-6 shadow-lg">
                       <div className="text-xl text-red-800 mb-3 font-bold">阶段：{simStage}</div>
+                      <div className="text-lg text-red-700 mb-2 font-medium">当前状态：{
+                        simStage === 'seed' ? '🌱 种子阶段' :
+                        simStage === 'planted' ? '🌰 已播种' :
+                        simStage === 'watered' ? '💧🌰 已浇水' :
+                        simStage === 'sprout' ? '🌱 发芽期' :
+                        simStage === 'flower' ? '🌸 开花期' :
+                        simStage === 'fruit' ? '🍎 结果期' :
+                        simStage === 'harvested' ? '✅🍎 已收获' :
+                        '未知状态'
+                      }</div>
                       <div className="text-lg text-red-700 mb-2 font-medium">施肥：{fertilized ? '是' : '否'}</div>
-                      <div className="text-lg text-red-700 leading-relaxed font-medium">提示：点击播种后需浇水，达到 25% 会发芽，60% 开花，100% 结果，可收获进入仓储流程。</div>
+                      <div className="text-lg text-red-700 leading-relaxed font-medium">提示：点击🌱播种→💧浇水→施肥→🌱发芽(25%)→🌸开花(60%)→🍎结果(100%)→✅收获</div>
                     </div>
                   </div>
                 )}

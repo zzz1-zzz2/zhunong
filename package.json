@@ -13,7 +13,7 @@
     "dev": "concurrently \"npm run client:dev\" \"npm run server:dev\"",
     "deploy": "npm run build && gh-pages -d dist"
   },
-  "homepage": "https://zzz1-zzz2.github.io/zhunong",
+
   "dependencies": {
     "@supabase/supabase-js": "^2.81.1",
     "@types/react-router-dom": "^5.3.3",

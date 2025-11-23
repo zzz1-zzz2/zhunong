@@ -39,7 +39,6 @@ function App() {
               <Route path="/play/map" element={<StoryMap />} />
               <Route path="/play/youth-red-dream" element={<YouthRedDream />} />
               <Route path="/traceability/:productId" element={<TraceabilityDetail />} />
-              <Route path="/traceability/:productId" element={<TraceabilityDetail />} />
               
               {/* 用户端路由 */}
               <Route path="/" element={<Layout />}>

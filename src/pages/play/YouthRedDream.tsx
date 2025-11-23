@@ -203,7 +203,10 @@ const AppleAdventure: React.FC = () => {
       }
     }
     if (current === 'pest') {
-      if (next === 'irrigation') {}
+      if (next === 'irrigation') {
+        setFlags((f) => ({ ...f, aiPest: true }))
+        setLastTip('AI 植保通过视觉识别与时序分析，提升早期发现率并减少药量。')
+      }
     }
     if (current === 'irrigation') {
       if (next === 'orchard') {
@@ -346,7 +349,7 @@ const AppleAdventure: React.FC = () => {
               src={imageOverrides[scene.id] || scene.image}
               alt={scene.title}
               className="absolute inset-0 w-full h-full object-cover transform transition duration-700 group-hover:scale-105"
-              onError={(e) => {
+              onError={() => {
                 const imgUrl = imageOverrides[scene.id] || scene.image;
                 console.error('Image failed to load:', imgUrl)
                 console.error('Full URL:', new URL(imgUrl, window.location.origin).href)

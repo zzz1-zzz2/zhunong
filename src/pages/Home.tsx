@@ -76,43 +76,45 @@ const Home: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* 英雄区域 */}
-      <section className="bg-gradient-to-r from-red-600 via-red-500 to-amber-500 rounded-2xl p-12 text-white">
+      <section className="bg-gradient-to-r from-red-600 via-red-500 to-amber-500 rounded-2xl p-6 md:p-8 lg:p-12 text-white">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl font-bold mb-4">神农智链 · 青年红色筑梦</h1>
-          <p className="text-2xl mb-6 text-amber-100">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 leading-tight">
+            神农智链 · 青年红色筑梦
+          </h1>
+          <p className="text-lg md:text-xl lg:text-2xl mb-4 md:mb-6 text-amber-100 leading-relaxed">
             基于区块链技术的农产品全生命周期溯源，让每一份农产品都有可信的身份证明
           </p>
-          <div className="flex justify-center space-x-4">
+          <div className="flex flex-col sm:flex-row justify-center items-center space-y-3 sm:space-y-0 sm:space-x-4 px-4">
             <Link
               to="/scan"
-              className="flex items-center space-x-3 bg-white text-red-700 px-10 py-5 rounded-lg font-bold hover:bg-amber-50 transition-colors border border-amber-300 text-lg"
+              className="flex items-center space-x-2 bg-white text-red-700 px-6 py-3 rounded-lg font-bold hover:bg-amber-50 transition-colors border border-amber-300 text-base md:text-lg w-full sm:w-auto"
             >
-              <Scan className="w-5 h-5" />
+              <Scan className="w-4 h-4 md:w-5 md:h-5" />
               <span>扫码溯源</span>
             </Link>
             <Link
               to="/register"
-              className="bg-red-600 text-white px-10 py-5 rounded-lg font-bold hover:bg-red-700 transition-colors border border-amber-400 text-lg"
+              className="bg-red-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-red-700 transition-colors border border-amber-400 text-base md:text-lg w-full sm:w-auto"
             >
               立即注册
             </Link>
             <Link
               to="/play/youth-red-dream"
-              className="bg-white text-red-700 px-10 py-5 rounded-lg font-bold hover:bg-amber-50 transition-colors border border-amber-300 text-lg"
+              className="bg-white text-red-700 px-6 py-3 rounded-lg font-bold hover:bg-amber-50 transition-colors border border-amber-300 text-base md:text-lg w-full sm:w-auto"
             >
               互动剧入口
             </Link>
             <Link
               to="/play/map"
-              className="bg-white text-red-700 px-6 py-3 rounded-lg font-semibold hover:bg-amber-50 transition-colors border border-amber-300"
+              className="bg-white text-red-700 px-4 py-2 rounded-lg font-semibold hover:bg-amber-50 transition-colors border border-amber-300 text-sm md:text-base w-full sm:w-auto"
             >
               故事线预览
             </Link>
             <Link
               to="/traceability/ORG-APPLE-2024-001"
-              className="bg-gradient-to-r from-red-600 to-amber-600 text-white px-10 py-5 rounded-lg font-bold hover:from-red-700 hover:to-amber-700 transition-all shadow-lg flex items-center space-x-3 text-lg"
+              className="bg-gradient-to-r from-red-600 to-amber-600 text-white px-6 py-3 rounded-lg font-bold hover:from-red-700 hover:to-amber-700 transition-all shadow-lg flex items-center space-x-2 text-base md:text-lg w-full sm:w-auto"
             >
-              <QrCode className="w-5 h-5" />
+              <QrCode className="w-4 h-4 md:w-5 md:h-5" />
               <span>有机苹果溯源示例</span>
             </Link>
           </div>
@@ -120,16 +122,16 @@ const Home: React.FC = () => {
       </section>
 
       {/* 搜索和筛选 */}
-      <section className="bg-white rounded-xl p-8 shadow-sm">
-        <div className="flex flex-col md:flex-row gap-4">
+      <section className="bg-white rounded-xl p-4 md:p-6 lg:p-8 shadow-sm">
+        <div className="flex flex-col md:flex-row gap-3 md:gap-4">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 md:w-5 md:h-5" />
             <input
               type="text"
               placeholder="搜索农产品..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-14 pr-6 py-5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent text-lg"
+              className="w-full pl-10 md:pl-14 pr-4 md:pr-6 py-3 md:py-5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent text-base md:text-lg"
             />
           </div>
           <div className="flex gap-2">
@@ -229,29 +231,29 @@ const Home: React.FC = () => {
       </section>
 
       {/* 特色功能 */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-          <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Shield className="w-6 h-6 text-red-600" />
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        <div className="bg-white rounded-xl p-4 md:p-6 shadow-sm text-center">
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+            <Shield className="w-5 h-5 md:w-6 md:h-6 text-red-600" />
           </div>
-          <h3 className="text-xl font-bold mb-2">区块链溯源</h3>
-          <p className="text-gray-600 text-base">基于区块链技术，确保数据不可篡改，提供可信的溯源服务</p>
+          <h3 className="text-lg md:text-xl font-bold text-red-800 mb-2">区块链溯源</h3>
+          <p className="text-gray-600 text-sm md:text-base">基于区块链技术，确保数据不可篡改，提供可信的溯源服务</p>
         </div>
         
-        <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-          <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Star className="w-6 h-6 text-amber-600" />
+        <div className="bg-white rounded-xl p-4 md:p-6 shadow-sm text-center">
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+            <Star className="w-5 h-5 md:w-6 md:h-6 text-amber-600" />
           </div>
-          <h3 className="text-xl font-bold mb-2">品质保证</h3>
-          <p className="text-gray-600 text-base">严格的质检流程，权威检测报告，让消费者买得放心</p>
+          <h3 className="text-lg md:text-xl font-bold text-red-800 mb-2">质检报告</h3>
+          <p className="text-gray-600 text-sm md:text-base">严格的质检流程，权威检测报告，让消费者买得放心</p>
         </div>
         
-        <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-          <div className="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Calendar className="w-6 h-6 text-rose-600" />
+        <div className="bg-white rounded-xl p-4 md:p-6 shadow-sm text-center">
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+            <Calendar className="w-5 h-5 md:w-6 md:h-6 text-rose-600" />
           </div>
-          <h3 className="text-xl font-bold mb-2">全链追踪</h3>
-          <p className="text-gray-600 text-base">从种植到销售的全生命周期记录，透明可视的供应链</p>
+          <h3 className="text-lg md:text-xl font-bold text-red-800 mb-2">全生命周期</h3>
+          <p className="text-gray-600 text-sm md:text-base">从种植到销售，完整记录每个环节，透明可追溯</p>
         </div>
       </section>
     </div>

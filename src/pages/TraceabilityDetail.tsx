@@ -234,38 +234,38 @@ const TraceabilityDetail: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 via-amber-50 to-yellow-50 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 via-amber-50 to-yellow-50 p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
         {/* 头部信息 */}
-        <div className="bg-white rounded-2xl shadow-2xl p-12 mb-8 border-2 border-red-200">
+        <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-12 mb-8 border-2 border-red-200">
           <div className="flex flex-col lg:flex-row items-center justify-between mb-6">
-            <div className="flex items-center space-x-6 mb-6 lg:mb-0">
-              <div className="w-20 h-20 bg-gradient-to-r from-red-600 to-red-700 rounded-2xl flex items-center justify-center shadow-lg">
-                <Leaf className="w-10 h-10 text-white" />
+            <div className="flex items-center space-x-4 md:space-x-6 mb-6 lg:mb-0">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-red-600 to-red-700 rounded-2xl flex items-center justify-center shadow-lg">
+                <Leaf className="w-8 h-8 md:w-10 md:h-10 text-white" />
               </div>
               <div>
-                <h1 className="text-4xl font-bold text-red-800">{data.productName}</h1>
-                <p className="text-red-600 text-lg font-medium">批次号: {data.batchNumber}</p>
+                <h1 className="text-2xl md:text-4xl font-bold text-red-800">{data.productName}</h1>
+                <p className="text-red-600 text-base md:text-lg font-medium">批次号: {data.batchNumber}</p>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 md:space-x-4">
               <div className="text-center">
                 <QRCodeSVG 
                   value={generateQRCode()} 
-                  size={80} 
+                  size={60} 
                   level="H"
                   includeMargin={true}
                   className="border-2 border-gray-200 rounded-lg"
                 />
-                <p className="text-lg text-red-600 font-bold mt-3">扫码验证</p>
+                <p className="text-sm md:text-lg text-red-600 font-bold mt-2 md:mt-3">扫码验证</p>
               </div>
               <div className="text-right">
-                <div className="flex items-center space-x-2 mb-2">
-                  <Shield className="w-6 h-6 text-red-600" />
-                  <span className="text-lg font-bold text-red-800">区块链验证</span>
+                <div className="flex items-center space-x-1 md:space-x-2 mb-2">
+                  <Shield className="w-5 h-5 md:w-6 md:h-6 text-red-600" />
+                  <span className="text-base md:text-lg font-bold text-red-800">区块链验证</span>
                 </div>
                 <div className="bg-gray-100 rounded-lg p-2">
-                  <p className="text-sm text-gray-500 font-mono break-all max-w-40">
+                  <p className="text-xs md:text-sm text-gray-500 font-mono break-all max-w-32 md:max-w-40">
                     {data.blockchainHash.slice(0, 16)}...
                   </p>
                 </div>
@@ -274,51 +274,51 @@ const TraceabilityDetail: React.FC = () => {
           </div>
 
           {/* 认证徽章 */}
-          <div className="flex flex-wrap gap-4 mb-8">
+          <div className="flex flex-wrap gap-2 md:gap-4 mb-6 md:mb-8">
             {data.farmInfo.certification.map((cert, index) => (
-              <div key={index} className="bg-gradient-to-r from-red-100 to-amber-100 text-red-800 px-6 py-4 rounded-full text-xl font-bold flex items-center space-x-3 shadow-lg border border-amber-400">
-                <CheckCircle className="w-6 h-6 text-red-600" />
+              <div key={index} className="bg-gradient-to-r from-red-100 to-amber-100 text-red-800 px-4 py-2 md:px-6 md:py-4 rounded-full text-sm md:text-xl font-bold flex items-center space-x-2 md:space-x-3 shadow-lg border border-amber-400">
+                <CheckCircle className="w-4 h-4 md:w-6 md:h-6 text-red-600" />
                 <span>{cert}</span>
               </div>
             ))}
           </div>
 
           {/* 快速信息卡片 */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-gradient-to-br from-red-50 to-amber-50 rounded-xl p-8 shadow-lg border-2 border-red-200">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+            <div className="bg-gradient-to-br from-red-50 to-amber-50 rounded-xl p-4 md:p-8 shadow-lg border-2 border-red-200">
               <div className="flex items-center space-x-2 mb-2">
-                <MapPin className="w-8 h-8 text-red-600" />
-                <span className="text-xl font-bold text-red-800">产地</span>
+                <MapPin className="w-6 h-6 md:w-8 md:h-8 text-red-600" />
+                <span className="text-lg md:text-xl font-bold text-red-800">产地</span>
               </div>
-              <p className="text-base text-gray-700 font-medium">{data.farmInfo.location}</p>
+              <p className="text-sm md:text-base text-gray-700 font-medium">{data.farmInfo.location}</p>
             </div>
-            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-8 border-2 border-amber-400 shadow-lg">
+            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-4 md:p-8 border-2 border-amber-400 shadow-lg">
               <div className="flex items-center space-x-2 mb-2">
-                <User className="w-8 h-8 text-red-600" />
-                <span className="text-xl font-bold text-red-800">种植者</span>
+                <User className="w-6 h-6 md:w-8 md:h-8 text-red-600" />
+                <span className="text-lg md:text-xl font-bold text-red-800">种植者</span>
               </div>
-              <p className="text-base text-gray-700 font-medium">{data.farmInfo.farmerName}</p>
+              <p className="text-sm md:text-base text-gray-700 font-medium">{data.farmInfo.farmerName}</p>
             </div>
-            <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-8 shadow-lg border-2 border-orange-200">
+            <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-4 md:p-8 shadow-lg border-2 border-orange-200">
               <div className="flex items-center space-x-2 mb-2">
-                <Calendar className="w-8 h-8 text-orange-600" />
-                <span className="text-xl font-bold text-orange-800">收获日期</span>
+                <Calendar className="w-6 h-6 md:w-8 md:h-8 text-orange-600" />
+                <span className="text-lg md:text-xl font-bold text-orange-800">收获日期</span>
               </div>
-              <p className="text-base text-gray-700 font-medium">{formatDate(data.growthCycle.harvestDate)}</p>
+              <p className="text-sm md:text-base text-gray-700 font-medium">{formatDate(data.growthCycle.harvestDate)}</p>
             </div>
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8 shadow-lg border-2 border-purple-200">
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 md:p-8 shadow-lg border-2 border-purple-200">
               <div className="flex items-center space-x-2 mb-2">
-                <Clock className="w-8 h-8 text-purple-600" />
-                <span className="text-lg font-bold text-purple-800">冷链时长</span>
+                <Clock className="w-6 h-6 md:w-8 md:h-8 text-purple-600" />
+                <span className="text-base md:text-lg font-bold text-purple-800">冷链时长</span>
               </div>
-              <p className="text-base text-gray-700 font-medium">{data.logistics.coldChain.duration}</p>
+              <p className="text-sm md:text-base text-gray-700 font-medium">{data.logistics.coldChain.duration}</p>
             </div>
           </div>
         </div>
 
         {/* 导航标签 */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8 mb-8 border-2 border-red-200">
-          <div className="flex flex-wrap gap-2">
+        <div className="bg-white rounded-2xl shadow-2xl p-4 md:p-8 mb-8 border-2 border-red-200">
+          <div className="flex flex-wrap gap-1 md:gap-2">
             {[
               { id: 'overview', label: '总览', icon: Shield },
               { id: 'farm', label: '农场信息', icon: MapPin },
@@ -331,28 +331,28 @@ const TraceabilityDetail: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center space-x-4 px-10 py-5 rounded-lg font-bold transition-all text-2xl ${
+                className={`flex items-center space-x-2 md:space-x-4 px-4 py-3 md:px-10 md:py-5 rounded-lg font-bold transition-all text-sm md:text-2xl ${
                   activeTab === tab.id
                     ? 'bg-blue-600 text-white shadow-lg'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
-                <tab.icon className="w-6 h-6" />
-                <span>{tab.label}</span>
+                <tab.icon className="w-4 h-4 md:w-6 md:h-6" />
+                <span className="hidden sm:inline">{tab.label}</span>
               </button>
             ))}
           </div>
         </div>
 
         {/* 内容区域 */}
-        <div className="bg-white rounded-2xl shadow-2xl p-12 border-2 border-red-200">
+        <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-12 border-2 border-red-200">
           {activeTab === 'overview' && (
             <div className="space-y-6">
-              <h2 className="text-4xl font-bold text-red-800 mb-8">产品溯源总览</h2>
+              <h2 className="text-2xl md:text-4xl font-bold text-red-800 mb-6 md:mb-8">产品溯源总览</h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="bg-gradient-to-r from-red-100 to-amber-100 rounded-xl p-8 shadow-lg border-2 border-red-300">
-                  <h3 className="text-3xl font-bold text-red-800 mb-8 flex items-center">
-                    <Leaf className="w-8 h-8 mr-4 text-red-600" />
+                <div className="bg-gradient-to-r from-red-100 to-amber-100 rounded-xl p-6 md:p-8 shadow-lg border-2 border-red-300">
+                  <h3 className="text-xl md:text-3xl font-bold text-red-800 mb-4 md:mb-8 flex items-center">
+                    <Leaf className="w-6 h-6 md:w-8 md:h-8 mr-2 md:mr-4 text-red-600" />
                     生长周期
                   </h3>
                   <div className="space-y-4">

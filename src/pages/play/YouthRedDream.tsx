@@ -18,13 +18,19 @@ interface Scene {
 }
 
 const AppleAdventure: React.FC = () => {
+  // 获取正确的base路径
+  const getImageUrl = (path: string) => {
+    const base = import.meta.env.BASE_URL || '/'
+    return base === '/' ? path : `${base.replace(/\/$/, '')}${path}`
+  }
+  
   const scenes: Record<string, Scene> = useMemo(() => ({
     intro: {
       id: 'intro',
       title: '苹果奇遇记 · 青年红色筑梦',
       narrative: '面向乡村振兴的青年红色筑梦赛道，跟随这颗“希望之果”，完成合规与品质并重的旅程，连接产业与市场。',
       icon: <Play className="w-10 h-10 text-red-600" />,
-      image: '/youth-red-dream.png',
+      image: getImageUrl('/youth-red-dream.png'),
       choices: [
         { text: '开始旅程', next: 'site' }
       ]
@@ -34,7 +40,7 @@ const AppleAdventure: React.FC = () => {
       title: '选址种植',
       narrative: '为苹果选择适宜的种植环境。向阳地有利于糖度积累，但需要精细水分管理；背阴地甜度略低，但抗旱压力较小。',
       icon: <Sprout className="w-10 h-10 text-red-600" />,
-      image: '/site-selection-planting.png',
+      image: getImageUrl('/site-selection-planting.png'),
       choices: [
         { text: '向阳地', next: 'pest' },
         { text: '背阴地', next: 'pest' }
@@ -45,7 +51,7 @@ const AppleAdventure: React.FC = () => {
       title: '病虫害监测',
       narrative: '果园工作人员穿着红色背心进行病虫害巡查，使用数字设备记录数据。通过专业监测设备收集病虫害数据，确保苹果健康成长。',
       icon: <Leaf className="w-10 h-10 text-red-600" />,
-      image: '/pest-control-scene.png',
+      image: getImageUrl('/pest-control-scene.png'),
       choices: [
         { text: 'AI 植保算法', next: 'irrigation' },
         { text: '传统人工巡园', next: 'irrigation' }
@@ -56,7 +62,7 @@ const AppleAdventure: React.FC = () => {
       title: '智能灌溉监测',
       narrative: '现代化滴灌系统正在运行，土壤传感器实时监测湿度、温度和pH值。数据显示：北区果园土壤湿度65%，温度24.5°C，pH值6.8，各项指标正常。工作人员穿着红色背心，使用数字设备检查灌溉管线。',
       icon: <Leaf className="w-10 h-10 text-red-600" />,
-      image: '/smart-irrigation-scene.png',
+      image: getImageUrl('/smart-irrigation-scene.png'),
       choices: [
         { text: '查看详细数据', next: 'data_monitoring' },
         { text: '继续灌溉', next: 'orchard' }
@@ -67,7 +73,7 @@ const AppleAdventure: React.FC = () => {
       title: '农业数据分析',
       narrative: '基于豆包AI生成的真实农业数据：土壤湿度65%，养分含量78%，pH值6.8，有机质82%。实验样本55*显示标准灌溉产量3.2kg/株，样本26*精准灌溉产量3.8kg/株，产量提升18.75%。',
       icon: <FlaskConical className="w-10 h-10 text-amber-600" />,
-      image: '/smart-irrigation-scene.png',
+      image: getImageUrl('/smart-irrigation-scene.png'),
       choices: [
         { text: '查看实验样本', next: 'experiment_samples' },
         { text: '继续果园管理', next: 'orchard' }
@@ -78,7 +84,7 @@ const AppleAdventure: React.FC = () => {
       title: '实验样本收集',
       narrative: '田间试验数据收集：样本55*（标准灌溉）产量3.2kg/株，样本26*（精准灌溉）产量3.8kg/株。透明样本袋标记清晰，白色网格线划分试验区域，确保数据准确性。',
       icon: <FlaskConical className="w-10 h-10 text-red-600" />,
-      image: '/pest-control-scene.png',
+      image: getImageUrl('/pest-control-scene.png'),
       choices: [
         { text: '分析实验结果', next: 'orchard' },
         { text: '调整灌溉策略', next: 'orchard' }
@@ -89,7 +95,7 @@ const AppleAdventure: React.FC = () => {
       title: '果园采摘',
       narrative: '在认证果园里，苹果通过智能采摘记录设备完成批次绑定。请选择采摘后的处理方式。',
       icon: <Sprout className="w-10 h-10 text-red-500" />,
-      image: '/harvest-picking-scene.png',
+      image: getImageUrl('/harvest-picking-scene.png'),
       choices: [
         { text: '进行分级与清洗', next: 'warehouse' },
         { text: '直接装箱出库', next: 'transport_risk' }
@@ -100,7 +106,7 @@ const AppleAdventure: React.FC = () => {
       title: '冷链仓储',
       narrative: '苹果进入规范仓储，温湿度与批次信息写入链上，形成关键溯源节点。下一步选择运输方式。',
       icon: <Leaf className="w-10 h-10 text-red-600" />,
-      image: '/cold-chain-transport.png',
+      image: getImageUrl('/cold-chain-transport.png'),
       choices: [
         { text: '低温冷链运输', next: 'packaging' },
         { text: '常温运输', next: 'transport_risk' }
@@ -111,7 +117,7 @@ const AppleAdventure: React.FC = () => {
       title: '包装材质',
       narrative: '选择更适合流通的包装。环保纸箱利于透气与减震；塑料筐耐用但在高温下通风性稍差。',
       icon: <Leaf className="w-10 h-10 text-red-600" />,
-      image: '/grading-packaging-scene.png',
+      image: getImageUrl('/grading-packaging-scene.png'),
       choices: [
         { text: '环保纸箱', next: 'transport' },
         { text: '塑料筐', next: 'transport' }
@@ -122,7 +128,7 @@ const AppleAdventure: React.FC = () => {
       title: '冷链运输',
       narrative: '车辆载入电子温度记录仪，里程、温度、司机与车辆信息写入链上，形成完整运输记录。',
       icon: <Truck className="w-10 h-10 text-red-600" />,
-      image: '/cold-chain-transport.png',
+      image: getImageUrl('/cold-chain-transport.png'),
       choices: [
         { text: '电商直销', next: 'channel' },
         { text: '线下精选', next: 'channel' }
@@ -133,7 +139,7 @@ const AppleAdventure: React.FC = () => {
       title: '销售渠道',
       narrative: '不同渠道影响消费者体验与口碑。电商强调履约速度；线下精选更看重现场品控与陈列。',
       icon: <Store className="w-10 h-10 text-red-600" />,
-      image: '/supermarket-shelf.png',
+      image: getImageUrl('/supermarket-shelf.png'),
       choices: [
         { text: '完成上架', next: 'market' }
       ]
@@ -143,7 +149,7 @@ const AppleAdventure: React.FC = () => {
       title: '运输异常',
       narrative: '由于缺少规范分级/冷链，品质风险上升，监管提示该批次需复检。你可以返回并选择合规流程。',
       icon: <Truck className="w-10 h-10 text-red-500" />,
-      image: '/cold-chain-transport.png',
+      image: getImageUrl('/cold-chain-transport.png'),
       choices: [
         { text: '返回果园重新选择', next: 'orchard' },
         { text: '进入仓储再试一次', next: 'warehouse' }
@@ -154,7 +160,7 @@ const AppleAdventure: React.FC = () => {
       title: '商超上架',
       narrative: '批次上架完成，消费者可扫码查看从果园到商超的完整链路，你已完成一次合规溯源旅程。',
       icon: <Store className="w-10 h-10 text-red-600" />,
-      image: '/supermarket-shelf.png',
+      image: getImageUrl('/supermarket-shelf.png'),
       choices: [
         { text: '重新体验', next: 'intro' }
       ]
@@ -349,10 +355,22 @@ const AppleAdventure: React.FC = () => {
               src={imageOverrides[scene.id] || scene.image}
               alt={scene.title}
               className="absolute inset-0 w-full h-full object-cover transform transition duration-700 group-hover:scale-105"
-              onError={() => {
+              onError={(e) => {
                 const imgUrl = imageOverrides[scene.id] || scene.image;
                 console.error('Image failed to load:', imgUrl)
                 console.error('Full URL:', new URL(imgUrl, window.location.origin).href)
+                console.error('Error event:', e)
+                console.error('Current base URL:', import.meta.env.BASE_URL)
+                console.error('Window location:', window.location.href)
+                
+                // 尝试备用图片
+                if (!imageOverrides[scene.id] && scene.id === 'intro') {
+                  const fallbackUrl = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmY2YjZiIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj7lvq7liqg8L3RleHQ+PC9zdmc+'
+                  const img = e.target as HTMLImageElement;
+                  img.src = fallbackUrl;
+                  return;
+                }
+                
                 setImageErrors(prev => ({ ...prev, [scene.id]: true }))
               }}
             />
@@ -364,10 +382,12 @@ const AppleAdventure: React.FC = () => {
                   <button 
                     onClick={() => {
                       setImageErrors(prev => ({ ...prev, [scene.id]: false }))
-                      // Force re-render by changing the src slightly
+                      // 强制重新加载图片，添加时间戳避免缓存
                       const img = document.querySelector(`img[alt="${scene.title}"]`) as HTMLImageElement
                       if (img) {
-                        img.src = imageOverrides[scene.id] || scene.image
+                        const originalSrc = imageOverrides[scene.id] || scene.image
+                        const cacheBuster = new Date().getTime()
+                        img.src = `${originalSrc}${originalSrc.includes('?') ? '&' : '?'}_t=${cacheBuster}`
                       }
                     }}
                     className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"

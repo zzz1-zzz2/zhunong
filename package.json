@@ -6,13 +6,15 @@
   "scripts": {
     "client:dev": "vite",
     "build": "tsc -b && vite build",
+    "build:cloudbase": "tsc -b && vite build --config vite.config.cloudbase.ts",
     "lint": "eslint .",
     "preview": "vite preview",
     "check": "tsc --noEmit",
     "server:dev": "nodemon",
     "dev": "concurrently \"npm run client:dev\" \"npm run server:dev\"",
     "deploy": "npm run build && gh-pages -d dist",
-    "vercel-build": "npm run build"
+    "vercel-build": "npm run build",
+    "cloudbase-deploy": "npm run build:cloudbase && cloudbase framework deploy"
   },
 
   "dependencies": {
